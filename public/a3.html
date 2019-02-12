@@ -6,19 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CIS 59C</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/assets/customutility.css">
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/customutility.css">
   <style>
     /* body * {
       border: red 1px solid;
     } */
-    
+
     .navbar-toggler span {
       border: none;
     }
-    
-    
-    
+
+
+
     .navbar-toggler {
       cursor: pointer;
       padding: 0;
@@ -27,6 +27,10 @@
       height: 35px;
       border: none;
       margin: 5px;
+    }
+
+    .navbar-toggler:focus {
+      outline: 0;
     }
 
     .navbar-toggler span {
@@ -62,17 +66,21 @@
 
 
     @keyframes moveright {
-      to {transform: translateX(10%);}
+      to {
+        transform: translateX(10%);
+      }
     }
-    
+
     @keyframes moveleft {
-      to {transform: translateX(-10%);}
+      to {
+        transform: translateX(-10%);
+      }
     }
 
     .navbar-toggler:hover span {
       background-color: #bbb;
     }
-    
+
     .navbar-toggler:hover:not(.open) span:first-of-type {
       /* transform: scaleX(0) translateY(7px);
       opacity: 0;
@@ -127,36 +135,55 @@
     .navbar-toggler.open span {
       background-color: #d00;
     }
-    
+
     .sidenav {
-      height: 0; /* 100% Full-height */
-      width: 100%; /* 0 width - change this with JavaScript */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Stay on top */
+      height: 100%;
+      /* 100% Full-height */
+      width: 100%;
+      /* 0 width - change this with JavaScript */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Stay on top */
       /*top: 0; /* Stay at the top */
       left: 0;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(255, 255, 255, 0.5);
       /* opacity: .8; */
-      overflow-x: hidden; /* Disable horizontal scroll */
-      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      overflow-x: hidden;
+      /* Disable horizontal scroll */
+      transition: 0.5s;
+      /* 0.5 second transition effect to slide in the sidenav */
+      transform: translate3d(0, -110vh, 0);
+      /* Changed */
+      transform-origin: top;
+      /* Changed */
     }
-    
-    .blur {/*
+
+    .blur {
+      /*
       animation: blurinout ease 4s 1 alternate;*/
       filter: blur(3px);
       z-index: 0;
     }
-    
+
     .blurable {
       transition: 1s;
       z-index: -1;
       position: relative;
     }
+
+    #header-main {
+      z-index: 2;
+    }
+
+    .sidenav-show {
+      transform: translate3d(0, 0, 0);
+    }
   </style>
 </head>
 
 <body>
-  <header class="navbar bg-primary p-sticky-top m-0">
+  <header id="header-main" class="navbar bg-primary p-sticky-top m-0">
     <section class="navbar-section">
       <button id="navbar-toggler-button" class="navbar-toggler">
         <span></span>
@@ -178,27 +205,64 @@
   </nav>
   <div class="blurable">
     <main id="main-content">
-      <section>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
-        corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
-        minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
-        modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio sit
-        impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis harum
-        voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.</section>
-      <section>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptate atque. Aliquam impedit vero
-        cupiditate adipisci deserunt assumenda perferendis cum repellendus? Nemo, est fugiat! Illo similique fugit neque
-        officiis iste asperiores doloribus! Corporis ratione itaque cumque esse, perferendis facere at.</section>
-      <section>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis ea, quaerat fuga inventore ipsum
-        consequatur delectus voluptate reiciendis quia deleniti impedit magni. Voluptate, error perspiciatis.</section>
-      <section>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
-        corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
-        minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
-        modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio sit
-        impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis harum
-        voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.</section>
+      <article class="card m-5">
+        <header class="card-header">
+          <h5 class="card-title h5">Lorem, ipsum.</h6>
+            <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
+        </header>
+        <main class="card-body">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
+          corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
+          minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
+          modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio
+          sit
+          impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis
+          harum
+          voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.
+        </main>
+      </article>
+      <article class="card m-5">
+        <header class="card-header">
+          <h5 class="card-title h5">Lorem, ipsum.</h5>
+          <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
+        </header>
+        <main class="card-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptate atque.
+          Aliquam impedit vero
+          cupiditate adipisci deserunt assumenda perferendis cum repellendus? Nemo, est fugiat! Illo similique fugit
+          neque
+          officiis iste asperiores doloribus! Corporis ratione itaque cumque esse, perferendis facere at.
+        </main>
+      </article>
+      <article class="card m-5 p-2">
+        <header class="card-header">
+          <h5 class="card-title h5">Lorem, ipsum.</h5>
+          <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
+        </header>
+        <main class="card-body">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis ea, quaerat
+          fuga inventore ipsum
+          consequatur delectus voluptate reiciendis quia deleniti impedit magni. Voluptate, error perspiciatis.
+        </main>
+      </article>
+      <article class="card m-5 p-2">
+        <header class="card-header">
+          <h5 class="card-title h5">Lorem, ipsum.</h5>
+          <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
+        </header>
+        <main class="card-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in
+          architecto totam
+          corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
+          minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
+          modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio
+          sit
+          impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis
+          harum
+          voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.
+        </main>
+      </article>
     </main>
-    <footer>footer</footer>
+    <footer class="text-center text-gray text-italic">footer</footer>
   </div>
-  <script src="/a3.js"></script>
+  <script src="./a3.js"></script>
 </body>
 
 </html>
