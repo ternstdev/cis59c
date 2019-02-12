@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CIS 59C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/customutility.css">
+  <style>
+    /* body * {
+      border: red 1px solid;
+    } */
+    
+    .navbar-toggler span {
+      border: none;
+    }
+    
+    
+    
+    .navbar-toggler {
+      cursor: pointer;
+      padding: 0;
+      background: none;
+      z-index: 2001;
+      height: 35px;
+      border: none;
+      margin: 5px;
+    }
+
+    .navbar-toggler span {
+      width: 30px;
+      height: 3px;
+      border-radius: 3px;
+      display: block;
+      background-color: #f8f8f8;
+      position: relative;
+      transition: all .4s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform-origin: 50% 50%;
+    }
+
+    .navbar-toggler span:first-of-type {
+      top: -1px;
+      transform-origin: 75% 50%;
+      transition: all .1s ease;
+      width: 20px;
+    }
+
+    .navbar-toggler span:nth-of-type(2) {
+      margin-top: 7px;
+    }
+
+    .navbar-toggler span:nth-of-type(3) {
+      top: 1px;
+      width: 15px;
+      margin-left: 50%;
+      margin-top: 7px;
+    }
+
+
+    @keyframes moveright {
+      to {transform: translateX(10%);}
+    }
+    
+    @keyframes moveleft {
+      to {transform: translateX(-10%);}
+    }
+
+    .navbar-toggler:hover span {
+      background-color: #bbb;
+    }
+    
+    .navbar-toggler:hover:not(.open) span:first-of-type {
+      /* transform: scaleX(0) translateY(7px);
+      opacity: 0;
+      transition-delay: 0s;
+      margin: 0; */
+      animation-name: moveright;
+      animation-duration: .5s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+    .navbar-toggler:hover span:nth-of-type(2) {
+      /* transform: rotate(-45deg);
+      margin: 0; */
+    }
+
+    .navbar-toggler:hover:not(.open) span:nth-of-type(3) {
+      /* transform: rotate(45deg);
+      width: 100%;
+      margin: 0;
+      top: -3px; */
+      animation-name: moveleft;
+      animation-duration: .5s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+
+
+
+    .navbar-toggler.open span:first-of-type {
+      transform: scaleX(0) translateY(7px);
+      opacity: 0;
+      transition-delay: 0s;
+      margin: 0;
+    }
+
+    .navbar-toggler.open span:nth-of-type(2) {
+      transform: rotate(-45deg);
+      margin: 0;
+    }
+
+    .navbar-toggler.open span:nth-of-type(3) {
+      transform: rotate(45deg);
+      width: 100%;
+      margin: 0;
+      top: -3px;
+    }
+
+    .navbar-toggler.open span {
+      background-color: #d00;
+    }
+    
+    .sidenav {
+      height: 0; /* 100% Full-height */
+      width: 100%; /* 0 width - change this with JavaScript */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Stay on top */
+      /*top: 0; /* Stay at the top */
+      left: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      /* opacity: .8; */
+      overflow-x: hidden; /* Disable horizontal scroll */
+      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+    
+    .blur {/*
+      animation: blurinout ease 4s 1 alternate;*/
+      filter: blur(3px);
+      z-index: 0;
+    }
+    
+    .blurable {
+      transition: 1s;
+      z-index: -1;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar bg-primary p-sticky-top m-0">
+    <section class="navbar-section">
+      <button id="navbar-toggler-button" class="navbar-toggler">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="#" class="navbar-brand text-bold text-white">CIS 59C</a>
+    </section>
+  </header>
+  <nav id="assignment-container" class="sidenav">
+    <div class="card m-5">
+      <div class="card-header">
+        <h6 class="card-title">hi...</h6>
+      </div>
+      <div class="card-body">
+        body...
+      </div>
+    </div>
+  </nav>
+  <div class="blurable">
+    <main id="main-content">
+      <section>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
+        corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
+        minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
+        modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio sit
+        impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis harum
+        voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.</section>
+      <section>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, voluptate atque. Aliquam impedit vero
+        cupiditate adipisci deserunt assumenda perferendis cum repellendus? Nemo, est fugiat! Illo similique fugit neque
+        officiis iste asperiores doloribus! Corporis ratione itaque cumque esse, perferendis facere at.</section>
+      <section>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis ea, quaerat fuga inventore ipsum
+        consequatur delectus voluptate reiciendis quia deleniti impedit magni. Voluptate, error perspiciatis.</section>
+      <section>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
+        corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
+        minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
+        modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio sit
+        impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis harum
+        voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.</section>
+    </main>
+    <footer>footer</footer>
+  </div>
+  <script src="/a3.js"></script>
+</body>
+
+</html>
