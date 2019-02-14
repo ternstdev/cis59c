@@ -27,7 +27,17 @@ class FVApp {
     this.interestRate = NaN;
     this.years = NaN;
     document.getElementById("calculate").addEventListener("click", this.processEntries);
-
+    const investInputs = document.querySelectorAll("#invest-inputs input");
+    investInputs.forEach((input) => {
+      if (input.id === "investment-amt") {
+        input.addEventListener("change", this.validateInvestmentAmt);
+        input.addEventListener("focus", this.notReadyToCalc);
+      } else if (input.id === "interest-rate") {
+        input.addEventListener("change", this.validateInterestRate);
+      } else if (input.id === "years") {
+        input.addEventListener("change", this.validateYears);
+      }
+    });
     document.getElementById("investment-amt").focus();
   }
 
@@ -45,7 +55,7 @@ class FVApp {
       // prevent future layout changes from breaking functionality.
       // I could also refactor the CSS, but that would also still be fragile.
       // If changed, would a require 3 changes per validation method.
-      elem.nextElementSibling.classList.add("d-invisible"); 
+      elem.nextElementSibling.classList.add("d-invisible");
     } else if (isNaN(val) || !(/^\d*\.?\d{0,2}$/.test(valUnparsed)) || val < 0.01 || val > 100000) {
       this.investmentAmt = NaN;
       elem.classList.remove("is-success");
@@ -133,15 +143,5 @@ class FVApp {
 let app;
 window.addEventListener("load", () => app = new FVApp());
 window.addEventListener("load", () => {
-  const investInputs = document.querySelectorAll("#invest-inputs input");
-  investInputs.forEach((input) => {
-    if (input.id === "investment-amt") {
-      input.addEventListener("change", () => app.validateInvestmentAmt());
-      input.addEventListener("focus", app.notReadyToCalc);
-    } else if (input.id === "interest-rate") {
-      input.addEventListener("change", () => app.validateInterestRate());
-    } else if (input.id === "years") {
-      input.addEventListener("change", () => app.validateYears());
-    }
-  });
+
 });
