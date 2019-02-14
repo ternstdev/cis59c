@@ -10,178 +10,13 @@
   <link rel="stylesheet" href="./assets/main.css">
   <link rel="stylesheet" href="./assets/customutility.css">
   <style>
-    /* body * {
+    /* Uncomment to display borders on all elements */
+    /*
+    body * {
       border: red 1px solid;
-    } */
-
-    .navbar-toggler span {
-      border: none;
     }
 
-
-
-    .navbar-toggler {
-      cursor: pointer;
-      padding: 0;
-      background: none;
-      z-index: 2001;
-      height: 35px;
-      border: none;
-      margin: 5px;
-    }
-
-    .navbar-toggler:focus {
-      outline: 0;
-    }
-
-    .navbar-toggler span {
-      width: 30px;
-      height: 3px;
-      border-radius: 3px;
-      display: block;
-      background-color: #f8f8f8;
-      position: relative;
-      transition: all .4s ease;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      transform-origin: 50% 50%;
-    }
-
-    .navbar-toggler span:first-of-type {
-      top: -1px;
-      transform-origin: 75% 50%;
-      transition: all .1s ease;
-      width: 20px;
-    }
-
-    .navbar-toggler span:nth-of-type(2) {
-      margin-top: 7px;
-    }
-
-    .navbar-toggler span:nth-of-type(3) {
-      top: 1px;
-      width: 15px;
-      margin-left: 50%;
-      margin-top: 7px;
-    }
-
-
-    @keyframes moveright {
-      to {
-        transform: translateX(10%);
-      }
-    }
-
-    @keyframes moveleft {
-      to {
-        transform: translateX(-10%);
-      }
-    }
-
-    .navbar-toggler:hover span {
-      background-color: #bbb;
-    }
-
-    .navbar-toggler:hover:not(.open) span:first-of-type {
-      /* transform: scaleX(0) translateY(7px);
-      opacity: 0;
-      transition-delay: 0s;
-      margin: 0; */
-      animation-name: moveright;
-      animation-duration: .5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
-    }
-
-    .navbar-toggler:hover span:nth-of-type(2) {
-      /* transform: rotate(-45deg);
-      margin: 0; */
-    }
-
-    .navbar-toggler:hover:not(.open) span:nth-of-type(3) {
-      /* transform: rotate(45deg);
-      width: 100%;
-      margin: 0;
-      top: -3px; */
-      animation-name: moveleft;
-      animation-duration: .5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
-    }
-
-
-
-
-    .navbar-toggler.open span:first-of-type {
-      transform: scaleX(0) translateY(7px);
-      opacity: 0;
-      transition-delay: 0s;
-      margin: 0;
-    }
-
-    .navbar-toggler.open span:nth-of-type(2) {
-      transform: rotate(-45deg);
-      margin: 0;
-    }
-
-    .navbar-toggler.open span:nth-of-type(3) {
-      transform: rotate(45deg);
-      width: 100%;
-      margin: 0;
-      top: -3px;
-    }
-
-    .navbar-toggler.open span {
-      background-color: #d00;
-    }
-
-    .sidenav {
-      height: 100%;
-      /* 100% Full-height */
-      width: 100%;
-      /* 0 width - change this with JavaScript */
-      position: fixed;
-      /* Stay in place */
-      z-index: 1;
-      /* Stay on top */
-      /*top: 0; /* Stay at the top */
-      left: 0;
-      background-color: rgba(255, 255, 255, 0.5);
-      /* opacity: .8; */
-      overflow-x: hidden;
-      /* Disable horizontal scroll */
-      transition: 0.5s;
-      /* 0.5 second transition effect to slide in the sidenav */
-      transform: translate3d(0, -110vh, 0);
-      /* Changed */
-      transform-origin: top;
-      /* Changed */
-    }
-
-    .blur {
-      /*
-      animation: blurinout ease 4s 1 alternate;*/
-      filter: blur(3px);
-      z-index: 0;
-    }
-
-    .blurable {
-      transition-duration: .3s;
-      transition-timing-function: ease-in-out;
-      z-index: -1;
-      position: relative;
-      will-change: filter;
-    }
-
-    #header-main {
-      z-index: 2;
-    }
-
-    .sidenav-show {
-      transform: translate3d(0, 0, 0);
-    }
+    /**/
   </style>
 </head>
 
@@ -197,32 +32,53 @@
     </section>
   </header>
   <nav id="assignment-container" class="sidenav">
-    <div class="card m-5"> <!-- TODO: reconsider elements -->
-      <div class="card-header">
-        <h6 class="card-title">hi...</h6>
-      </div>
-      <div class="card-body">
-        body...
-      </div>
-    </div>
+    <!-- TODO: reconsider which elements to use -->
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
   </nav>
   <!-- the following div is required to make both the 'main' and 'footer' sections blur when the menu is opened -->
   <div class="blurable">
     <main id="main-content">
       <article class="card m-5">
         <header class="card-header">
-          <h5 class="card-title h5">Lorem, ipsum.</h5>
-            <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
+          <h5 class="card-title h5">Future Values Part II</h5>
+          <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
         </header>
         <main class="card-body">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dicta quidem in architecto totam
-          corporis ipsam maiores sit placeat culpa non ex ipsa incidunt accusamus, dignissimos voluptatibus similique ea
-          minima, ullam optio adipisci sequi asperiores explicabo? Consequuntur praesentium et debitis maxime facere sed
-          modi deleniti enim sint placeat tempore dignissimos doloribus pariatur nihil cupiditate voluptates distinctio
-          sit
-          impedit reprehenderit quam eius, ex repudiandae consequatur tempora. Tempore non cupiditate dolore debitis
-          harum
-          voluptatum, blanditiis error doloribus consequuntur vel aut, ad dicta.
+          <form action="" class="form-group" id="invest-inputs" autocomplete="off">
+            <label for="investment-amt" class="form-label text-bold">Initial Investment</label>
+            <input class="form-input measurement" type="text" placeholder="10,000" id="investment-amt">
+            <label class="form-input-hint d-invisible"><strong>Error:</strong> Must enter a value above $0.01 and no greater than $100,000.00.</label><br />
+            <label for="interest-rate" class="form-label text-bold">Interest Rate</label>
+            <input class="form-input measurement" type="text" placeholder="7.5" id="interest-rate">
+            <label class="form-input-hint d-invisible"><strong>Error:</strong> Must enter a value above 0% and no greater than 15%.</label><br />
+            <label for="years" class="form-label text-bold">Years</label>
+            <input class="form-input measurement" type="text" placeholder="2" id="years">
+            <label class="form-input-hint d-invisible"><strong>Error:</strong> Must enter a value between 1 and 50 years.</label><br />
+            <input id="calculate" type="button" class="btn btn-primary disabled m-5" value="Calculate">
+          </form>
         </main>
       </article>
       <article class="card m-5">
