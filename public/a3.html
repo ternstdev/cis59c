@@ -172,6 +172,7 @@
       transition-timing-function: ease-in-out;
       z-index: -1;
       position: relative;
+      will-change: filter;
     }
 
     #header-main {
@@ -196,7 +197,7 @@
     </section>
   </header>
   <nav id="assignment-container" class="sidenav">
-    <div class="card m-5">
+    <div class="card m-5"> <!-- TODO: reconsider elements -->
       <div class="card-header">
         <h6 class="card-title">hi...</h6>
       </div>
@@ -205,11 +206,12 @@
       </div>
     </div>
   </nav>
+  <!-- the following div is required to make both the 'main' and 'footer' sections blur when the menu is opened -->
   <div class="blurable">
     <main id="main-content">
       <article class="card m-5">
         <header class="card-header">
-          <h5 class="card-title h5">Lorem, ipsum.</h6>
+          <h5 class="card-title h5">Lorem, ipsum.</h5>
             <h6 class="card-subtitle text-gray text-italic">Taylor Ernst</h6>
         </header>
         <main class="card-body">
