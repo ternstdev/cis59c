@@ -30,12 +30,14 @@ class FVApp {
     const investInputs = document.querySelectorAll("#invest-inputs input");
     investInputs.forEach((input) => {
       if (input.id === "investment-amt") {
-        input.addEventListener("change", this.validateInvestmentAmt);
-        input.addEventListener("focus", this.notReadyToCalc);
+        input.addEventListener("blur", () => this.validateInvestmentAmt());
+        input.addEventListener("focus", (evt) => this.notReadyToCalc(evt));
       } else if (input.id === "interest-rate") {
-        input.addEventListener("change", this.validateInterestRate);
+        input.addEventListener("blur", () => this.validateInterestRate());
+        input.addEventListener("focus", (evt) => this.notReadyToCalc(evt));
       } else if (input.id === "years") {
-        input.addEventListener("change", this.validateYears);
+        input.addEventListener("blur", () => this.validateYears());
+        input.addEventListener("focus", (evt) => this.notReadyToCalc(evt));
       }
     });
     document.getElementById("investment-amt").focus();
@@ -116,9 +118,11 @@ class FVApp {
     this.checkIfReadyForCalc();
   }
 
-  notReadyToCalc() {
+  notReadyToCalc(evt) {
+    evt.target.classList.remove("is-success");
+    evt.target.classList.remove("is-error");
     document.getElementById("calculate").classList.add("disabled");
-    document.querySelectorAll("#invest-inputs.label-error").forEach(e => e.classList.add("d-invisible"));
+    evt.target.nextElementSibling.classList.add("d-invisible");
   }
 
   checkIfReadyForCalc() {
@@ -130,7 +134,49 @@ class FVApp {
   }
 
   calculateFV(investmentAmt, interestRate, years) {
-    //alert(this.name);
+    if (document.getElementById("calculate").classList.contains("disabled"))
+      return false;
+    // TODO: Convert this output to javascript.
+    let output = `
+          <h5 class="mb-1">Investment Amount: <span class="label label-secondary">${investmentAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</span></h5>
+          <h5 class="mb-1">Interest Rate: <span class="label label-secondary">${interestRate.toFixed(3) + "%"}</span></h5>
+          <h5 class="mb-1">Years: <span class="label label-secondary">${years}</span></h5>
+          <table class="table table-striped table-hover text-right">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Interest</th>
+                <th>Total Value</th>
+              </tr>
+            </thead>
+            <tbody>`;
+
+    let currentInterestAmt;
+    let totalAmt = investmentAmt;
+
+    output += `
+              <tr>
+                <td>0</td>
+                <td>N/A</td>
+                <td>${totalAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
+              </tr>`;
+
+    for (let i = 1; i <= years; i++) {
+      currentInterestAmt = totalAmt * (interestRate / 100);
+      totalAmt += currentInterestAmt;
+      output += `
+              <tr>
+                <td>${i}</td>
+                <td>${currentInterestAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
+                <td>${totalAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
+              </tr>`;
+    }
+
+    output += `
+            </tbody>
+          </table>`;
+
+    document.getElementById("table-output").innerHTML = output + document.getElementById("table-output").innerHTML;
   }
 
   processEntries() {
@@ -142,6 +188,5 @@ class FVApp {
 //let app = new FVApp();
 let app;
 window.addEventListener("load", () => app = new FVApp());
-window.addEventListener("load", () => {
 
-});
+document.getElementById("invest-inputs").addEventListener("submit", () => app.calculateFV(app.investmentAmt, app.interestRate, app.years));
