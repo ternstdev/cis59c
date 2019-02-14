@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <title>CIS 59C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/customutility.css">
+  <style>
+    /* Uncomment to display borders on all elements */
+    /*
+    body * {
+      border: red 1px solid;
+    }
+
+    /**/
+    #sad:checked+#sadlbl {
+      transform: translate3d(-1500%, 0, 0) rotate(720deg);
+      transition: 1s;
+      transition-timing-function: ease-out;
+    }
+
+    #yay:checked+#heart {
+      animation: bounce .5s;
+      animation-direction:alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-out;
+      transform-origin: bottom;
+      transition-timing-function: ease-in-out;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1, 1);
+      }
+
+      20% {
+        transform: translate3d(0, 0, 0) scale(1, 1);
+      }
+
+      60% {
+        transform: translate3d(0, 0, 0) scale(1.1, .9);
+      }
+
+      70% {
+        transform: translate3d(0, 0, 0) scale(1, 1);
+      }
+
+      100% {
+        transform: translate3d(0, -20px, 0) scale(.9, 1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header-main" class="navbar bg-primary p-sticky-top m-0">
+    <section class="navbar-section">
+      <button id="navbar-toggler-button" class="navbar-toggler">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="#" class="navbar-brand text-bold text-white">CIS 59C</a>
+    </section>
+  </header>
+  <nav id="assignment-container" class="sidenav">
+    <!-- TODO: reconsider which elements to use -->
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
+    <article class="card m-5">
+      <header class="card-header">
+        <h6 class="card-title">Title</h6>
+      </header>
+      <section class="card-body">
+        This will eventually contain descriptions and links to other assignments.
+      </section>
+    </article>
+  </nav>
+  <!-- the following div is required to make both the 'main' and 'footer' sections blur when the menu is opened -->
+  <div class="blurable">
+    <main id="main-content">
+      <article class="card m-5 text-center">
+        <header class="card-header">
+          <h5 class="card-title h5">Happy Valentine's Day, Bae!!!!</h5>
+        </header>
+        <main class="card-body">
+          <input id="yay" type="checkbox" value="" style="display: none;">
+          <h1 id="heart" style="font-size: 4rem;">🥰</h1>
+          <p>I'm so lucky to have a bae as sweet as you!!!</p>
+          <p>Will you be mine? 😘</p>
+          <label for="yay" id="yaylbl" class="btn btn-success">Yes 😍</label>
+          <input id="sad" type="checkbox" value="" style="display: none;">
+          <label for="sad" id="sadlbl" class="btn btn-error">No 😢</label>
+        </main>
+      </article>
+    </main>
+    <footer class="text-center text-gray text-italic">footer</footer>
+  </div>
+  <script src="./a3.js"></script>
+</body>
+
+</html>
