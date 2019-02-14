@@ -53,6 +53,7 @@ class FVApp {
       this.investmentAmt = NaN;
       elem.classList.remove("is-success");
       elem.classList.remove("is-error");
+      
       // Might want to consider explicitly selecting the label-error element to
       // prevent future layout changes from breaking functionality.
       // I could also refactor the CSS, but that would also still be fragile.
@@ -179,9 +180,9 @@ class FVApp {
     document.getElementById("table-output").innerHTML = output + document.getElementById("table-output").innerHTML;
   }
 
-  processEntries() {
-    //alert(this.name);
-  }
+  //processEntries() {
+    // This method isn't needed
+  //}
 }
 
 // This setup is a little convoluted in order to fulfill the specifications of the assignment.
