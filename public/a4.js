@@ -185,52 +185,50 @@ class FVApp {
   }
 
   submitRegisterForm() {
-    if (!this.checkIfReadyForSubmit()) {
+    const isFormValid = this.checkIfReadyForSubmit();
+    if (!isFormValid) {
       //return;
     }
     
     this.comments = document.getElementById("comments").value;
 
     let output = `
-          <h5 class="mb-1">Email: <span class="label label-secondary">${this.email}</span></h5>
-          <h5 class="mb-1">Phone: <span class="label label-secondary">${this.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")}</span></h5>
-          <h5 class="mb-1">Country: <span class="label label-secondary">${this.country}</span></h5>
-          <h5 class="mb-1">Contact Preference: <span class="label label-secondary">${this.contactPreference}</span></h5>
-          <h5 class="mb-1">Terms Accepted: <span class="label label-secondary">${this.termsAccepted ? "Yes" : "No"}</span></h5>
-          <table class="table table-striped table-hover text-right d-inline">
+          <h5 class="mb-5">Form Valid?: ${isFormValid ? '<span class="label label-success">Yes' : '<span class="label label-error">No'}</span></h5>
+          <table class="table table-striped table-hover text-center" style="min-width: 150px; max-width: 800px; margin: 0 auto;">
             <thead>
-              <tr>
+              <tr class="text-center text-primary h5">
                 <th>Field</th>
                 <th>Value</th>
               </tr>
-            <thead>
+            </thead>
             <tbody>
               <tr>
-                <td>Email</td>
-                <td>${this.email}</td>
+                <td class="text-bold">Email</td>
+                <td>${this.email ? this.email : "No valid input" }</td>
               </tr>
               <tr>
-                <td>Phone</td>
-                <td>${this.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")}</td>
+                <td class="text-bold">Phone</td>
+                <td>${this.phone ? this.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3") : "No valid input"}</td>
               </tr>
               <tr>
-                <td>Country</td>
-                <td>${this.country}</td>
+                <td class="text-bold">Country</td>
+                <td>${this.country ? this.country : "No valid input"}</td>
               </tr>
               <tr>
-                <td>Contact Preference</td>
-                <td>${this.contactPreference}</td>
+                <td class="text-bold">Contact Preference</td>
+                <td>${this.contactPreference ? this.contactPreference.cap : "No selection made"}</td>
               </tr>
               <tr>
-                <td>Terms Accepted?</td>
+                <td class="text-bold">Terms Accepted?</td>
                 <td>${this.termsAccepted ? "Yes" : "No"}</td>
               </tr>
               <tr>
-                <td>Comments</td>
-                <td style='white-space: pre-wrap;'>Length: ${this.comments.length}<br />${this.comments}</td>
+                <td class="text-bold">Comments</td>
+                <td class="text-break" style='white-space: pre-wrap;'>Length: ${this.comments.length}<br />${this.comments}</td>
               </tr>
             </tbody>
-          </table>`;
+          </table>
+          <br />`;
     /*
         let currentInterestAmt;
         let totalAmt = investmentAmt;
