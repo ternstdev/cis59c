@@ -242,7 +242,7 @@ class RegApp {
               </tr>
               <tr>
                 <td class="text-bold">Contact Preference</td>
-                <td>${this.contactPreference ? this.contactPreference.cap : "No selection made"}</td>
+                <td>${this.contactPreference ? this.contactPreference : "No selection made"}</td>
               </tr>
               <tr>
                 <td class="text-bold">Terms Accepted?</td>
