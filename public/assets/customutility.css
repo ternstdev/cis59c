@@ -1,153 +1,159 @@
- 
- /* CSS for navbar menu button */
- 
- .navbar-toggler {
-   cursor: pointer;
-   padding: 0;
-   background: none;
-   z-index: 2001;
-   height: 35px;
-   border: none;
-   margin: 5px;
- }
 
- .navbar-toggler:focus {
-   outline: 0;
- }
+/* CSS for navbar menu button */
 
- .navbar-toggler span {
-   width: 30px;
-   height: 3px;
-   border-radius: 3px;
-   display: block;
-   background-color: #f8f8f8;
-   position: relative;
-   transition: all .4s ease;
-   transform-origin: 50% 50%;
- }
+.navbar-toggler {
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  z-index: 2001;
+  height: 35px;
+  border: none;
+  margin: 5px;
+}
 
- .navbar-toggler span:first-of-type {
-   top: -1px;
-   transform-origin: 75% 50%;
-   transition: all .1s ease;
-   width: 20px;
- }
+.navbar-toggler:focus {
+  outline: 0;
+}
 
- .navbar-toggler span:nth-of-type(2) {
-   margin-top: 7px;
- }
+.navbar-toggler span {
+  width: 30px;
+  height: 3px;
+  border-radius: 3px;
+  display: block;
+  background-color: #f8f8f8;
+  position: relative;
+  transition: all .4s ease;
+  transform-origin: 50% 50%;
+}
 
- .navbar-toggler span:nth-of-type(3) {
-   top: 1px;
-   width: 15px;
-   margin-left: 50%;
-   margin-top: 7px;
- }
+.navbar-toggler span:first-of-type {
+  top: -1px;
+  transform-origin: 75% 50%;
+  transition: all .1s ease;
+  width: 20px;
+}
+
+.navbar-toggler span:nth-of-type(2) {
+  margin-top: 7px;
+}
+
+.navbar-toggler span:nth-of-type(3) {
+  top: 1px;
+  width: 15px;
+  margin-left: 50%;
+  margin-top: 7px;
+}
 
 
- @keyframes moveright {
-   to {
-     transform: translateX(10%);
-   }
- }
+@keyframes moveright {
+  to {
+    transform: translateX(2px);
+  }
+}
 
- @keyframes moveleft {
-   to {
-     transform: translateX(-10%);
-   }
- }
+@keyframes moveleft {
+  to {
+    transform: translateX(-2px);
+  }
+}
 
- .navbar-toggler:hover span {
-   background-color: #bbb;
- }
+.navbar-toggler:hover span,
+.navbar-toggler:focus span {
+  background-color: #bbb;
+}
 
- .navbar-toggler:hover:not(.open) span:first-of-type {
-   animation-name: moveright;
-   animation-duration: .5s;
-   animation-iteration-count: infinite;
-   animation-direction: alternate;
-   animation-timing-function: ease-in-out;
- }
+.navbar-toggler:hover:not(.open) span:first-of-type,
+.navbar-toggler:focus:not(.open) span:first-of-type {
+  animation-name: moveright;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
 
- /* .navbar-toggler:hover span:nth-of-type(2) {
- } */
+/* .navbar-toggler:hover span:nth-of-type(2) {
+} */
 
- .navbar-toggler:hover:not(.open) span:nth-of-type(3) {
-   /* transform: rotate(45deg);
-   width: 100%;
-   margin: 0;
-   top: -3px; */
-   animation-name: moveleft;
-   animation-duration: .5s;
-   animation-iteration-count: infinite;
-   animation-direction: alternate;
-   animation-timing-function: ease-in-out;
- }
+.navbar-toggler:hover:not(.open) span:nth-of-type(3),
+.navbar-toggler:focus:not(.open) span:nth-of-type(3) {
+  /* transform: rotate(45deg);
+  width: 100%;
+  margin: 0;
+  top: -3px; */
+  animation-name: moveleft;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
 
- .navbar-toggler.open span:first-of-type {
-   transform: scaleX(0) translateY(7px);
-   opacity: 0;
-   transition-delay: 0s;
-   margin: 0;
- }
+.navbar-toggler.open span:first-of-type {
+  transform: scaleX(0) translateY(7px);
+  opacity: 0;
+  transition-delay: 0s;
+  margin: 0;
+}
 
- .navbar-toggler.open span:nth-of-type(2) {
-   transform: rotate(-45deg);
-   margin: 0;
- }
+.navbar-toggler.open span:nth-of-type(2) {
+  transform: rotate(-45deg);
+  margin: 0;
+}
 
- .navbar-toggler.open span:nth-of-type(3) {
-   transform: rotate(45deg);
-   width: 100%;
-   margin: 0;
-   top: -3px;
- }
+.navbar-toggler.open span:nth-of-type(3) {
+  transform: rotate(45deg);
+  width: 100%;
+  margin: 0;
+  top: -3px;
+}
 
- .navbar-toggler.open span {
-   background-color: #d00;
- }
+.navbar-toggler.open span {
+  background-color: #d00;
+}
 
- .sidenav {
-   height: 100%;
-   width: 100%;
-   position: fixed;
-   z-index: 1;
-   /*left: 0;*/
-   background-color: rgba(255, 255, 255, 0.5);
-   overflow-x: hidden;
-   transition: 0.5s;
-   transform: translate3d(0, -110vh, 0);
-   transform-origin: top;
- }
+.sidenav {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  /*left: 0;*/
+  background-color: rgba(255, 255, 255, 0.5);
+  overflow-x: hidden;
+  transition: 0.5s;
+  transition-property: transform;
+  transform: translate3d(0, -110vh, 0);
+  transform-origin: top;
+  opacity: 0;
+}
 
- .blur {
-   filter: blur(3px);
-   /* z-index: 0; */
- }
+.blur {
+  filter: blur(3px);
+  /* z-index: 0; */
+}
 
- .blurable {
-   transition-duration: .3s;
-   transition-timing-function: ease-in-out;
-   /* z-index: -1; */
-   position: relative;
-   will-change: filter;
- }
+.blurable {
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  /* z-index: -1; */
+  position: relative;
+  will-change: filter;
+}
 
- #header-main {
-   z-index: 2;
- }
+#header-main {
+  z-index: 2;
+}
 
- .sidenav-show {
-   transform: translate3d(0, 0, 0);
- }
- 
- 
- 
- 
- 
- 
- /* Misc Extensions to CSS */
- .noselect {
+.sidenav-show {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+
+
+
+
+
+/* Misc Extensions to CSS */
+.noselect {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
