@@ -20,7 +20,7 @@
 })();
 
 
-class FVApp {
+class RegApp {
 
   constructor() {
     this.email = "";
@@ -30,9 +30,10 @@ class FVApp {
     this.termsAccepted = false;
     this.comments = "";
     document.getElementById("register-form").addEventListener("submit", () => this.submitRegisterForm());
+    document.getElementById("register-form").addEventListener("reset", () => this.resetRegisterForm());
     //document.getElementById("submit-register").addEventListener("click", this.processEntries);
-    const investInputs = document.querySelectorAll("#register-form input, #register-form select");
-    investInputs.forEach((input) => {
+    const registerInputs = document.querySelectorAll("#register-form input, #register-form select");
+    registerInputs.forEach((input) => {
       if (input.id === "email-address") {
         input.addEventListener("blur", () => this.validateEmail());
         input.addEventListener("focus", (evt) => this.notReadyToSubmit(evt));
@@ -184,12 +185,30 @@ class FVApp {
 
   }
 
+  resetRegisterForm() {
+    const registerInputs = document.querySelectorAll("#register-form input, #register-form select");
+    registerInputs.forEach((input) => {
+      input.classList.remove("is-success");
+      input.classList.remove("is-error");
+    });
+    
+    const labelErrorHints = document.querySelectorAll(".form-input-hint");
+    labelErrorHints.forEach((label) => {
+      label.classList.add("d-invisible");
+    });
+    
+    const hasSuccessContainers = document.querySelectorAll(".has-success");
+    hasSuccessContainers.forEach((elem) => {
+      elem.classList.remove("has-success");
+    })
+  }
+
   submitRegisterForm() {
     const isFormValid = this.checkIfReadyForSubmit();
     if (!isFormValid) {
       //return;
     }
-    
+
     this.comments = document.getElementById("comments").value;
 
     let output = `
@@ -204,7 +223,7 @@ class FVApp {
             <tbody>
               <tr>
                 <td class="text-bold">Email</td>
-                <td>${this.email ? this.email : "No valid input" }</td>
+                <td>${this.email ? this.email : "No valid input"}</td>
               </tr>
               <tr>
                 <td class="text-bold">Phone</td>
@@ -229,49 +248,12 @@ class FVApp {
             </tbody>
           </table>
           <br />`;
-    /*
-        let currentInterestAmt;
-        let totalAmt = investmentAmt;
-    
-        output += `
-                  <tr>
-                    <td>0</td>
-                    <td>N/A</td>
-                    <td>${totalAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
-                  </tr>`;
-    
-        for (let i = 1; i <= years; i++) {
-          currentInterestAmt = totalAmt * (interestRate / 100);
-          totalAmt += currentInterestAmt;
-          output += `
-                  <tr>
-                    <td>${i}</td>
-                    <td>${currentInterestAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
-                    <td>${totalAmt.toLocaleString('en', { style: 'currency', currency: 'USD' })}</td>
-                  </tr>`;
-        }
-    
-    
-    output += `
-            </tbody>
-          </table>`;
-    */
+
     document.getElementById("table-output").innerHTML = output + document.getElementById("table-output").innerHTML;
   }
 
-  //processEntries() {
-  // This method isn't needed
-  //}
 }
 
-// This setup is a little convoluted in order to fulfill the specifications of the assignment.
-//let app = new FVApp();
-(function () {
 
-
-
-
-})();
-
-let app = new FVApp()
+let app = new RegApp()
 
