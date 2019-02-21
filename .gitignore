@@ -78,3 +78,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+
+
+###################################
+# Additional stuff added by me.
+.vscode/settings.json
