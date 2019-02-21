@@ -200,7 +200,14 @@ class RegApp {
     const hasSuccessContainers = document.querySelectorAll(".has-success");
     hasSuccessContainers.forEach((elem) => {
       elem.classList.remove("has-success");
-    })
+    });
+    
+    this.email = "";
+    this.phone = "";
+    this.country = "";
+    this.contactPreference = "";
+    this.termsAccepted = false;
+    this.comments = "";
   }
 
   submitRegisterForm() {
