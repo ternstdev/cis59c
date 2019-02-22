@@ -175,16 +175,14 @@
   height: 100%;
   width: 100%;
   position: fixed;
-  
   z-index: 1;
   /*left: 0;*/
-  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
   overflow-x: hidden;
   transition: 0.5s;
   transition-property: transform;
   transform: translate3d(0, -110vh, 0);
   transform-origin: top;
-  opacity: 0;
 }
 
 .blur {
