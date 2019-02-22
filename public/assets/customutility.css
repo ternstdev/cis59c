@@ -1,3 +1,46 @@
+/* Pets */
+.hero-body {
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height: 100vh;
+  background-attachment: fixed;
+}
+
+.wrapper {
+  /* The height needs to be set to a fixed value for the effect to work.
+   * 100vh is the full height of the viewport. */
+  height: 100vh;
+  /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+  overflow-x: hidden;
+  /* Enable scrolling on the page. */
+  overflow-y: auto;
+  /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+  perspective: 2px;
+}
+
+.hero-parallax::after {
+  background-image: url("https://tay.fail/pets/img/rocky-orig.jpg");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-position: top;
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-1px) scale(1.5);
+  height: 100vh;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -1;
+}
+
 
 /* CSS for navbar menu button */
 
@@ -62,8 +105,7 @@
   background-color: #bbb;
 }
 
-.navbar-toggler:hover:not(.open) span:first-of-type,
-.navbar-toggler:focus:not(.open) span:first-of-type {
+.navbar-toggler:hover:not(.open) span:first-of-type {
   animation-name: moveright;
   animation-duration: .5s;
   animation-iteration-count: infinite;
@@ -74,8 +116,7 @@
 /* .navbar-toggler:hover span:nth-of-type(2) {
 } */
 
-.navbar-toggler:hover:not(.open) span:nth-of-type(3),
-.navbar-toggler:focus:not(.open) span:nth-of-type(3) {
+.navbar-toggler:hover:not(.open) span:nth-of-type(3) {
   /* transform: rotate(45deg);
   width: 100%;
   margin: 0;
