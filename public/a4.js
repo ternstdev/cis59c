@@ -49,7 +49,7 @@ class RegApp {
       } else if (input.name === "contact-preference") {
         input.addEventListener("input", () => this.validateContactPreference());
       } else if (input.id === "accept-terms") {
-        input.addEventListener("input", () => this.validateTerms());
+        input.addEventListener("change", () => this.validateTerms());
       }
 
     });
