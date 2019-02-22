@@ -1,10 +1,25 @@
 /* Pets */
 .hero-body {
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  /* background-position: center; 
+  background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed; */
   height: 100vh;
-  background-attachment: fixed;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section {
+  color: rgb(240, 240, 240);
+  text-shadow: 0 0 10px rgba(100, 100, 100, 1);
+}
+
+
+.hero-main {
+}
+
+#main-content {
+  background: white;
 }
 
 .wrapper {
@@ -24,6 +39,8 @@
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
   background-position: top;
+  background-color: rgba(0, 0, 0, .15);
+  background-blend-mode: multiply;
   /* Display and position the pseudo-element */
   content: " ";
   position: absolute;
@@ -35,11 +52,14 @@
   /* Move the pseudo-element back away from the camera,
    * then scale it back up to fill the viewport.
    * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
-  transform: translateZ(-1px) scale(1.5);
+  transform: translateZ(-2px) scale(2);
   height: 100vh;
   /* Keep the image from overlapping sibling elements. */
   z-index: -1;
 }
+
+
+
 
 
 /* CSS for navbar menu button */
@@ -396,7 +416,7 @@
 
 
 
-.m-4 {
+.m-3 {
   margin: .6rem !important;
 }
 
@@ -486,4 +506,21 @@
 .my-5 {
   margin-bottom: 1rem !important;
   margin-top: 1rem !important;
+}
+
+
+.p-3 {
+  padding: .6rem !important;
+}
+
+.p-4 {
+  padding: .8rem !important;
+}
+
+.p-5 {
+  padding: 1rem !important;
+}
+
+.pt-5 {
+  padding-top: 1rem !important;
 }
