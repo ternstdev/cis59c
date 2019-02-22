@@ -38,7 +38,7 @@
   background-image: url("https://tay.fail/pets/img/rocky-orig.jpg");
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
-  background-position: top;
+  background-position: 30% top;
   background-color: rgba(0, 0, 0, .15);
   background-blend-mode: multiply;
   /* Display and position the pseudo-element */
@@ -183,6 +183,7 @@
   transition-property: transform;
   transform: translate3d(0, -110vh, 0);
   transform-origin: top;
+  top: -110vh;
 }
 
 .blur {
@@ -205,6 +206,7 @@
 .sidenav-show {
   transform: translate3d(0, 0, 0);
   opacity: 1;
+  top: unset;
 }
 
 
