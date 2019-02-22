@@ -177,7 +177,7 @@
   position: fixed;
   z-index: 1;
   /*left: 0;*/
-  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  background: linear-gradient(rgba(255, 255, 255, 0.7) 60%, rgba(255, 255, 255, 0) );
   overflow-x: hidden;
   transition: 0.5s;
   transition-property: transform;
