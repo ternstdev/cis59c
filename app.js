@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var subdomain = require('express-subdomain');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(subdomain('api', router));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
