@@ -17,7 +17,7 @@ const fs = require('fs');
 const customlogger = (req, res, next) => {
   const logFile = fs.openSync('log.txt', 'a');
   fs.writeSync(logFile, `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, null, null);
-  fs.close(logFile);
+  fs.closeSync(logFile);
   next();
 };
 
