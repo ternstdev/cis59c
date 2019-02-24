@@ -6,7 +6,7 @@ router.get('/', function (req, res) {
   res.send('Welcome to our API!');
 }); */
 
-router.get('/pets/all', function (req, res, next) {
+router.get('/', function (req, res, next) {
   let allPets = {
     0: {
       name: "Rocky",
