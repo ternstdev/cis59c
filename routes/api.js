@@ -1,3 +1,4 @@
+var express = require('express');
 var router = express.Router();
 
 /*
@@ -5,7 +6,7 @@ router.get('/', function (req, res) {
   res.send('Welcome to our API!');
 }); */
 
-router.get('/pets/all', function (req, res) {
+router.get('/pets/all', function (req, res, next) {
   let allPets = {
     0: {
       name: "Rocky",
@@ -49,3 +50,5 @@ router.get('/pets/all', function (req, res) {
     allPets
   ]);
 });
+
+module.exports = router;
