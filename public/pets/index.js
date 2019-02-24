@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
   let blurBehindNav = function (event) {
     if (document.getElementById("assignment-container").classList.contains("sidenav-show")) {
       if (this.id !== event.target.id && this.id !== "navbar-toggler-button") {
@@ -17,4 +17,4 @@
 
   document.getElementById("navbar-toggler-button").addEventListener("click", blurBehindNav);
   document.getElementById("assignment-container").addEventListener("click", blurBehindNav);
-})();
+})();*/
