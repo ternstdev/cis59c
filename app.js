@@ -11,6 +11,8 @@ var apiRouter = require('./routes/api');
 
 var app = express();
 
+const customlogger = require('./middleware/customlogger');
+app.use(customlogger);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
