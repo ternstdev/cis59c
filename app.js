@@ -11,8 +11,19 @@ var apiRouter = require('./routes/api');
 
 var app = express();
 
-const customlogger = require('./middleware/customlogger');
+
+const fs = require('fs');
+
+const customlogger = (req, res, next) => {
+  const logFile = fs.openSync('log.txt', 'a');
+  fs.writeSync(logFile, `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, null, null);
+  next();
+};
+
+//const customlogger = require('./middleware/customlogger');
 app.use(customlogger);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
