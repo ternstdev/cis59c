@@ -15,9 +15,13 @@ var app = express();
 const fs = require('fs');
 
 const customlogger = (req, res, next) => {
-  const logFile = fs.openSync('log.txt', 'a');
-  fs.writeSync(logFile, `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, null, null);
-  fs.closeSync(logFile);
+  fs.appendFile('log.txt', `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, function (err) {
+    if (err) {
+      console.log("failed");
+    } else {
+      console.log("success!");
+    }
+  });
   next();
 };
 
