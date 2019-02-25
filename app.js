@@ -12,24 +12,6 @@ var apiRouter = require('./routes/api');
 var app = express();
 
 
-const fs = require('fs');
-
-const customlogger = (req, res, next) => {
-  fs.appendFile('log.txt', `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, function (err) {
-    if (err) {
-      console.log("failed");
-      //res.send(`Uhh fail.  --  ${req.protocol}://${req.get('host')}${req.originalUrl}\n`);
-    } else {
-      console.log("success!");
-      //res.send(`Uhh success?  --  ${req.protocol}://${req.get('host')}${req.originalUrl}\n`);
-    }
-  });
-  next();
-};
-
-//const customlogger = require('./middleware/customlogger');
-app.use(customlogger);
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
