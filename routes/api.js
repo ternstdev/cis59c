@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var allAnimalsData = require('allAnimalsData');
+var allAnimalsData = require('./allAnimalsData');
 
 
 router.get('/pets/animals/', function (req, res, next) {

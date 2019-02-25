@@ -1,4 +1,4 @@
-const allPets = [
+const allAnimalsData = [
   {
     id: 0,
     name: "Rocky",
