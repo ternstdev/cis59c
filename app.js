@@ -1,5 +1,5 @@
 var createError = require('http-errors');
-//var subdomain = require('express-subdomain');
+var subdomain = require('express-subdomain');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
