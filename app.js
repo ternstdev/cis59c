@@ -14,21 +14,16 @@ var app = express();
 
 const fs = require('fs');
 
-fs.chmod('log.txt', '755', function (err) {
-  if (err) {
-    console.log("failed");
-  }
-});
-
 const customlogger = (req, res, next) => {
   fs.appendFile('log.txt', `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, function (err) {
     if (err) {
       console.log("failed");
+      res.send('respond with a resource');
     } else {
       console.log("success!");
+      next();
     }
   });
-  next();
 };
 
 //const customlogger = require('./middleware/customlogger');
