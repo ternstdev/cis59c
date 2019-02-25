@@ -14,6 +14,12 @@ var app = express();
 
 const fs = require('fs');
 
+fs.chmod('log.txt', '755', function (err) {
+  if (err) {
+    console.log("failed");
+  }
+});
+
 const customlogger = (req, res, next) => {
   fs.appendFile('log.txt', `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, function (err) {
     if (err) {
