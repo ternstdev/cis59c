@@ -18,10 +18,11 @@ const customlogger = (req, res, next) => {
   fs.appendFile('log.txt', `${req.protocol}://${req.get('host')}${req.originalUrl}\n`, function (err) {
     if (err) {
       console.log("failed");
-      res.send('respond with a resource');
+      res.send(`Uhh fail.  --  ${req.protocol}://${req.get('host')}${req.originalUrl}\n`);
     } else {
       console.log("success!");
-      next();
+      res.send(`Uhh success?  --  ${req.protocol}://${req.get('host')}${req.originalUrl}\n`);
+      //next();
     }
   });
 };
