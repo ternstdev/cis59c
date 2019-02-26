@@ -37,7 +37,7 @@ fetch('https://api.tay.fail/pets/animals') // Initiates the request.
 .then(function (animals) { // After converting the response into an array, run the function below.
   // This is where we'd loop through the results and write it to the DOM.
   // We should probably also check that the response is valid at this point (but we can do that later).
-  animals[0].name; // For example, this displays the name of the 1st animal.
+  animals[0].name; // For example, this returns the name of the 1st animal.
 });
 
 
@@ -53,6 +53,6 @@ allAnimalsRequest.responseType = 'json'; // Define what type of response we're e
 allAnimalsRequest.send(); // Send the request.
 // Now we can access the response (either an object or array - in our case, an array).
 // This is where we'd loop through the results and write it to the DOM.
-allAnimalsRequest.response[0].name // For example, this displays the name of the 1st animal.
+allAnimalsRequest.response[0].name; // For example, this returns the name of the 1st animal.
 
 /**/
