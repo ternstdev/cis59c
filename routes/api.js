@@ -7,6 +7,13 @@ var allAnimalsData = require('./allAnimalsData');
 router.get('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+/*
+  let returnArray = [];
+  //Object.keys(req.query).length
+  if (req.query.length.)
+  //split
+  //loop through split array.
+*/
   res.json(allAnimalsData);
 });
 
