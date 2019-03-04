@@ -7,14 +7,39 @@ var allAnimalsData = require('./allAnimalsData');
 router.get('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-/*
-  let returnArray = [];
-  //Object.keys(req.query).length
-  if (req.query.length.)
-  //split
-  //loop through split array.
-*/
-  res.json(allAnimalsData);
+
+  let filteredArray = [];
+
+  // If no filters specified, return full data set.
+  if (Object.keys(req.query).length <= 0) {
+    return res.json(allAnimalsData);
+  }
+
+  // Max filters is 10. If more are requested, return empty array.
+  if (Object.keys(req.query).length > 10) {
+    return res.json(filteredArray);
+  }
+
+  filteredArray = allAnimalsData.filter((animal) => {
+    return Object.keys(req.query).every(key => {
+      // If this key doesn't exist, return false.
+      if (!(key in animal)) {
+        return false;
+      }
+      
+      let keyValues = req.query[key].split(",", 5);
+      let doesKeyValueMatch = keyValues.some(keyValue => {
+        console.log(typeof animal[key]);
+        console.log(typeof keyValue);
+        return (animal[key].toString().toLowerCase() === keyValue.toString().toLowerCase());
+      });
+      
+      return doesKeyValueMatch;
+    });
+  });
+
+  res.json(filteredArray);
+
 });
 
 router.get('/pets/animals/:id', function (req, res, next) {
@@ -27,7 +52,6 @@ router.get('/pets/animals/:id', function (req, res, next) {
   } else {
     res.status(400).json({ msg: `No animal found with id ${req.params.id}` });
   }
-  res.json(allAnimalsData);
 });
 
 module.exports = router;
