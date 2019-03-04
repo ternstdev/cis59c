@@ -29,8 +29,6 @@ router.get('/pets/animals/', function (req, res, next) {
       
       let keyValues = req.query[key].split(",", 5);
       let doesKeyValueMatch = keyValues.some(keyValue => {
-        console.log(typeof animal[key]);
-        console.log(typeof keyValue);
         return (animal[key].toString().toLowerCase() === keyValue.toString().toLowerCase());
       });
       
