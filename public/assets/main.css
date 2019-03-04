@@ -1842,6 +1842,9 @@ summary.accordion-header::-webkit-details-marker {
     .card .card-image:last-child img {
       border-bottom-left-radius: 0.1rem;
       border-bottom-right-radius: 0.1rem; }
+  .card .card-subtitle {
+    color: #bcc3ce;
+    font-style: italic; }
   .card:hover .card-image .hover-zoom {
     transform: scale(1.05); }
   .card img {
