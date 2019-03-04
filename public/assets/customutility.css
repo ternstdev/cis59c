@@ -24,6 +24,23 @@
 #main-content {
   background: white;
 }
+  
+#main-grid {
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  #main-grid {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 2rem;
+  padding: 2rem;
+  }
+}
+
 
 .wrapper {
   /* The height needs to be set to a fixed value for the effect to work.

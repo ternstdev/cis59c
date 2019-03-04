@@ -1,0 +1,70 @@
+// Cards
+.card {
+  background: $bg-color-light;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0,0,0,.3);
+
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: $layout-spacing-lg;
+    padding-bottom: 0;
+
+    &:last-child {
+      padding-bottom: $layout-spacing-lg;
+    }
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+  }
+
+  .card-image {
+    padding-top: $layout-spacing-lg;
+    overflow: hidden;
+    
+    img {
+      transition: transform .2s ease;
+    }
+
+    &:first-child {
+      padding-top: 0;
+
+      img {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+    }
+
+    &:last-child {
+      img {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+  
+  &:hover .card-image .hover-zoom {
+    transform: scale(1.05);
+  }
+  
+  img {
+    padding-top: $layout-spacing-lg;
+
+    &:first-child {
+      padding-top: 0;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+  
+
+}

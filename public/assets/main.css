@@ -1816,7 +1816,8 @@ summary.accordion-header::-webkit-details-marker {
   border: 0.05rem solid #dadee4;
   border-radius: 0.1rem;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); }
   .card .card-header,
   .card .card-body,
   .card .card-footer {
@@ -1829,13 +1830,27 @@ summary.accordion-header::-webkit-details-marker {
   .card .card-body {
     flex: 1 1 auto; }
   .card .card-image {
-    padding-top: 0.8rem; }
+    padding-top: 0.8rem;
+    overflow: hidden; }
+    .card .card-image img {
+      transition: transform .2s ease; }
     .card .card-image:first-child {
       padding-top: 0; }
       .card .card-image:first-child img {
         border-top-left-radius: 0.1rem;
         border-top-right-radius: 0.1rem; }
     .card .card-image:last-child img {
+      border-bottom-left-radius: 0.1rem;
+      border-bottom-right-radius: 0.1rem; }
+  .card:hover .card-image .hover-zoom {
+    transform: scale(1.05); }
+  .card img {
+    padding-top: 0.8rem; }
+    .card img:first-child {
+      padding-top: 0;
+      border-top-left-radius: 0.1rem;
+      border-top-right-radius: 0.1rem; }
+    .card img:last-child {
       border-bottom-left-radius: 0.1rem;
       border-bottom-right-radius: 0.1rem; }
 
