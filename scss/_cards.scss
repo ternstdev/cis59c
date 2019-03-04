@@ -6,13 +6,13 @@
   display: flex;
   flex-direction: column;
   box-shadow: 5px 5px 15px rgba(0,0,0,.3);
-
+  
   .card-header,
   .card-body,
   .card-footer {
     padding: $layout-spacing-lg;
     padding-bottom: 0;
-
+    
     &:last-child {
       padding-bottom: $layout-spacing-lg;
     }
@@ -45,6 +45,11 @@
         border-bottom-right-radius: $border-radius;
       }
     }
+  }
+  
+  .card-subtitle {
+    color: #bcc3ce;
+    font-style: italic;
   }
   
   &:hover .card-image .hover-zoom {
