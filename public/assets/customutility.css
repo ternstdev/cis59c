@@ -72,7 +72,7 @@
   /* Move the pseudo-element back away from the camera,
    * then scale it back up to fill the viewport.
    * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
-  transform: translateZ(-2px) scale(2);
+  transform: translateZ(-2px) scale(2.05);
   height: 100vh;
   /* Keep the image from overlapping sibling elements. */
   z-index: -1;
