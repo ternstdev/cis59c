@@ -3,6 +3,16 @@ var router = express.Router();
 
 var allAnimalsData = require('./allAnimalsData');
 
+
+
+
+
+
+
+
+
+
+
 const mysql = require('mysql');
 const dbUser = require('./dbUser');
 let dbconn = mysql.createConnection(dbUser);
@@ -10,13 +20,29 @@ let dbconn = mysql.createConnection(dbUser);
 router.get('/test/', function (req, res, next) {
   dbconn.connect();
   
-  dbconn.query('SELECT * FROM animals', function (error, results, fields) {
-    if (error) {
-      res.send(error);
-      throw error;
-    }
-    res.send(JSON.stringify(results));
-  });
+  let test = [];
+  let blargh;// = new {};
+  
+  dbconn.query(`
+SELECT id, name, typeId, breed,
+        age, shortDesc, houseTrained, specialNeeds,
+        energy, affection, obedience, children,
+        strangers, otherAnimals
+  FROM animals`,
+    function (error, results, fields) {
+      if (error) {
+        res.send(error);
+        throw error;
+      }
+      results.forEach(row => {
+        let blargh = new {};
+        Object.keys(row).forEach(key => blargh[key] = row[key]);
+        test.push(blargh);
+      });
+
+      res.send(JSON.stringify(test));
+      //res.send(JSON.stringify(results));
+    });
 
   dbconn.end();
 });
