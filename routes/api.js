@@ -20,7 +20,8 @@ SELECT A.id, name, typeId, breed,
         strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ', ') AS imgs
   FROM animals A
   LEFT JOIN animal_images I
-  ON A.id = I.animalId`,
+  ON A.id = I.animalId
+  GROUP BY A.id`,
     function (error, results, fields) {
       if (error) {
         res.send(error);
