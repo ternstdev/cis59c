@@ -35,7 +35,7 @@ SELECT id, name, typeId, breed,
         throw error;
       }
       results.forEach(row => {
-        let blargh = new {};
+        let blargh = {};
         Object.keys(row).forEach(key => blargh[key] = row[key]);
         test.push(blargh);
       });
