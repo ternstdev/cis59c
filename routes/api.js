@@ -3,6 +3,26 @@ var router = express.Router();
 
 var allAnimalsData = require('./allAnimalsData');
 
+const mysql = require('mysql');
+const dbUser = require('./dbUser');
+const dbconn = mysql.createConnection(dbUser);
+
+router.get('/test/', function (req, res, next) {
+  dbconn.connect();
+
+  dbconn.query('SELECT * FROM animals', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+    console.log(fields);
+    res.send(fields.toString() + "\n\n\n" + results.toString());
+  });
+
+  dbconn.end();
+});
+
+
+
+
 
 router.get('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,12 +46,12 @@ router.get('/pets/animals/', function (req, res, next) {
       if (!(key in animal)) {
         return false;
       }
-      
+
       let keyValues = req.query[key].split(",", 5);
       let doesKeyValueMatch = keyValues.some(keyValue => {
         return (animal[key].toString().toLowerCase() === keyValue.toString().toLowerCase());
       });
-      
+
       return doesKeyValueMatch;
     });
   });
