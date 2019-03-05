@@ -5,14 +5,14 @@ var allAnimalsData = require('./allAnimalsData');
 
 const mysql = require('mysql');
 const dbUser = require('./dbUser');
-const dbconn = mysql.createConnection(dbUser);
+let dbconn = mysql.createConnection(dbUser);
 
 router.get('/test/', function (req, res, next) {
   dbconn.connect();
-//xyz
+  
   dbconn.query('SELECT * FROM animals', function (error, results, fields) {
     if (error) {
-      res.send(error);
+      res.send(error + "\n\n\n" + dbUser);
       throw error;
     }
     console.log(results);
