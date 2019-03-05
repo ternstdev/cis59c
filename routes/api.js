@@ -3,16 +3,6 @@ var router = express.Router();
 
 var allAnimalsData = require('./allAnimalsData');
 
-
-
-
-
-
-
-
-
-
-
 const mysql = require('mysql');
 const dbUser = require('./dbUser');
 let dbconn = mysql.createConnection(dbUser);
@@ -24,11 +14,13 @@ router.get('/test/', function (req, res, next) {
   let blargh;// = new {};
   
   dbconn.query(`
-SELECT id, name, typeId, breed,
+SELECT A.id, name, typeId, breed,
         age, shortDesc, houseTrained, specialNeeds,
         energy, affection, obedience, children,
-        strangers, otherAnimals
-  FROM animals`,
+        strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ', ') AS imgs
+  FROM animals A
+  LEFT JOIN animal_images I
+  ON A.id = I.animalId`,
     function (error, results, fields) {
       if (error) {
         res.send(error);
@@ -37,12 +29,6 @@ SELECT id, name, typeId, breed,
       results.forEach(row => {
         blargh = {};
         Object.keys(row).forEach(key => blargh[key] = row[key]);
-        test.push(blargh);
-      });
-      
-      results.forEach(row => {
-        blargh = {};
-        Object.keys(row).forEach(key => blargh[key] = row[key] +1);
         test.push(blargh);
       });
 
