@@ -17,7 +17,7 @@ router.get('/test/', function (req, res, next) {
 SELECT A.id, name, typeId, breed,
         age, shortDesc, houseTrained, specialNeeds,
         energy, affection, obedience, children,
-        strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ', ') AS imgs
+        strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ',') AS imgs
   FROM animals A
   LEFT JOIN animal_images I
   ON A.id = I.animalId
@@ -29,6 +29,7 @@ SELECT A.id, name, typeId, breed,
       }
       results.forEach(row => {
         blargh = {};
+        row.imgs = row.imgs.split(",");
         Object.keys(row).forEach(key => blargh[key] = row[key]);
         test.push(blargh);
       });
