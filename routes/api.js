@@ -12,7 +12,7 @@ router.get('/test/', function (req, res, next) {
   
   dbconn.query('SELECT * FROM animals', function (error, results, fields) {
     if (error) {
-      res.send(dbUser.user + "@" + dbUser.host + "--" + dbUser.password);
+      res.send(error);
       throw error;
     }
     console.log(results);
