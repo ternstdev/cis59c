@@ -15,9 +15,7 @@ router.get('/test/', function (req, res, next) {
       res.send(error);
       throw error;
     }
-    console.log(results);
-    console.log(fields);
-    res.send(fields.toString() + "\n\n\n" + results.toString());
+    res.send(JSON.stringify(results));
   });
 
   dbconn.end();
