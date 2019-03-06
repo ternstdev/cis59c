@@ -10,6 +10,8 @@ let dbconn = mysql.createConnection(dbUser);
 router.get('/test/', function (req, res, next) {
   dbconn.connect();
   
+  let test = [];
+  let blargh;// = new {};
   
   dbconn.query(`
 SELECT A.id, name, typeId, breed,
@@ -25,10 +27,6 @@ SELECT A.id, name, typeId, breed,
         res.send(error);
         throw error;
       }
-      
-      let test = [];
-      let blargh;// = new {};
-      
       results.forEach(row => {
         blargh = {};
         row.imgs = row.imgs.split(",");
@@ -36,10 +34,10 @@ SELECT A.id, name, typeId, breed,
         test.push(blargh);
       });
 
-      res.send(JSON.stringify(test));
+      //res.send(JSON.stringify(test));
       //res.send(JSON.stringify(results));
     });
-
+  res.send("lol");
   dbconn.end();
 });
 
