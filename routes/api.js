@@ -37,8 +37,8 @@ SELECT A.id, name, typeId, breed,
       });
 
       
-      //res.send(JSON.stringify(test));
-      res.send(JSON.stringify(results));
+      res.send(JSON.stringify(test));
+      //res.send(JSON.stringify(results));
     });
   //res.send("lol");
 });
