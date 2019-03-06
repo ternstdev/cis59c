@@ -58,7 +58,7 @@ router.get('/pets/animals/', function (req, res, next) {
 
   let test = [];
   let blargh;
-  
+
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
           age, shortDesc, houseTrained, specialNeeds,
@@ -110,22 +110,22 @@ router.get('/pets/animals/', function (req, res, next) {
       });
 
       res.json(filteredArray);
-
     });
+});
 
-  router.get('/pets/animals/:id', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    const found = allAnimalsData.some(animal => animal.id === parseInt(req.params.id));
+router.get('/pets/animals/:id', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  const found = allAnimalsData.some(animal => animal.id === parseInt(req.params.id));
 
-    if (found) {
-      res.json(allAnimalsData.filter(animal => animal.id === parseInt(req.params.id)));
-    } else {
-      res.status(400).json({ msg: `No animal found with id ${req.params.id}` });
-    }
-  });
+  if (found) {
+    res.json(allAnimalsData.filter(animal => animal.id === parseInt(req.params.id)));
+  } else {
+    res.status(400).json({ msg: `No animal found with id ${req.params.id}` });
+  }
+});
 
-  module.exports = router;
+module.exports = router;
 
 /* // Examples of using the API:
 
