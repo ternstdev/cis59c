@@ -9,10 +9,10 @@ let dbconn = mysql.createConnection(dbUser);
 
 router.get('/test/', function (req, res, next) {
   dbconn.connect();
-  
+
   let test = [];
   let blargh;// = new {};
-  
+
   dbconn.query(`
 SELECT A.id, name, typeId, breed,
         age, shortDesc, houseTrained, specialNeeds,
@@ -37,8 +37,8 @@ SELECT A.id, name, typeId, breed,
       //res.send(JSON.stringify(test));
       //res.send(JSON.stringify(results));
     });
-  res.send("lol");
   dbconn.end();
+  res.send("lol");
 });
 
 
