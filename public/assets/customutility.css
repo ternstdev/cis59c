@@ -55,7 +55,7 @@
 }
 
 .hero-parallax::after {
-  background-image: url("https://tay.fail/pets/img/rocky-orig.jpg");
+  background-image: url("https://ernst.dev/pets/img/rocky-orig.jpg");
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
   background-position: 30% top;
