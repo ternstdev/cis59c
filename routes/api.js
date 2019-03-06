@@ -6,9 +6,9 @@ var allAnimalsData = require('./allAnimalsData');
 const mysql = require('mysql');
 const dbUser = require('./dbUser');
 let dbconn = mysql.createConnection(dbUser);
+dbconn.connect();
 
 router.get('/test/', function (req, res, next) {
-  dbconn.connect();
 
   let test = [];
   let blargh;// = new {};
@@ -34,11 +34,11 @@ SELECT A.id, name, typeId, breed,
         test.push(blargh);
       });
 
-      //res.send(JSON.stringify(test));
+      
       //res.send(JSON.stringify(results));
     });
-  dbconn.end();
-  res.send("lol");
+  res.send(JSON.stringify(test));
+  //res.send("lol");
 });
 
 
