@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //app.use(logger('combined', { stream: accessLogStream }))
-app.use(logger('common')); //:method :url :status :response-time ms - :res[content-length]
+app.use(logger(':date[iso] :method :url :status :response-time ms - :res[content-length]'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
