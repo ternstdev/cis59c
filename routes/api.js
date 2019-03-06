@@ -24,7 +24,7 @@ SELECT A.id, name, typeId, breed,
   GROUP BY A.id`,
     function (error, results, fields) {
       if (error) {
-        res.send(error);
+        res.status(400).send(error);
         throw error;
       }
 
@@ -53,11 +53,11 @@ router.get('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-  let filteredArray = [];
+  let filteredResult = [];
 
 
-  let test = [];
-  let blargh;
+  let fullResult = [];
+  let tempAnimal;
 
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
@@ -70,30 +70,30 @@ router.get('/pets/animals/', function (req, res, next) {
     GROUP BY A.id`,
     function (error, results, fields) {
       if (error) {
-        res.send(error);
+        res.status(400).send(error);
         throw error;
       }
 
 
       results.forEach(row => {
-        blargh = {};
+        tempAnimal = {};
         row.imgs = row.imgs.split(",");
-        Object.keys(row).forEach(key => blargh[key] = row[key]);
-        test.push(blargh);
+        Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
+        fullResult.push(tempAnimal);
       });
 
       // If no filters specified, return full data set.
       if (Object.keys(req.query).length <= 0) {
         //return res.json(allAnimalsData);
-        return res.json(test);
+        return res.json(fullResult);
       }
 
       // Max filters is 10. If more are requested, return empty array.
       if (Object.keys(req.query).length > 10) {
-        return res.json(filteredArray);
+        return res.status(400).json(filteredResult);
       }
 
-      filteredArray = test.filter((animal) => {
+      filteredResult = fullResult.filter((animal) => {
         return Object.keys(req.query).every(key => {
           // If this key doesn't exist, return false.
           if (!(key in animal)) {
@@ -109,20 +109,48 @@ router.get('/pets/animals/', function (req, res, next) {
         });
       });
 
-      res.json(filteredArray);
+      res.json(filteredResult);
     });
 });
 
 router.get('/pets/animals/:id', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  const found = allAnimalsData.some(animal => animal.id === parseInt(req.params.id));
 
-  if (found) {
-    res.json(allAnimalsData.filter(animal => animal.id === parseInt(req.params.id)));
-  } else {
-    res.status(400).json({ msg: `No animal found with id ${req.params.id}` });
-  }
+  let fullResult = [];
+  let tempAnimal;
+
+  dbconn.query(`
+  SELECT A.id, name, typeId, breed,
+          age, shortDesc, houseTrained, specialNeeds,
+          energy, affection, obedience, children,
+          strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ',') AS imgs
+    FROM animals A
+    LEFT JOIN animal_images I
+    ON A.id = I.animalId
+    GROUP BY A.id`,
+    function (error, results, fields) {
+      if (error) {
+        res.status(400).send(error);
+        throw error;
+      }
+
+
+      results.forEach(row => {
+        tempAnimal = {};
+        row.imgs = row.imgs.split(",");
+        Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
+        fullResult.push(tempAnimal);
+      });
+
+      const found = fullResult.some(animal => animal.id === parseInt(req.params.id));
+
+      if (found) {
+        res.json(fullResult.filter(animal => animal.id === parseInt(req.params.id)));
+      } else {
+        res.status(400).json({ msg: `No animal found with id ${req.params.id}` });
+      }
+    });
 });
 
 module.exports = router;
