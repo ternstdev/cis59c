@@ -1,3 +1,9 @@
+
+document.getElementById("navbar-toggler-button").addEventListener("click", (evt) => {
+  document.getElementById("main-nav").classList.add("anim");
+  document.getElementById("main-nav").classList.toggle("open");
+  document.getElementById("navbar-toggler-button").classList.toggle("open");
+});
 /*(function () {
   let blurBehindNav = function (event) {
     if (document.getElementById("assignment-container").classList.contains("sidenav-show")) {

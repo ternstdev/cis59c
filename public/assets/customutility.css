@@ -41,15 +41,35 @@
   }
 }
 
+#main-nav {
+  transform: unset;
+  transform: translateY(-110%);
+  position: fixed;
+  top: 0;
+  z-index: unset;
+  text-align: center;
+  width: 100%;
+}
+
+
+#main-nav.anim {
+  transition: all .4s ease;
+}
+
+#main-nav.open {
+  transform: translateY(0);
+}
+
+
 
 .wrapper {
   /* The height needs to be set to a fixed value for the effect to work.
    * 100vh is the full height of the viewport. */
   height: 100vh;
   /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   /* Enable scrolling on the page. */
-  overflow-y: auto;
+  /* overflow-y: auto; */
   /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
   perspective: 2px;
 }
@@ -96,6 +116,9 @@
   border-radius: 50%;
   margin: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
+  position: fixed;
+  top: 1%;
+  right: 2%;
 }
 
 .navbar-toggler2:focus {
@@ -122,7 +145,7 @@
   transition: all .4s ease;
 }
 
-.navbar-toggler2:hover:not(:focus) span:first-of-type {
+.navbar-toggler2:hover:not(.open) span:first-of-type {
   transform: rotate(90deg) translateX(8px);
   /* top: -1px;
   transform-origin: 75% 50%;
@@ -131,13 +154,13 @@
 }
 
 .navbar-toggler2:hover span:nth-of-type(2),
-.navbar-toggler2:focus span:nth-of-type(2) {
+.navbar-toggler2.open span:nth-of-type(2) {
   transform: scaleX(0);
   opacity: 0;
   /* margin-top: 7px; */
 }
 
-.navbar-toggler2:hover:not(:focus) span:nth-of-type(3) {
+.navbar-toggler2:hover:not(.open) span:nth-of-type(3) {
   /*
   transform: rotate(180deg) translateY(8px);
   */
@@ -148,7 +171,7 @@
   margin-top: 7px; */
 }
 
-.navbar-toggler2:focus span:first-of-type {
+.navbar-toggler2.open span:first-of-type {
   transform: rotate(135deg) translate(5.66px, -5.66px);
   background-color: firebrick;
   /* top: -1px;
@@ -157,7 +180,7 @@
   width: 20px; */
 }
 
-.navbar-toggler2:focus span:nth-of-type(3) {
+.navbar-toggler2.open span:nth-of-type(3) {
   /*
   transform: rotate(135deg) translate(-5.66px, 5.66px);
   */
