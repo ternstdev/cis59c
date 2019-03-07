@@ -221,29 +221,21 @@
       <footer class="text-center text-gray text-italic">footer</footer>
     </div>
   </div>
-  <nav id="main-nav" class="menu text-large">
-    <div style="max-width: 400px; margin: 0 auto;">
-      <!--<div class="divider" data-content="Adopt.com"></div>-->
-      <div class="menu-item d-inline-block">
-        <a href="#">Home
-        </a>
-      </div><br />
-      <div class="menu-item d-inline-block">
-        <a href="#">Find Your Match
-        </a>
-      </div><br />
-      <div class="menu-item d-inline-block">
-        <a href="#">Your Matches <label class="label label-primary">2</label></a>
-      </div><br />
-      <div class="menu-item d-inline-block">
-        <a href="#">Rescue Portal</a>
-      </div>
-    </div>
-  </nav>
-  <button id="navbar-toggler-button" class="navbar-toggler2" aria-label="nav menu">
-    <span></span>
-    <span></span>
-    <span></span></button>
+  <div id="nav-menu-wrapper">
+    <a id="nav-menu-closer" href="#"></a>
+    <nav id="nav-menu-main" class="nav">
+      <a class="nav-item active" href="#">Home</a>
+      <a class="nav-item" href="#">Find Your Match</a>
+      <a href="#" class="nav-item badge" data-badge="3">Your Matches </a>
+      <a class="nav-item" href="#">Rescue Portal</a>
+      <a class="nav-item" href="#">About Us</a>
+    </nav>
+    <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
   <script src="./index.js"></script>
 </body>
 

@@ -1,4 +1,26 @@
 /* Pets */
+
+/* Need to add this to the SCSS: */
+.nav {
+  align-items: center;
+}
+.nav a.nav-item {
+  color: #66758c;
+  padding: 0.2rem 0.4rem;
+  text-decoration: none; }
+  .nav a.nav-item:focus, .nav a.nav-item:hover {
+    color: #00ae41; }
+.nav a.nav-item.active {
+  color: #505c6e;
+  font-weight: bold; }
+  .nav a.nav-item.active:focus, .nav a.nav-item.active:hover {
+    color: #00ae41; }
+
+  /* End adding to SCSS */
+
+
+
+
 .hero-body {
   /* background-position: center; 
   background-repeat: no-repeat;
@@ -41,23 +63,33 @@
   }
 }
 
-#main-nav {
-  transform: unset;
-  transform: translateY(-110%);
+#nav-menu-main {
+  /* transform: unset; */
+  transform: translateY(-105%);
   position: fixed;
   top: 0;
   z-index: unset;
   text-align: center;
   width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,.3);
+  background-color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: .6rem;
 }
 
 
-#main-nav.anim {
-  transition: all .4s ease;
+#nav-menu-wrapper.anim #nav-menu-main {
+  transition: transform .4s ease;
 }
 
-#main-nav.open {
+#nav-menu-wrapper.open #nav-menu-main {
   transform: translateY(0);
+}
+
+#nav-menu-main .nav-item {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 }
 
 
@@ -67,7 +99,7 @@
    * 100vh is the full height of the viewport. */
   height: 100vh;
   /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   /* Enable scrolling on the page. */
   /* overflow-y: auto; */
   /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
@@ -103,7 +135,19 @@
 
 
 
+#nav-menu-closer {
+  cursor: unset;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
 
+#nav-menu-wrapper.open > #nav-menu-closer {
+  display: unset;
+}
 
 
 .navbar-toggler2 {
@@ -118,7 +162,7 @@
   box-shadow: 0 0 15px rgba(0,0,0,.3);
   position: fixed;
   top: 1%;
-  right: 2%;
+  right: 1.5%;
 }
 
 .navbar-toggler2:focus {
@@ -145,7 +189,7 @@
   transition: all .4s ease;
 }
 
-.navbar-toggler2:hover:not(.open) span:first-of-type {
+#nav-menu-wrapper:not(.open) .navbar-toggler2:hover span:first-of-type {
   transform: rotate(90deg) translateX(8px);
   /* top: -1px;
   transform-origin: 75% 50%;
@@ -154,13 +198,13 @@
 }
 
 .navbar-toggler2:hover span:nth-of-type(2),
-.navbar-toggler2.open span:nth-of-type(2) {
+#nav-menu-wrapper.open .navbar-toggler2 span:nth-of-type(2) {
   transform: scaleX(0);
   opacity: 0;
   /* margin-top: 7px; */
 }
 
-.navbar-toggler2:hover:not(.open) span:nth-of-type(3) {
+#nav-menu-wrapper:not(.open) .navbar-toggler2:hover span:nth-of-type(3) {
   /*
   transform: rotate(180deg) translateY(8px);
   */
@@ -171,7 +215,7 @@
   margin-top: 7px; */
 }
 
-.navbar-toggler2.open span:first-of-type {
+#nav-menu-wrapper.open .navbar-toggler2 span:first-of-type {
   transform: rotate(135deg) translate(5.66px, -5.66px);
   background-color: firebrick;
   /* top: -1px;
@@ -180,7 +224,7 @@
   width: 20px; */
 }
 
-.navbar-toggler2.open span:nth-of-type(3) {
+#nav-menu-wrapper.open .navbar-toggler2 span:nth-of-type(3) {
   /*
   transform: rotate(135deg) translate(-5.66px, 5.66px);
   */

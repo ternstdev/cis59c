@@ -1,9 +1,13 @@
 
-document.getElementById("navbar-toggler-button").addEventListener("click", (evt) => {
-  document.getElementById("main-nav").classList.add("anim");
-  document.getElementById("main-nav").classList.toggle("open");
-  document.getElementById("navbar-toggler-button").classList.toggle("open");
-});
+let navbarToggler = function() {
+  document.getElementById("nav-menu-wrapper").classList.add("anim");
+  document.getElementById("nav-menu-wrapper").classList.toggle("open");
+  //document.getElementById("navbar-toggler-button").classList.toggle("open");
+  //document.getElementById("navbar-toggler-button").blur();
+};
+document.getElementById("nav-menu-button").addEventListener("click", navbarToggler);
+document.getElementById("nav-menu-closer").addEventListener("click", navbarToggler);
+
 /*(function () {
   let blurBehindNav = function (event) {
     if (document.getElementById("assignment-container").classList.contains("sidenav-show")) {
