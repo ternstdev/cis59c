@@ -98,6 +98,10 @@
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 
+.navbar-toggler2:focus {
+  outline: 0;
+}
+
 .navbar-toggler2 span {
   width: 100%;
   height: 3px;
