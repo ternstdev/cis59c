@@ -8,6 +8,70 @@ const dbUser = require('./dbUser');
 let dbconn = mysql.createConnection(dbUser);
 dbconn.connect();
 
+const canParseInt = (text, min, max) => {
+  const num = parseInt(text)
+  return ( (!isNaN()) && (num >= min) && (num <= max) );
+}
+
+const validateInput = (params) => {
+  let i = -1;
+  if (params("id") !== undefined) {
+    if (canParseInt(params("id"), 0, 9999999)) {
+      return false;
+    }
+  }
+  if (params("name").length < 1 || params("name").length > 20) {
+    return false;
+  }
+  
+  if (canParseInt(params("typeId"), 0, 30)) {
+    return false;
+  }
+  
+  if (params("breed").length < 1 || params("breed").length > 20) {
+    return false;
+  }
+  
+  if (canParseInt(params("age"), 0, 200)) {
+    return false;
+  }
+  
+  if (params("shortDesc").length < 1 || params("shortDesc").length > 100) {
+    return false;
+  }
+  
+  if (canParseInt(params("houseTrained"), 0, 5)) {
+    return false;
+  }
+  
+  
+  if (canParseInt(params("specialNeeds"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("energy"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("affection"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("obedience"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("children"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("strangers"), 0, 5)) {
+    return false;
+  }
+  if (canParseInt(params("otherAnimals"), 0, 5)) {
+    return false;
+  }
+  
+  return true;
+  
+};
+
+
 router.get('/test/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -152,6 +216,52 @@ router.get('/pets/animals/:id', function (req, res, next) {
       }
     });
 });
+
+
+router.post('/pets/animals/', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
+  if (!validateInput(req.params)) {
+    return res.status(400).json({ msg: `Invalid Request` });
+  }
+  
+  let fullResult = [];
+  let tempAnimal;
+  const newAnimalData = [
+    req.param("name"),
+    req.param("typeId"), 
+    req.param("breed"), 
+    req.param("age"), 
+    req.param("shortDesc"), 
+    req.param("houseTrained"), 
+    req.param("specialNeeds"), 
+    req.param("energy"), 
+    req.param("affection"), 
+    req.param("obedience"), 
+    req.param("children"), 
+    req.param("strangers"), 
+    req.param("otherAnimals")
+  ];
+  
+  dbconn.query(`
+  INSERT INTO animals (name, typeId, breed,
+          age, shortDesc, houseTrained, specialNeeds,
+          energy, affection, obedience, children,
+          strangers, otherAnimals)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    newAnimalData,
+    function (error, results, fields) {
+      if (error) {
+        res.status(400).send(error);
+        throw error;
+      }
+
+      return res.json({ id: results.insertId });
+      
+      });
+});
+
 
 module.exports = router;
 
