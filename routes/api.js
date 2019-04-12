@@ -222,7 +222,7 @@ router.post('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
-  if (!validateInput(req.params)) {
+  if (!validateInput(req)) {
     return res.status(400).json({ msg: `Invalid Request` });
   }
   
