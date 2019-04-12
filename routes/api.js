@@ -71,6 +71,64 @@ const validateInput = (req) => {
   
 };
 
+const validateInput = (req) => {
+  let i = -1;
+  if (req.param("id") !== undefined) {
+    if (canParseInt(req.param("id"), 0, 9999999)) {
+      return "id";
+    }
+  }
+  if (!req.param("name") || req.param("name").length > 20) {
+    return "name";
+  }
+
+  if (canParseInt(req.param("typeId"), 0, 30)) {
+    return "typeId";
+  }
+
+  if (!req.param("breed") || req.param("breed").length > 20) {
+    return "breed";
+  }
+
+  if (canParseInt(req.param("age"), 0, 200)) {
+    return "age";
+  }
+
+  if (!req.param("shortDesc") || req.param("shortDesc").length > 100) {
+    return "shortDesc";
+  }
+
+  if (canParseInt(req.param("houseTrained"), 0, 5)) {
+    return "houseTrained";
+  }
+
+
+  if (canParseInt(req.param("specialNeeds"), 0, 5)) {
+    return "specialNeeds";
+  }
+  if (canParseInt(req.param("energy"), 0, 5)) {
+    return "energy";
+  }
+  if (canParseInt(req.param("affection"), 0, 5)) {
+    return "affection";
+  }
+  if (canParseInt(req.param("obedience"), 0, 5)) {
+    return "obedience";
+  }
+  if (canParseInt(req.param("children"), 0, 5)) {
+    return "children";
+  }
+  if (canParseInt(req.param("strangers"), 0, 5)) {
+    return "strangers";
+  }
+  if (canParseInt(req.param("otherAnimals"), 0, 5)) {
+    return "otherAnimals";
+  }
+
+  return "";
+
+};
+
 
 router.get('/test/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -222,7 +280,7 @@ router.post('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
-  if (!validateInput(req)) {
+  if (validateInput2(req)) {
     return res.status(400).json({ msg: `Invalid Request` });
   }
   
