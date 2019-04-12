@@ -199,7 +199,10 @@ router.get('/pets/animals/', function (req, res, next) {
 
       results.forEach(row => {
         tempAnimal = {};
-        row.imgs = row.imgs.split(",");
+        if (row.imgs)
+          row.imgs = row.imgs.split(",");
+        else
+          row.imgs = [];
         Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
         fullResult.push(tempAnimal);
       });
