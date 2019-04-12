@@ -73,7 +73,7 @@ const validateInput = (req) => {
 
 const validateInput2 = (req) => {
   let i = -1;
-  if (req.param("id") !== undefined) {
+  if (req.param("id")) {
     if (canParseInt(req.param("id"), 0, 9999999)) {
       return "id";
     }
