@@ -71,7 +71,7 @@ const validateInput = (req) => {
   
 };
 
-const validateInput = (req) => {
+const validateInput2 = (req) => {
   let i = -1;
   if (req.param("id") !== undefined) {
     if (canParseInt(req.param("id"), 0, 9999999)) {
@@ -280,8 +280,9 @@ router.post('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
-  if (validateInput2(req)) {
-    return res.status(400).json({ msg: `Invalid Request` });
+  var validationResult = validateInput2(req);
+  if (validationResult) {
+    return res.status(400).json({ msg: `Invalid Request`, field: validationResult });
   }
   
   let fullResult = [];
