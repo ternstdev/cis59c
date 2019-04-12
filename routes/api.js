@@ -10,7 +10,7 @@ dbconn.connect();
 
 const canParseInt = (text, min, max) => {
   const num = parseInt(text)
-  return ( (!isNaN()) && (num >= min) && (num <= max) );
+  return ( (!isNaN(num)) && (num >= min) && (num <= max) );
 }
 
 const validateInput = (req) => {
