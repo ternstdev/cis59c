@@ -74,7 +74,7 @@ const validateInput = (req) => {
 const validateInput2 = (req) => {
   let i = -1;
   if (req.param("id")) {
-    if (canParseInt(req.param("id"), 0, 9999999)) {
+    if (!canParseInt(req.param("id"), 0, 9999999)) {
       return "id";
     }
   }
@@ -82,7 +82,7 @@ const validateInput2 = (req) => {
     return "name";
   }
 
-  if (canParseInt(req.param("typeId"), 0, 30)) {
+  if (!canParseInt(req.param("typeId"), 0, 30)) {
     return "typeId";
   }
 
@@ -90,7 +90,7 @@ const validateInput2 = (req) => {
     return "breed";
   }
 
-  if (canParseInt(req.param("age"), 0, 200)) {
+  if (!canParseInt(req.param("age"), 0, 200)) {
     return "age";
   }
 
@@ -98,30 +98,30 @@ const validateInput2 = (req) => {
     return "shortDesc";
   }
 
-  if (canParseInt(req.param("houseTrained"), 0, 5)) {
+  if (!canParseInt(req.param("houseTrained"), 0, 5)) {
     return "houseTrained";
   }
 
 
-  if (canParseInt(req.param("specialNeeds"), 0, 5)) {
+  if (!canParseInt(req.param("specialNeeds"), 0, 5)) {
     return "specialNeeds";
   }
-  if (canParseInt(req.param("energy"), 0, 5)) {
+  if (!canParseInt(req.param("energy"), 0, 5)) {
     return "energy";
   }
-  if (canParseInt(req.param("affection"), 0, 5)) {
+  if (!canParseInt(req.param("affection"), 0, 5)) {
     return "affection";
   }
-  if (canParseInt(req.param("obedience"), 0, 5)) {
+  if (!canParseInt(req.param("obedience"), 0, 5)) {
     return "obedience";
   }
-  if (canParseInt(req.param("children"), 0, 5)) {
+  if (!canParseInt(req.param("children"), 0, 5)) {
     return "children";
   }
-  if (canParseInt(req.param("strangers"), 0, 5)) {
+  if (!canParseInt(req.param("strangers"), 0, 5)) {
     return "strangers";
   }
-  if (canParseInt(req.param("otherAnimals"), 0, 5)) {
+  if (!canParseInt(req.param("otherAnimals"), 0, 5)) {
     return "otherAnimals";
   }
 
