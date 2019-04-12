@@ -15,7 +15,7 @@ const canParseInt = (text, min, max) => {
 
 const validateInput = (req) => {
   let i = -1;
-  if (id !== undefined) {
+  if (req.param("id") !== undefined) {
     if (canParseInt(req.param("id"), 0, 9999999)) {
       return false;
     }
