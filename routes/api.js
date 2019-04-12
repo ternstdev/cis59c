@@ -20,7 +20,7 @@ const validateInput = (req) => {
       return false;
     }
   }
-  if (req.param("name").length < 1 || req.param("name").length > 20) {
+  if (!req.param("name") || req.param("name").length > 20) {
     return false;
   }
   
@@ -28,7 +28,7 @@ const validateInput = (req) => {
     return false;
   }
   
-  if (req.param("breed").length < 1 || req.param("breed").length > 20) {
+  if (!req.param("breed") || req.param("breed").length > 20) {
     return false;
   }
   
@@ -36,7 +36,7 @@ const validateInput = (req) => {
     return false;
   }
   
-  if (req.param("shortDesc").length < 1 || req.param("shortDesc").length > 100) {
+  if (!req.param("shortDesc") || req.param("shortDesc").length > 100) {
     return false;
   }
   
