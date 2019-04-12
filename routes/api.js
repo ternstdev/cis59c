@@ -15,55 +15,55 @@ const canParseInt = (text, min, max) => {
 
 const validateInput = (params) => {
   let i = -1;
-  if (params("id") !== undefined) {
-    if (canParseInt(params("id"), 0, 9999999)) {
+  if (id !== undefined) {
+    if (canParseInt(params["id"], 0, 9999999)) {
       return false;
     }
   }
-  if (params("name").length < 1 || params("name").length > 20) {
+  if (params["name"].length < 1 || params["name"].length > 20) {
     return false;
   }
   
-  if (canParseInt(params("typeId"), 0, 30)) {
+  if (canParseInt(params["typeId"], 0, 30)) {
     return false;
   }
   
-  if (params("breed").length < 1 || params("breed").length > 20) {
+  if (params["breed"].length < 1 || params["breed"].length > 20) {
     return false;
   }
   
-  if (canParseInt(params("age"), 0, 200)) {
+  if (canParseInt(params["age"], 0, 200)) {
     return false;
   }
   
-  if (params("shortDesc").length < 1 || params("shortDesc").length > 100) {
+  if (params["shortDesc"].length < 1 || params["shortDesc"].length > 100) {
     return false;
   }
   
-  if (canParseInt(params("houseTrained"), 0, 5)) {
+  if (canParseInt(params["houseTrained"], 0, 5)) {
     return false;
   }
   
   
-  if (canParseInt(params("specialNeeds"), 0, 5)) {
+  if (canParseInt(params["specialNeeds"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("energy"), 0, 5)) {
+  if (canParseInt(params["energy"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("affection"), 0, 5)) {
+  if (canParseInt(params["affection"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("obedience"), 0, 5)) {
+  if (canParseInt(params["obedience"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("children"), 0, 5)) {
+  if (canParseInt(params["children"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("strangers"), 0, 5)) {
+  if (canParseInt(params["strangers"], 0, 5)) {
     return false;
   }
-  if (canParseInt(params("otherAnimals"), 0, 5)) {
+  if (canParseInt(params["otherAnimals"], 0, 5)) {
     return false;
   }
   
