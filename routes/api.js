@@ -13,57 +13,57 @@ const canParseInt = (text, min, max) => {
   return ( (!isNaN()) && (num >= min) && (num <= max) );
 }
 
-const validateInput = (params) => {
+const validateInput = (req) => {
   let i = -1;
   if (id !== undefined) {
-    if (canParseInt(params["id"], 0, 9999999)) {
+    if (canParseInt(req.param("id"), 0, 9999999)) {
       return false;
     }
   }
-  if (params["name"].length < 1 || params["name"].length > 20) {
+  if (req.param("name").length < 1 || req.param("name").length > 20) {
     return false;
   }
   
-  if (canParseInt(params["typeId"], 0, 30)) {
+  if (canParseInt(req.param("typeId"), 0, 30)) {
     return false;
   }
   
-  if (params["breed"].length < 1 || params["breed"].length > 20) {
+  if (req.param("breed").length < 1 || req.param("breed").length > 20) {
     return false;
   }
   
-  if (canParseInt(params["age"], 0, 200)) {
+  if (canParseInt(req.param("age"), 0, 200)) {
     return false;
   }
   
-  if (params["shortDesc"].length < 1 || params["shortDesc"].length > 100) {
+  if (req.param("shortDesc").length < 1 || req.param("shortDesc").length > 100) {
     return false;
   }
   
-  if (canParseInt(params["houseTrained"], 0, 5)) {
+  if (canParseInt(req.param("houseTrained"), 0, 5)) {
     return false;
   }
   
   
-  if (canParseInt(params["specialNeeds"], 0, 5)) {
+  if (canParseInt(req.param("specialNeeds"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["energy"], 0, 5)) {
+  if (canParseInt(req.param("energy"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["affection"], 0, 5)) {
+  if (canParseInt(req.param("affection"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["obedience"], 0, 5)) {
+  if (canParseInt(req.param("obedience"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["children"], 0, 5)) {
+  if (canParseInt(req.param("children"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["strangers"], 0, 5)) {
+  if (canParseInt(req.param("strangers"), 0, 5)) {
     return false;
   }
-  if (canParseInt(params["otherAnimals"], 0, 5)) {
+  if (canParseInt(req.param("otherAnimals"), 0, 5)) {
     return false;
   }
   
