@@ -22,13 +22,14 @@
 
 <body>
   <div class="wrapper">
-    <form>
+    <form class="big-form card">
       <article id="step1" class="form-group">
+        <h2>Add a new pet for adoption</h2>
         <label class="form-label" for="name">Name</label>
         <input class="form-input" type="text" id="name" placeholder="Name">
         <label class="form-label" for="age">Age</label>
         <input class="form-input numeric" type="text" id="age" placeholder="3" data-numtype="+i">
-        <label class="form-label" for="name">Name</label>
+        <label class="form-label" for="typeId">Type</label>
         <select id="typeId" class="form-select">
           <option value="1">Dog</option>
           <option value="?">Cat</option>
@@ -38,22 +39,23 @@
         <label class="form-label" for="breed">Breed</label>
         <input class="form-input" type="text" id="breed" placeholder="German Shepard">
       </article>
+      
+      <article id="step2" class="form-group">asdfasdfsadfsdaf</article>
+      <ul class="step">
+        <li class="step-item active">
+          <span>Step 1</span>
+        </li>
+        <li class="step-item">
+          <span>Step 2</span>
+        </li>
+        <li class="step-item">
+          <span>Step 3</span>
+        </li>
+        <li class="step-item">
+          <span>Step 4</span>
+        </li>
+      </ul>
     </form>
-
-    <ul class="step">
-      <li class="step-item active">
-        <a href="#">Step 1</a>
-      </li>
-      <li class="step-item">
-        <a href="#">Step 2</a>
-      </li>
-      <li class="step-item">
-        <a href="#">Step 3</a>
-      </li>
-      <li class="step-item">
-        <a href="#">Step 4</a>
-      </li>
-    </ul>
     <main id="main-grid" class="">
       <article class="card">
         <a class="card-image" href="#">

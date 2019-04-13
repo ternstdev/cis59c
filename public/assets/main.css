@@ -2156,12 +2156,12 @@ summary.accordion-header::-webkit-details-marker {
       position: absolute;
       top: 9px;
       width: 100%; }
-    .step .step-item a {
+    .step .step-item span {
       color: #00ae41;
       display: inline-block;
       padding: 20px 10px 0;
       text-decoration: none; }
-      .step .step-item a::before {
+      .step .step-item span::before {
         background: #00ae41;
         border: 0.1rem solid #fff;
         border-radius: 50%;
@@ -2174,14 +2174,14 @@ summary.accordion-header::-webkit-details-marker {
         transform: translateX(-50%);
         width: 0.6rem;
         z-index: 1; }
-    .step .step-item.active a::before {
+    .step .step-item.active span::before {
       background: #fff;
       border: 0.1rem solid #00ae41; }
     .step .step-item.active ~ .step-item::before {
       background: #dadee4; }
-    .step .step-item.active ~ .step-item a {
+    .step .step-item.active ~ .step-item span {
       color: #bcc3ce; }
-      .step .step-item.active ~ .step-item a::before {
+      .step .step-item.active ~ .step-item span::before {
         background: #dadee4; }
 
 .tab {
