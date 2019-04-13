@@ -24,10 +24,33 @@ const validateInput = (req) => {
     return false;
   }
 
-  if (!canParseInt(req.param("typeId"), 0, 30)) {
+  if (!canParseInt(req.param("typeId"), 0, 17)) {
     return false;
   }
-
+  
+  // +----+-------------+
+  // | id | animal_type |
+  // +----+-------------+
+  // |  0 | Other       |
+  // |  1 | Bird        |
+  // |  2 | Cat         |
+  // |  3 | Caticorn    |
+  // |  4 | Dog         |
+  // |  5 | Ferret      |
+  // |  6 | Fish        |
+  // |  7 | Frog        |
+  // |  8 | Hedgehog    |
+  // |  9 | Horse       |
+  // | 10 | Lizard      |
+  // | 11 | Otter       |
+  // | 12 | Pig         |
+  // | 13 | Rabbit      |
+  // | 14 | Rodent      |
+  // | 15 | Snake       |
+  // | 16 | Tortoise    |
+  // | 17 | Turtle      |
+  // +----+-------------+
+  
   if (!req.param("breed") || req.param("breed").length > 20) {
     return false;
   }
