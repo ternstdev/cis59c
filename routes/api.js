@@ -139,7 +139,7 @@ router.get('/test/', function (req, res, next) {
 SELECT A.id, name, typeId, breed,
         age, shortDesc, houseTrained, specialNeeds,
         energy, affection, obedience, children,
-        strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ',') AS imgs
+        strangers, otherAnimals, IFNULL(GROUP_CONCAT(I.img SEPARATOR ','), "") AS imgs
   FROM animals A
   LEFT JOIN animal_images I
   ON A.id = I.animalId
@@ -185,7 +185,7 @@ router.get('/pets/animals/', function (req, res, next) {
   SELECT A.id, name, typeId, breed,
           age, shortDesc, houseTrained, specialNeeds,
           energy, affection, obedience, children,
-          strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ',') AS imgs
+          strangers, otherAnimals, IFNULL(GROUP_CONCAT(I.img SEPARATOR ','), "") AS imgs
     FROM animals A
     LEFT JOIN animal_images I
     ON A.id = I.animalId
@@ -199,10 +199,7 @@ router.get('/pets/animals/', function (req, res, next) {
 
       results.forEach(row => {
         tempAnimal = {};
-        if (row.imgs)
-          row.imgs = row.imgs.split(",");
-        else
-          row.imgs = [];
+        row.imgs = row.imgs.split(",");
         Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
         fullResult.push(tempAnimal);
       });
@@ -249,7 +246,7 @@ router.get('/pets/animals/:id', function (req, res, next) {
   SELECT A.id, name, typeId, breed,
           age, shortDesc, houseTrained, specialNeeds,
           energy, affection, obedience, children,
-          strangers, otherAnimals, GROUP_CONCAT(I.img SEPARATOR ',') AS imgs
+          strangers, otherAnimals, IFNULL(GROUP_CONCAT(I.img SEPARATOR ','), "") AS imgs
     FROM animals A
     LEFT JOIN animal_images I
     ON A.id = I.animalId
