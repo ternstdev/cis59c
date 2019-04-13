@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="google" content="notranslate" />
+  <title>Adopt a Pet! - CIS 59C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/main.css" />
+  <link rel="stylesheet" href="../assets/customutility.css" />
+  <style>
+    /* Uncomment to display borders on all elements */
+    /*
+    body * {
+      border: red 1px solid;
+    }
+
+    /**/
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <form>
+      <article id="step1" class="form-group">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-input" type="text" id="name" placeholder="Name">
+        <label class="form-label" for="age">Age</label>
+        <input class="form-input numeric" type="text" id="age" placeholder="3" data-numtype="+i">
+        <label class="form-label" for="name">Name</label>
+        <select id="typeId" class="form-select">
+          <option value="1">Dog</option>
+          <option value="?">Cat</option>
+          <option value="?">Hedgehog</option>
+          <option value="?">Bird</option>
+        </select>
+        <label class="form-label" for="breed">Breed</label>
+        <input class="form-input" type="text" id="breed" placeholder="German Shepard">
+      </article>
+    </form>
+
+    <ul class="step">
+      <li class="step-item active">
+        <a href="#">Step 1</a>
+      </li>
+      <li class="step-item">
+        <a href="#">Step 2</a>
+      </li>
+      <li class="step-item">
+        <a href="#">Step 3</a>
+      </li>
+      <li class="step-item">
+        <a href="#">Step 4</a>
+      </li>
+    </ul>
+    <main id="main-grid" class="">
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/rockygrizzled.jpg" alt="Rocky" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Rocky</h5>
+          <h6 class="card-subtitle">Terrier Mix</h6>
+        </header>
+        <p class="card-body">
+          Rocky is a friendly, well behaved pup and the perfect companion
+          for long walks!
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/scoutportrait.jpg" alt="Scout" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Scout</h5>
+          <h6 class="card-subtitle">Terrier Mix</h6>
+        </header>
+        <p class="card-body">
+          Scout is a spunky terrier who loves nothing more than taking a
+          nap on your lap!
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/teddy.jpg" alt="Teddy" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Teddy</h5>
+          <h6 class="card-subtitle">Terrier Mix</h6>
+        </header>
+        <p class="card-body">
+          Teddy loves to play fetch and jam to his
+          <a href="https://www.youtube.com/watch?v=ci_pCk0l-WA">favorite song</a>!
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/badger.jpg" alt="Teddy" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Badger</h5>
+          <h6 class="card-subtitle">Cool guy</h6>
+        </header>
+        <p class="card-body">
+          When he's not making funny faces, Badger can most often be found curled up under a pile of blankets.
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/hedgy.jpg" alt="Hedgy" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Hedgy</h5>
+          <h6 class="card-subtitle">Hedgehog</h6>
+        </header>
+        <p class="card-body">
+          Don't let his spikey exterior fool you &mdash; Hedgy the
+          Hedgehog is full of love!
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+
+      <article class="card">
+        <a class="card-image" href="#">
+          <img src="./img/emily.jpg" alt="Emily" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">Emily</h5>
+          <h6 class="card-subtitle">Formosan Mountain Dog</h6>
+        </header>
+        <p class="card-body">
+          Emily is wary of new people, but give her a few treats, and
+          she'll warm up to you!
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>
+      </article>
+      <!-- ********************** End Assignment ********************** -->
+      <article class="card">
+        <header class="card-header">
+          <h5 class="card-title">Lorem, ipsum.</h5>
+          <h6 class="card-subtitle">Placeholder</h6>
+        </header>
+        <p class="card-body">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Perferendis ea, quaerat fuga inventore ipsum consequatur
+          delectus voluptate reiciendis quia deleniti impedit magni.
+          Voluptate, error perspiciatis.
+        </p>
+      </article>
+
+      <article class="card">
+        <header class="card-header">
+          <h5 class="card-title">Lorem, ipsum.</h5>
+          <h6 class="card-subtitle">Placeholder</h6>
+        </header>
+        <p class="card-body">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Blanditiis dicta quidem in architecto totam corporis ipsam
+          maiores sit placeat culpa non ex ipsa incidunt accusamus,
+          dignissimos voluptatibus similique ea minima, ullam optio
+          adipisci sequi asperiores explicabo?
+        </p>
+      </article>
+    </main>
+    <br />
+    <footer class="text-center text-gray text-italic">footer</footer>
+  </div>
+  <header id="nav-menu-wrapper">
+    <a id="nav-menu-closer" href="#"></a>
+    <nav id="nav-menu-main" class="nav">
+      <a class="nav-item active" href="#">Home</a>
+      <a class="nav-item" href="#">Find Your Match</a>
+      <a href="#" class="nav-item badge" data-badge="3">Your Matches </a>
+      <a class="nav-item" href="#">Rescue Portal</a>
+      <a class="nav-item" href="#">About Us</a>
+    </nav>
+    <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+  <script src="./index.js"></script>
+</body>
+
+</html>

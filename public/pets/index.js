@@ -1,5 +1,5 @@
 
-let navbarToggler = function() {
+let navbarToggler = function () {
   document.getElementById("nav-menu-wrapper").classList.add("anim");
   document.getElementById("nav-menu-wrapper").classList.toggle("open");
   //document.getElementById("navbar-toggler-button").classList.toggle("open");
@@ -7,6 +7,65 @@ let navbarToggler = function() {
 };
 document.getElementById("nav-menu-button").addEventListener("click", navbarToggler);
 document.getElementById("nav-menu-closer").addEventListener("click", navbarToggler);
+
+
+
+// Setup numeric inputs
+// data-numtype options:
+//   +i = int (positive or negative)
+//   -i = unsigned int (positive only)
+//   +d2 = up to two decimal places (positive or negative)
+//   +d3 = up to two decimal places (positive or negative)
+//   -d2 = up to two decimal places (positive only)
+//   -d3 = up to two decimal places (positive only)
+(function () {
+  let numericInputs = document.getElementsByClassName("numeric");
+  for (let i = 0; i < numericInputs.length; i++) {
+    if (numericInputs[i].getAttribute("data-numtype") === "+i") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^\d*$/.test(value); // positive integers only
+      });
+    } else if (numericInputs[i].getAttribute("data-numtype") === "-i") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^-?\d*$/.test(value); // +/- integers only
+      });
+    } else if (numericInputs[i].getAttribute("data-numtype") === "+d2") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^\d*\.?\d{0,2}$/.test(value); // up to two decimal places
+      });
+    } else if (numericInputs[i].getAttribute("data-numtype") === "+d3") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^\d*\.?\d{0,3}$/.test(value); // up to three decimal places
+      });
+    } else if (numericInputs[i].getAttribute("data-numtype") === "-d2") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^-?\d*\.?\d{0,2}$/.test(value); // up to two decimal places
+      });
+    } else if (numericInputs[i].getAttribute("data-numtype") === "-d3") {
+      setInputFilter(numericInputs[i], function (value) {
+        return /^-?\d*\.?\d{0,3}$/.test(value); // up to three decimal places
+      });
+    }
+  }
+
+})();
+
+function setInputFilter(input, inputFilter) {
+  ["input", "keydown", "keyup", "mousedown",
+    "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+      input.addEventListener(event, function () {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        }
+        else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        }
+      });
+    });
+}
 
 /*(function () {
   let blurBehindNav = function (event) {
