@@ -16,7 +16,29 @@
   .nav a.nav-item.active:focus, .nav a.nav-item.active:hover {
     color: #00ae41; }
 
-  /* End adding to SCSS */
+/* End "need to add to SCSS" */
+
+
+.big-form {
+  background: white;
+  width: 600px;
+  margin: 0, auto;
+}
+
+.big-form > .form-group{
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .big-form {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 2rem;
+  padding: 2rem;
+  }
+}
+
 
 
 
@@ -36,9 +58,11 @@
   text-shadow: 0 0 10px rgba(100, 100, 100, 1);
 }
 
+/*
 .card {
   height: 100%;
 }
+*/
 
 .hero-main {
 }
