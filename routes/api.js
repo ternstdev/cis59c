@@ -63,12 +63,12 @@ const validateInput = (req) => {
     return false;
   }
 
-  if (!canParseInt(req.param("houseTrained"), 0, 5)) {
+  if (req.param("houseTrained") && !canParseInt(req.param("houseTrained"), 0, 1)) {
     return false;
   }
 
 
-  if (!(req.param("specialNeeds"), 0, 5)) {
+  if (req.param("specialNeeds") && !(req.param("specialNeeds"), 0, 1)) {
     return false;
   }
   if (!canParseInt(req.param("energy"), 0, 5)) {
@@ -328,8 +328,8 @@ router.post('/pets/animals/', function (req, res, next) {
     req.param("age"),
     req.param("shortDesc"),
     req.param("longDesc"),
-    req.param("houseTrained"),
-    req.param("specialNeeds"),
+    req.param("houseTrained") || 0,
+    req.param("specialNeeds") || 0,
     req.param("energy"),
     req.param("affection"),
     req.param("obedience"),

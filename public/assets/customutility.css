@@ -18,28 +18,39 @@
 
 /* End "need to add to SCSS" */
 
-
-.big-form {
-  background: white;
-  width: 600px;
-  margin: 0, auto;
+.auto-width {  
+  width: fit-content;
 }
 
-.big-form > .form-group{
-  position: relative;
-  top: 0;
-  right: 0;
+.slider {
+  -webkit-appearance: none;
+  height: 3rem;
+}
+
+.slider-container {
+  width: 85%;
+}
+
+.paged-form {
+  background: white;
+  margin: 0;
+  width: 100%;
+  padding: 2rem;
+  
 }
 
 @media only screen and (min-width: 600px) {
-  .big-form {
+  .paged-form {
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   grid-gap: 2rem;
-  padding: 2rem;
+  width: 600px;
+  margin: 1rem auto;
   }
 }
 
-
+form[data-current-page="0"] button.btn-back {
+  display: none;
+}
 
 
 
@@ -92,7 +103,6 @@
   transform: translateY(-105%);
   position: fixed;
   top: 0;
-  z-index: unset;
   text-align: center;
   width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
@@ -102,6 +112,11 @@
   padding: .6rem;
 }
 
+#nav-menu-main,
+#nav-menu-button
+{
+  z-index: 2;
+}
 
 #nav-menu-wrapper.anim #nav-menu-main {
   transition: transform .4s ease;

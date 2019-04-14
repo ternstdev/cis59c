@@ -67,6 +67,90 @@ function setInputFilter(input, inputFilter) {
     });
 }
 
+
+
+if (document.getElementById("add-animal-next"))
+  document.getElementById("add-animal-next").addEventListener("click", formNext);
+if (document.getElementById("add-animal-back"))
+  document.getElementById("add-animal-back").addEventListener("click", formBack);
+
+// Form pagination
+// <form id="add-animal" class="paged-form card" data-current-page="0" data-max-pages="3">
+function formNext(evt) {
+  let addAnimal = document.getElementById("add-animal");
+  let currentPage = parseInt(addAnimal.getAttribute("data-current-page"));
+  const maxPages = parseInt(addAnimal.getAttribute("data-max-pages"));
+
+  if (currentPage < maxPages) {
+    document.getElementById("step" + currentPage + "prog").classList.remove("active");
+    document.getElementById("step" + (currentPage + 1) + "prog").classList.add("active");
+    document.getElementById("step" + currentPage).classList.add("d-hide");
+    document.getElementById("step" + (currentPage + 1)).classList.remove("d-hide");
+
+    currentPage += 1;
+    addAnimal.setAttribute("data-current-page", currentPage);
+    if (currentPage === maxPages) {
+      this.classList.add("d-hide");
+      document.getElementById("add-animal-submit").classList.remove("d-hide")
+    } else {
+      document.getElementById("add-animal-back").classList.remove("d-hide");
+    }
+  }
+
+  // let formPages = document.getElementsByClassName("form-group");
+  // let stepInidcators = document.getElementsByClassName("step-item");
+
+  // let activateNextPage = false;
+
+  // for (let i = 0; i < formPages.length; ++i) {
+  //   if (activateNextPage === true) {      
+  //     formPages[i].classList.add("d-hide");
+
+  //     activateNextPage = false
+  //   }
+  //   if (!formPages[i].classList.contains("d-hide")) {
+  //     activateNextPage = true;
+  //   }
+  // }
+
+}
+
+function formBack(evt) {
+  let addAnimal = document.getElementById("add-animal");
+  let currentPage = parseInt(addAnimal.getAttribute("data-current-page"));
+  const maxPages = parseInt(addAnimal.getAttribute("data-max-pages"));
+
+  if (currentPage > 0) {
+    document.getElementById("step" + currentPage + "prog").classList.remove("active");
+    document.getElementById("step" + (currentPage - 1) + "prog").classList.add("active");
+    document.getElementById("step" + currentPage).classList.add("d-hide");
+    document.getElementById("step" + (currentPage - 1)).classList.remove("d-hide");
+
+    currentPage -= 1;
+    addAnimal.setAttribute("data-current-page", currentPage);
+
+    if (currentPage === 0) {
+      this.classList.add("d-hide");
+    } else {
+      document.getElementById("add-animal-next").classList.remove("d-hide");
+      document.getElementById("add-animal-submit").classList.add("d-hide")
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*(function () {
   let blurBehindNav = function (event) {
     if (document.getElementById("assignment-container").classList.contains("sidenav-show")) {

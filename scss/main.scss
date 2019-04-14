@@ -22,7 +22,7 @@ $primary-color: #00ae41;
 @import "../node_modules/spectre.css/src/asian";
 @import "../node_modules/spectre.css/src/tables";
 @import "../node_modules/spectre.css/src/buttons";
-@import "../node_modules/spectre.css/src/forms";
+@import "forms";
 @import "../node_modules/spectre.css/src/labels";
 @import "../node_modules/spectre.css/src/codes";
 @import "../node_modules/spectre.css/src/media";
@@ -57,3 +57,6 @@ $primary-color: #00ae41;
 // Utility classes
 @import "../node_modules/spectre.css/src/animations";
 @import "../node_modules/spectre.css/src/utilities";
+
+// Experimental
+@import "../node_modules/spectre.css/src/spectre-exp";

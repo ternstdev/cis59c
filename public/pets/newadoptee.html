@@ -22,187 +22,147 @@
 
 <body>
   <div class="wrapper">
-    <form class="big-form card">
-      <article id="step1" class="form-group">
-        <h2>Add a new pet for adoption</h2>
+    <form id="add-animal" class="paged-form card" data-current-page="0" data-max-pages="3" autocomplete="off" method="POST" action="https://api.ernst.dev/pets/animals">
+
+      <header class="card-header">
+        <h2 class="text-center">Add a new pet for adoption</h2>
+        <ul class="step">
+          <li id="step0prog" class="step-item active">
+            <span>Step 1</span>
+          </li>
+          <li id="step1prog" class="step-item">
+            <span>Step 2</span>
+          </li>
+          <li id="step2prog" class="step-item">
+            <span>Step 3</span>
+          </li>
+          <li id="step3prog" class="step-item">
+            <span>Step 4</span>
+          </li>
+        </ul>
+      </header>
+
+      <article id="step0" class="form-group my-5">
         <label class="form-label" for="name">Name</label>
-        <input class="form-input" type="text" id="name" placeholder="Name">
+        <input class="form-input" type="text" id="name" name="name" placeholder="Name">
         <label class="form-label" for="age">Age</label>
-        <input class="form-input numeric" type="text" id="age" placeholder="3" data-numtype="+i">
+        <input class="form-input numeric" type="text" id="age" name="age" placeholder="3" data-numtype="+i">
         <label class="form-label" for="typeId">Type</label>
-        <select id="typeId" class="form-select">
-          <option value="1">Dog</option>
-          <option value="?">Cat</option>
-          <option value="?">Hedgehog</option>
-          <option value="?">Bird</option>
+        <select id="typeId" name="typeId" class="form-select" size="6">
+          <option value="1">Bird</option>
+          <option value="2">Cat</option>
+          <option value="4">Dog</option>
+          <option value="5">Ferret</option>
+          <option value="6">Fish</option>
+          <option value="7">Frog</option>
+          <option value="8">Hedgehog</option>
+          <option value="9">Horse</option>
+          <option value="10">Lizard</option>
+          <option value="11">Otter</option>
+          <option value="12">Pig</option>
+          <option value="13">Rabbit</option>
+          <option value="14">Rodent</option>
+          <option value="15">Snake</option>
+          <option value="16">Tortoise</option>
+          <option value="17">Turtle</option>
+          <option value="3">Caticorn</option>
+          <option value="0">Other</option>
         </select>
         <label class="form-label" for="breed">Breed</label>
-        <input class="form-input" type="text" id="breed" placeholder="German Shepard">
+        <input id="breed" name="breed" class="form-input" type="text" placeholder="German Shepard">
+        
+        <label class="form-switch auto-width mt-5">
+          <input id="houseTrained" name="houseTrained" type="checkbox" value="1" checked>
+          <i class="form-icon"></i> This animal is house-trained.
+        </label>
+        <label class="form-switch auto-width mt-5">
+          <input id="specialNeeds" name="specialNeeds" type="checkbox" value="1">
+          <i class="form-icon"></i> This animal has special needs.
+        </label>
       </article>
-      
-      <article id="step2" class="form-group">asdfasdfsadfsdaf</article>
-      <ul class="step">
-        <li class="step-item active">
-          <span>Step 1</span>
-        </li>
-        <li class="step-item">
-          <span>Step 2</span>
-        </li>
-        <li class="step-item">
-          <span>Step 3</span>
-        </li>
-        <li class="step-item">
-          <span>Step 4</span>
-        </li>
-      </ul>
+
+      <article id="step1" class="form-group my-5 d-hide">
+        <label class="form-label noselect" for="energy">
+          <span class="float-left">Low Energy</span>
+          <span class="float-right">High Energy</span>
+          <span class="p-centered text-center slider-container">
+            <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+
+        <label class="form-label noselect" for="affection">
+          <span class="float-left">Independent</span>
+          <span class="float-right">Affectionate</span>
+          <span class="p-centered text-center slider-container">
+            <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+        
+        <label class="form-label noselect" for="obedience">
+          <span class="float-left">Disobedient</span>
+          <span class="float-right">Obedience</span>
+          <span class="p-centered text-center slider-container">
+            <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+      </article>
+
+      <article id="step2" class="form-group my-5 d-hide">
+        <label class="form-label noselect" for="children">
+          <span class="float-left">Bad with Children</span>
+          <span class="float-right">Good with Children</span>
+          <span class="p-centered text-center slider-container">
+            <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+
+        <label class="form-label noselect" for="strangers">
+          <span class="float-left">Defensive w/ Strangers</span>
+          <span class="float-right">Good with Strangers</span>
+          <span class="p-centered text-center slider-container">
+            <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+
+        <label class="form-label noselect" for="otherAnimals">
+          <span class="float-left">Aggressive w/ Other Animals</span>
+          <span class="float-right">Good with Other Animals</span>
+          <span class="p-centered text-center slider-container">
+            <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+          </span>
+        </label>
+      </article>
+
+      <article id="step3" class="form-group my-5 d-hide">
+        <label class="form-label" for="shortDesc">Brief Description</label>
+        <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
+        <label class="form-label" for="longDesc">Detailed Desecription</label>
+        <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
+      </article>
+
+      <footer class="card-footer">
+        <button id="add-animal-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
+        <input id="add-animal-submit" class="btn btn-primary btn-submit float-right d-hide" type="submit" value="Submit">
+        <button  id="add-animal-back" class="btn btn-back d-hide" type="button">Back</button>
+      </footer>
     </form>
-    <main id="main-grid" class="">
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/rockygrizzled.jpg" alt="Rocky" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Rocky</h5>
-          <h6 class="card-subtitle">Terrier Mix</h6>
-        </header>
-        <p class="card-body">
-          Rocky is a friendly, well behaved pup and the perfect companion
-          for long walks!
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/scoutportrait.jpg" alt="Scout" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Scout</h5>
-          <h6 class="card-subtitle">Terrier Mix</h6>
-        </header>
-        <p class="card-body">
-          Scout is a spunky terrier who loves nothing more than taking a
-          nap on your lap!
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/teddy.jpg" alt="Teddy" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Teddy</h5>
-          <h6 class="card-subtitle">Terrier Mix</h6>
-        </header>
-        <p class="card-body">
-          Teddy loves to play fetch and jam to his
-          <a href="https://www.youtube.com/watch?v=ci_pCk0l-WA">favorite song</a>!
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/badger.jpg" alt="Teddy" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Badger</h5>
-          <h6 class="card-subtitle">Cool guy</h6>
-        </header>
-        <p class="card-body">
-          When he's not making funny faces, Badger can most often be found curled up under a pile of blankets.
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/hedgy.jpg" alt="Hedgy" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Hedgy</h5>
-          <h6 class="card-subtitle">Hedgehog</h6>
-        </header>
-        <p class="card-body">
-          Don't let his spikey exterior fool you &mdash; Hedgy the
-          Hedgehog is full of love!
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <a class="card-image" href="#">
-          <img src="./img/emily.jpg" alt="Emily" class="img-responsive hover-zoom" />
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">Emily</h5>
-          <h6 class="card-subtitle">Formosan Mountain Dog</h6>
-        </header>
-        <p class="card-body">
-          Emily is wary of new people, but give her a few treats, and
-          she'll warm up to you!
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>
-      </article>
-      <!-- ********************** End Assignment ********************** -->
-      <article class="card">
-        <header class="card-header">
-          <h5 class="card-title">Lorem, ipsum.</h5>
-          <h6 class="card-subtitle">Placeholder</h6>
-        </header>
-        <p class="card-body">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Perferendis ea, quaerat fuga inventore ipsum consequatur
-          delectus voluptate reiciendis quia deleniti impedit magni.
-          Voluptate, error perspiciatis.
-        </p>
-      </article>
-
-      <article class="card">
-        <header class="card-header">
-          <h5 class="card-title">Lorem, ipsum.</h5>
-          <h6 class="card-subtitle">Placeholder</h6>
-        </header>
-        <p class="card-body">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Blanditiis dicta quidem in architecto totam corporis ipsam
-          maiores sit placeat culpa non ex ipsa incidunt accusamus,
-          dignissimos voluptatibus similique ea minima, ullam optio
-          adipisci sequi asperiores explicabo?
-        </p>
-      </article>
-    </main>
-    <br />
-    <footer class="text-center text-gray text-italic">footer</footer>
+    
+    <header id="nav-menu-wrapper">
+      <a id="nav-menu-closer" href="#"></a>
+      <nav id="nav-menu-main" class="nav">
+        <a class="nav-item active" href="index.html">Home</a>
+        <a class="nav-item" href="#">Find Your Match</a>
+        <a href="#" class="nav-item badge" data-badge="3">Your Matches </a>
+        <a class="nav-item" href="newadoptee.html">Rescue Portal</a>
+        <a class="nav-item" href="#">About Us</a>
+      </nav>
+      <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
   </div>
-  <header id="nav-menu-wrapper">
-    <a id="nav-menu-closer" href="#"></a>
-    <nav id="nav-menu-main" class="nav">
-      <a class="nav-item active" href="#">Home</a>
-      <a class="nav-item" href="#">Find Your Match</a>
-      <a href="#" class="nav-item badge" data-badge="3">Your Matches </a>
-      <a class="nav-item" href="#">Rescue Portal</a>
-      <a class="nav-item" href="#">About Us</a>
-    </nav>
-    <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
   <script src="./index.js"></script>
 </body>
 
