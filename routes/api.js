@@ -1,5 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
+
+const multer = require('multer');
+let upload = multer({
+  dest: '../public/pets/img', limits: { fileSize: 3072 }, fileFilter: function (req, file, cb) {
+    let extType = path.extension(file.originalname);
+    if (extType !== 'jpg' && extType !== 'jpeg' && extType !== 'png') {
+      return cb(null, false);
+    } else {
+      return cb(null, true);
+    }
+  }
+});
 
 var allAnimalsData = require('./allAnimalsData');
 
@@ -27,7 +40,7 @@ const validateInput = (req) => {
   if (!canParseInt(req.param("typeId"), 0, 17)) {
     return false;
   }
-  
+
   // +----+-------------+
   // | id | animal_type |
   // +----+-------------+
@@ -50,7 +63,7 @@ const validateInput = (req) => {
   // | 16 | Tortoise    |
   // | 17 | Turtle      |
   // +----+-------------+
-  
+
   if (!req.param("breed") || req.param("breed").length > 20) {
     return false;
   }
@@ -96,7 +109,7 @@ const validateInput = (req) => {
 
 const validateInput2 = (req) => {
   let i = -1;
-  if (req.param("id")) { 
+  if (req.param("id")) {
     if (!canParseInt(req.param("id"), 0, 999999999)) {
       return "id"; // int(11)
     }
@@ -104,31 +117,31 @@ const validateInput2 = (req) => {
   if (!req.param("name") || req.param("name").length > 30) {
     return "name " + req.param("name"); // varchar(31)
   }
-  
+
   if (!canParseInt(req.param("typeId"), 0, 30)) {
     return "typeId"; // int(11)
   }
-  
+
   if (!req.param("breed") || req.param("breed").length > 30) {
     return "breed"; // varchar(30)
   }
-  
+
   if (!canParseInt(req.param("age"), 0, 250)) {
     return "age"; // tinyint(3)
   }
-  
+
   if (!req.param("shortDesc") || req.param("shortDesc").length > 1000) {
     return "shortDesc"; // varchar(1022)
   }
-  
+
   if (!req.param("longDesc") || req.param("longDesc").length > 3000) {
     return "shortDesc"; // text
   }
-  
+
   if (req.param("houseTrained") && !canParseInt(req.param("houseTrained"), 0, 1)) {
     return "houseTrained"; // tinyint(1)
   }
-  
+
   if (req.param("specialNeeds") && !canParseInt(req.param("specialNeeds"), 0, 1)) {
     return "specialNeeds"; // tinyint(1)
   }
@@ -200,16 +213,16 @@ SELECT A.id, name, typeId, breed,
 router.get('/pets/animals/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  
+
   let filteredResult = [];
   let fullResult = [];
   let tempAnimal;
-  
+
   // Max filters is 10. If more are requested, return error.
   if (Object.keys(req.query).length > 10) {
     return res.status(400).json({ msg: `Too many filters provided.` });
   }
-  
+
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
           age, shortDesc, houseTrained, specialNeeds,
@@ -232,18 +245,18 @@ router.get('/pets/animals/', function (req, res, next) {
         Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
         fullResult.push(tempAnimal);
       });
-      
+
       // If no animals are found, return w/ message.
       if (fullResult.length <= 0) {
         res.status(404).json({ msg: `No animals matching the provided criteria was found.` });
       }
-      
+
       // If no filters specified, return full data set.
       if (Object.keys(req.query).length <= 0) {
         //return res.json(allAnimalsData);
         return res.json(fullResult);
       }
-      
+
       filteredResult = fullResult.filter((animal) => {
         return Object.keys(req.query).every(key => {
           // If this key doesn't exist, return false.
@@ -259,7 +272,7 @@ router.get('/pets/animals/', function (req, res, next) {
           return doesKeyValueMatch;
         });
       });
-      
+
       if (filteredResult.length <= 0) {
         // If no animals are found, return w/ message.
         res.status(404).json({ msg: `No animals matching the provided criteria was found.` });
@@ -310,7 +323,7 @@ router.get('/pets/animals/:id', function (req, res, next) {
 });
 
 
-router.post('/pets/animals/', function (req, res, next) {
+router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
@@ -350,8 +363,23 @@ router.post('/pets/animals/', function (req, res, next) {
         res.status(400).send(error);
         throw error;
       }
-
-      return res.status(201).json({ id: results.insertId });
+      
+      res.status(201).json({ id: results.insertId });
+      
+      req.files.forEach((imgFile) => {
+        let newImg = [results.insertId, imgFile.filename]
+        dbconn.query(`
+        INSERT INTO animal_images (animalId, img)
+        VALUES (?, ?)`,
+          newImg,
+          function (error, results, fields) {
+            if (error) {
+              res.status(400).send(error);
+              throw error;
+            }
+            
+          });
+      });
 
     });
 });

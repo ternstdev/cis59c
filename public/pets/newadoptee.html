@@ -70,7 +70,7 @@
         </select>
         <label class="form-label" for="breed">Breed</label>
         <input id="breed" name="breed" class="form-input" type="text" placeholder="German Shepard">
-        
+
         <label class="form-switch auto-width mt-5">
           <input id="houseTrained" name="houseTrained" type="checkbox" value="1" checked>
           <i class="form-icon"></i> This animal is house-trained.
@@ -97,7 +97,7 @@
             <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
         </label>
-        
+
         <label class="form-label noselect" for="obedience">
           <span class="float-left">Disobedient</span>
           <span class="float-right">Obedience</span>
@@ -138,15 +138,18 @@
         <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
         <label class="form-label" for="longDesc">Detailed Desecription</label>
         <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
+        <label for="imgs">Upload Images
+          <input id="imgs" name="imgs" type="file" accept=".jpg, .jpeg, .png" class="form-input" multiple>
+        </label>
       </article>
 
       <footer class="card-footer">
         <button id="add-animal-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
         <input id="add-animal-submit" class="btn btn-primary btn-submit float-right d-hide" type="submit" value="Submit">
-        <button  id="add-animal-back" class="btn btn-back d-hide" type="button">Back</button>
+        <button id="add-animal-back" class="btn btn-back d-hide" type="button">Back</button>
       </footer>
     </form>
-    
+
     <header id="nav-menu-wrapper">
       <a id="nav-menu-closer" href="#"></a>
       <nav id="nav-menu-main" class="nav">
