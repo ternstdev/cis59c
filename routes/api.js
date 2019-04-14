@@ -102,7 +102,7 @@ const validateInput2 = (req) => {
     }
   }
   if (!req.param("name") || req.param("name").length > 30) {
-    return "name"; // varchar(31)
+    return "name " + req.param("name"); // varchar(31)
   }
   
   if (!canParseInt(req.param("typeId"), 0, 30)) {
