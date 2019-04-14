@@ -7,7 +7,7 @@ let upload = multer({
   dest: '../public/pets/img', limits: { fileSize: 3072 }, fileFilter: function (req, file, cb) {
     let extType = path.extension(file.originalname);
     if (extType !== 'jpg' && extType !== 'jpeg' && extType !== 'png') {
-      return cb(null, false);
+      return cb(null, true);
     } else {
       return cb(null, true);
     }
@@ -326,7 +326,9 @@ router.get('/pets/animals/:id', function (req, res, next) {
 router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+  
+  res.status(201).json(req.files);
+  
   var validationResult = validateInput2(req);
   if (validationResult) {
     return res.status(406).json({ msg: `Invalid Request`, field: validationResult });
