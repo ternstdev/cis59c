@@ -25,7 +25,7 @@ app.set('view engine', 'jade');
 //app.use(logger('combined', { stream: accessLogStream }))
 app.use(logger(':date[iso] :method :url :status :response-time ms - :res[content-length]'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, limit: 5120 }));
 app.use(cookieParser());
 app.use(subdomain('api', apiRouter));
 app.use('/api', apiRouter);
