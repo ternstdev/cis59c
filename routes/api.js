@@ -387,7 +387,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
           throw error;
         }
 
-        fs.rename(imgFile.path, (path + newExt), function (err) {
+        fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
           if (err) {
             console.log('ERROR: ' + err);
             res.status(400).send(error);
