@@ -408,7 +408,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
           });
       });
-      res.status(201).json(req.insertId);
+      res.status(201).json(results.insertId);
     });
 });
 
