@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 
 const multer = require('multer');
-var upload = multer({ dest: '../public/pets/img/' });
+var upload = multer({ dest: '../public/pets/img/', limits: { fieldSize: 5120 } });
 // let upload = multer({
 //   dest: '../public/pets/img/', limits: { fileSize: 3072 }, fileFilter: function (req, file, cb) {
 //     let extType = path.extension(file.originalname);
