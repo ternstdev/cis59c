@@ -68,7 +68,7 @@ const validateInput = (req) => {
   }
 
 
-  if (req.param("specialNeeds") && !(req.param("specialNeeds"), 0, 1)) {
+  if (req.param("specialNeeds") && !canParseInt(req.param("specialNeeds"), 0, 1)) {
     return false;
   }
   if (!canParseInt(req.param("energy"), 0, 5)) {
@@ -125,11 +125,11 @@ const validateInput2 = (req) => {
     return "shortDesc"; // text
   }
   
-  if (!canParseInt(req.param("houseTrained"), 0, 1)) {
+  if (req.param("houseTrained") && !canParseInt(req.param("houseTrained"), 0, 1)) {
     return "houseTrained"; // tinyint(1)
   }
   
-  if (!canParseInt(req.param("specialNeeds"), 0, 1)) {
+  if (req.param("specialNeeds") && !canParseInt(req.param("specialNeeds"), 0, 1)) {
     return "specialNeeds"; // tinyint(1)
   }
   if (!canParseInt(req.param("energy"), 0, 5)) {
