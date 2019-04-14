@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var fs = require('fs');
 
 const multer = require('multer');
 var upload = multer({ dest: '../public/pets/img/' });
@@ -327,9 +328,9 @@ router.get('/pets/animals/:id', function (req, res, next) {
 router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  
+
   res.status(201).json(req.files);
-  
+
   var validationResult = validateInput2(req);
   if (validationResult) {
     return res.status(406).json({ msg: `Invalid Request`, field: validationResult });
@@ -366,11 +367,28 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
         res.status(400).send(error);
         throw error;
       }
-      
-      res.status(201).json({ id: results.insertId });
-      
+
       req.files.forEach((imgFile) => {
-        let newImg = [results.insertId, imgFile.filename]
+        let newExt = '';
+        if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
+          newExt = '.jpg';
+        } else if (imgFile.originalname.includes('.png')) {
+          newExt = '.png';
+        } else {
+          console.log('ERROR: ' + err);
+          res.status(400).send(error);
+          throw error;
+        }
+
+        fs.rename(imgFile.path, (path + newExt), function (err) {
+          if (err) {
+            console.log('ERROR: ' + err);
+            res.status(400).send(error);
+            throw error;
+          }
+        });
+
+        let newImg = [results.insertId, (imgFile.filename + newExt)]
         dbconn.query(`
         INSERT INTO animal_images (animalId, img)
         VALUES (?, ?)`,
@@ -380,7 +398,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
               res.status(400).send(error);
               throw error;
             }
-            
+
           });
       });
 
