@@ -329,10 +329,15 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-  res.status(201).json(req.files);
-
   var validationResult = validateInput2(req);
   if (validationResult) {
+    fs.unlink(imgFile.path, function (err) {
+      if (err) {
+        console.log('ERROR: ' + err);
+        res.status(400).send(error);
+        throw error;
+      }
+    });
     return res.status(406).json({ msg: `Invalid Request`, field: validationResult });
   }
 
