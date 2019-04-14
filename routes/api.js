@@ -331,12 +331,14 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
   var validationResult = validateInput2(req);
   if (validationResult) {
-    fs.unlink(imgFile.path, function (err) {
-      if (err) {
-        console.log('ERROR: ' + err);
-        res.status(400).send(error);
-        throw error;
-      }
+    req.files.forEach((imgFile) => {
+      fs.unlink(imgFile.path, function (err) {
+        if (err) {
+          console.log('ERROR: ' + err);
+          res.status(400).send(error);
+          throw error;
+        }
+      });
     });
     return res.status(406).json({ msg: `Invalid Request`, field: validationResult });
   }
