@@ -7,6 +7,15 @@
       "type": "gulp",
       "task": "default",
       "problemMatcher": []
+    },
+    {
+      "type": "gulp",
+      "task": "sass",
+      "problemMatcher": [],
+      "group": {
+          "kind": "build",
+          "isDefault": true
+      }
     }
   ]
 }

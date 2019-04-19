@@ -151,9 +151,11 @@ fetch('https://api.tay.fail/pets/animals') // Initiates the request.
     animals.forEach((animal) => {
       let node = document.createElement("article");
       node.classList.add("card");
+      // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
+      // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
       node.innerHTML = `
         <a class="card-image" href="#">
-          <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
+        <div alt="${animal.name}" class="img-aspect hover-zoom" style="background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;"></div>
         </a>
         <header class="card-header">
           <h5 class="card-title">${animal.name}</h5>
@@ -164,7 +166,7 @@ fetch('https://api.tay.fail/pets/animals') // Initiates the request.
         </p>
         <footer class="card-footer">
           <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>`
+        </footer>`;
       document.getElementById("main-grid").appendChild(node);
     });
   });

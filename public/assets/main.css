@@ -1814,8 +1814,7 @@ summary.accordion-header::-webkit-details-marker {
 
 .card {
   background: #fff;
-  border: 0.05rem solid #dadee4;
-  border-radius: 0.1rem;
+  border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); }
@@ -1835,14 +1834,20 @@ summary.accordion-header::-webkit-details-marker {
     overflow: hidden; }
     .card .card-image img {
       transition: transform .2s ease; }
+    .card .card-image .img-aspect {
+      transition: transform .2s ease;
+      height: 0;
+      padding-top: 75%; }
     .card .card-image:first-child {
-      padding-top: 0; }
-      .card .card-image:first-child img {
-        border-top-left-radius: 0.1rem;
-        border-top-right-radius: 0.1rem; }
-    .card .card-image:last-child img {
-      border-bottom-left-radius: 0.1rem;
-      border-bottom-right-radius: 0.1rem; }
+      padding-top: 0;
+      border-top-left-radius: 0.4rem;
+      border-top-right-radius: 0.4rem; }
+      .card .card-image:first-child img, .card .card-image:first-child .img-aspect {
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem; }
+    .card .card-image:last-child img, .card .card-image:last-child .img-aspect {
+      border-bottom-left-radius: 0.4rem;
+      border-bottom-right-radius: 0.4rem; }
   .card .card-subtitle {
     color: #bcc3ce;
     font-style: italic; }
@@ -1852,11 +1857,11 @@ summary.accordion-header::-webkit-details-marker {
     padding-top: 0.8rem; }
     .card img:first-child {
       padding-top: 0;
-      border-top-left-radius: 0.1rem;
-      border-top-right-radius: 0.1rem; }
+      border-top-left-radius: 0.4rem;
+      border-top-right-radius: 0.4rem; }
     .card img:last-child {
-      border-bottom-left-radius: 0.1rem;
-      border-bottom-right-radius: 0.1rem; }
+      border-bottom-left-radius: 0.4rem;
+      border-bottom-right-radius: 0.4rem; }
 
 .chip {
   align-items: center;

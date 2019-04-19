@@ -1,8 +1,8 @@
 // Cards
 .card {
   background: $bg-color-light;
-  border: $border-width solid $border-color;
-  border-radius: $border-radius;
+  //border: $border-width solid $border-color;
+  border-radius: $custom-card-border-radius;
   display: flex;
   flex-direction: column;
   box-shadow: 5px 5px 15px rgba(0,0,0,.3);
@@ -29,20 +29,28 @@
     img {
       transition: transform .2s ease;
     }
-
+    
+    .img-aspect {
+      transition: transform .2s ease;
+      height: 0;
+      padding-top: 75%;
+    }
+    
     &:first-child {
       padding-top: 0;
+      border-top-left-radius: $custom-card-border-radius;
+      border-top-right-radius: $custom-card-border-radius;
 
-      img {
-        border-top-left-radius: $border-radius;
-        border-top-right-radius: $border-radius;
+      img, .img-aspect {
+        border-top-left-radius: $custom-card-border-radius;
+        border-top-right-radius: $custom-card-border-radius;
       }
     }
 
     &:last-child {
-      img {
-        border-bottom-left-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
+      img, .img-aspect {
+        border-bottom-left-radius: $custom-card-border-radius;
+        border-bottom-right-radius: $custom-card-border-radius;
       }
     }
   }
@@ -61,13 +69,13 @@
 
     &:first-child {
       padding-top: 0;
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
+      border-top-left-radius: $custom-card-border-radius;
+      border-top-right-radius: $custom-card-border-radius;
     }
 
     &:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-bottom-left-radius: $custom-card-border-radius;
+      border-bottom-right-radius: $custom-card-border-radius;
     }
   }
   
