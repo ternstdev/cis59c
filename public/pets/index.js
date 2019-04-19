@@ -142,7 +142,32 @@ function formBack(evt) {
 
 
 
-
+fetch('https://api.tay.fail/pets/animals') // Initiates the request.
+  .then(function (response) { // Once we receive a response, run the function below.
+    var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
+    return animals;
+  })
+  .then(function (animals) {
+    animals.forEach((animal) => {
+      let node = document.createElement("article");
+      node.classList.add("card");
+      node.innerHTML = `
+        <a class="card-image" href="#">
+          <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
+        </a>
+        <header class="card-header">
+          <h5 class="card-title">${animal.name}</h5>
+          <h6 class="card-subtitle">${animal.breed}</h6>
+        </header>
+        <p class="card-body">
+          ${animal.shortDesc}
+        </p>
+        <footer class="card-footer">
+          <a class="btn btn-primary" href="#">Learn more!</a>
+        </footer>`
+      document.getElementById("main-grid").appendChild(node);
+    });
+  });
 
 
 
