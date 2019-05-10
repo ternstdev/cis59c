@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="google" content="notranslate" />
+  <title>Adopt a Pet! - CIS 59C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#00ae41">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00ae41">
+  <link rel="stylesheet" href="../assets/main.css" />
+  <link rel="stylesheet" href="../assets/customutility.css" />
+  <script type="text/javascript" src="matches.js"></script>
+  <script type="text/javascript" src="profileObjectLibrary.js"></script>
+  <style>
+    /* Uncomment to display borders on all elements */
+    /*
+    body * {
+      border: red 1px solid;
+    }
+
+    /**/
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <span class="input-group m-5">
+      <select name="select_profile" id="select_profile" class="form-select flex-unset">
+        <option value="make_new_profile">Select a Profile</option>
+      </select>
+      <button type="button" id="find_matches" class="btn btn-primary btn-next input-group-btn">Display</button>
+    </span>
+
+  </div>
+  <header id="nav-menu-wrapper">
+    <a id="nav-menu-closer" href="#"></a>
+    <nav id="nav-menu-main" class="nav">
+      <a class="nav-item active" href="index.html">Home</a>
+      <a class="nav-item" href="createprofile.html">Find Your Match</a>
+      <a href="matches.html" class="nav-item badge" data-badge="3">Your Matches </a>
+      <a class="nav-item" href="rescueportal.html">Rescue Portal</a>
+      <a class="nav-item" href="#">About Us</a>
+    </nav>
+    <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+  <script src="./index.js"></script>
+</body>
+
+</html>

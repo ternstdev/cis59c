@@ -620,6 +620,10 @@ form[data-current-page="0"] button.btn-back {
 
 
 /* Misc Extensions to CSS */
+.flex-unset {
+  flex: unset !important;
+}
+
 .noselect {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */

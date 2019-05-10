@@ -15,6 +15,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#00ae41">
   <link rel="stylesheet" href="../assets/main.css" />
   <link rel="stylesheet" href="../assets/customutility.css" />
+  <script type="text/javascript" src="profile.js"></script>
+  <script type="text/javascript" src="profileObjectLibrary.js"></script>
   <style>
     /* Uncomment to display borders on all elements */
     /*
@@ -28,10 +30,10 @@
 
 <body>
   <div class="wrapper">
-    <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="3" autocomplete="off" method="POST" action="https://api.ernst.dev/pets/animals" enctype="multipart/form-data">
+    <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="2" autocomplete="off" method="GET" action="matches.html" enctype="multipart/form-data">
 
       <header class="card-header">
-        <h2 class="text-center">Add a new pet for adoption</h2>
+        <h2 class="text-center">Find Your Match</h2>
         <ul class="step">
           <li id="step0prog" class="step-item active">
             <span>Step 1</span>
@@ -42,19 +44,25 @@
           <li id="step2prog" class="step-item">
             <span>Step 3</span>
           </li>
-          <li id="step3prog" class="step-item">
-            <span>Step 4</span>
-          </li>
         </ul>
       </header>
-
       <article id="step0" class="form-group my-5">
-        <label class="form-label" for="name">Name</label>
-        <input class="form-input" type="text" id="name" name="name" placeholder="Name">
-        <label class="form-label" for="age">Age</label>
-        <input class="form-input numeric" type="text" id="age" name="age" placeholder="3" data-numtype="+i">
-        <label class="form-label" for="typeId">Type</label>
-        <select id="typeId" name="typeId" class="form-select" size="6">
+        <label for="profile" class="form-label">Create a new profile or edit an existing one:</label>
+        <div class="input-group">
+          <select name="profile_action" id="profile_action" class="form-select">
+            <option value="make_new_profile">Make New Profile</option>
+          </select>
+          <input type="button" id="delete_this_profile" value="Delete" class="btn btn-error btn-next input-group-btn">
+          <input type="button" id="clear_saved_values" value="Clear All" class="btn btn-link text-error btn-next input-group-btn">
+        </div>
+        <br />
+
+        <label class="form-label" for="profile_name">Name</label>
+        <input class="form-input" type="text" id="profile_name" name="profile_name" placeholder="Name">
+        <br />
+        
+        <label class="form-label" for="typeId">What type of animal are you looking for?</label>
+        <select id="typeId" name="typeId" class="form-select" size="6" multiple>
           <option value="1">Bird</option>
           <option value="2">Cat</option>
           <option value="4">Dog</option>
@@ -74,39 +82,36 @@
           <option value="3">Caticorn</option>
           <option value="0">Other</option>
         </select>
-        <label class="form-label" for="breed">Breed</label>
-        <input id="breed" name="breed" class="form-input" type="text" placeholder="German Shepard">
 
         <label class="form-switch auto-width mt-5">
-          <input id="houseTrained" name="houseTrained" type="checkbox" value="1" checked>
-          <i class="form-icon"></i> This animal is house-trained.
-        </label>
-        <label class="form-switch auto-width mt-5">
-          <input id="specialNeeds" name="specialNeeds" type="checkbox" value="1">
-          <i class="form-icon"></i> This animal has special needs.
+          <input id="houseTrained" name="houseTrained" type="checkbox" value="1">
+          <i class="form-icon"></i> I am only looking for house-trained animals.
         </label>
       </article>
 
       <article id="step1" class="form-group my-5 d-hide">
         <label class="form-label noselect" for="energy">
-          <span class="float-left text-left">Low Energy</span>
-          <span class="float-right text-right">High Energy</span>
+          How active is your lifestyle?<br /><br />
+          <span class="float-left text-left text-italic">Not Very Active</span>
+          <span class="float-right text-right text-italic">Very Active</span>
           <span class="p-centered text-center slider-container">
             <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
         </label>
 
         <label class="form-label noselect" for="affection">
-          <span class="float-left text-left">Independent</span>
-          <span class="float-right text-right">Affectionate</span>
+          Some animals are mostly independent, and others are very affectionate. What's your ideal balance?<br /><br />
+          <span class="float-left text-left text-italic">Independent</span>
+          <span class="float-right text-right text-italic">Affectionate</span>
           <span class="p-centered text-center slider-container">
             <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
         </label>
 
         <label class="form-label noselect" for="obedience">
-          <span class="float-left text-left">Disobedient</span>
-          <span class="float-right text-right">Obedience</span>
+          Some animals need lots of training. How willing to train are you?<br /><br />
+          <span class="float-left text-left text-italic">I'm happy to do any training required</span>
+          <span class="float-right text-right text-italic">Must already be trained</span>
           <span class="p-centered text-center slider-container">
             <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
@@ -115,24 +120,27 @@
 
       <article id="step2" class="form-group my-5 d-hide">
         <label class="form-label noselect" for="children">
-          <span class="float-left text-left">Bad with Children</span>
-          <span class="float-right text-right">Good with Children</span>
+          How often will your animal be around children?<br /><br />
+          <span class="float-left text-left text-italic">Rarely, if ever</span>
+          <span class="float-right text-right text-italic">Frequently</span>
           <span class="p-centered text-center slider-container">
             <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
         </label>
 
         <label class="form-label noselect" for="strangers">
-          <span class="float-left text-left">Defensive w/ Strangers</span>
-          <span class="float-right text-right">Good with Strangers</span>
+          How often will your animal be around strangers?<br /><br />
+          <span class="float-left text-left text-italic">Rarely, if ever</span>
+          <span class="float-right text-right text-italic">Frequently</span>
           <span class="p-centered text-center slider-container">
             <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
         </label>
 
         <label class="form-label noselect" for="otherAnimals">
-          <span class="float-left text-left">Aggressive w/ Other Animals</span>
-          <span class="float-right text-right">Good with Other Animals</span>
+          How often will your animal be around other animals?<br /><br />
+          <span class="float-left text-left text-italic">Rarely, if ever</span>
+          <span class="float-right text-right text-italic">Frequently</span>
           <span class="p-centered text-center slider-container">
             <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
           </span>
@@ -151,7 +159,7 @@
 
       <footer class="card-footer">
         <button id="add-form-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
-        <input id="add-form-submit" class="btn btn-primary btn-submit float-right d-hide" type="submit" value="Submit">
+        <input id="add-form-submit" type="button" value="Create New Profile Or Save Changes" class="btn btn-primary btn-submit float-right d-hide">
         <button id="add-form-back" class="btn btn-back d-hide" type="button">Back</button>
       </footer>
     </form>

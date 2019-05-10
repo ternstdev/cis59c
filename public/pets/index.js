@@ -69,17 +69,17 @@ function setInputFilter(input, inputFilter) {
 
 
 
-if (document.getElementById("add-animal-next"))
-  document.getElementById("add-animal-next").addEventListener("click", formNext);
-if (document.getElementById("add-animal-back"))
-  document.getElementById("add-animal-back").addEventListener("click", formBack);
+if (document.getElementById("add-form-next"))
+  document.getElementById("add-form-next").addEventListener("click", formNext);
+if (document.getElementById("add-form-back"))
+  document.getElementById("add-form-back").addEventListener("click", formBack);
 
 // Form pagination
-// <form id="add-animal" class="paged-form card" data-current-page="0" data-max-pages="3">
+// <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="3">
 function formNext(evt) {
-  let addAnimal = document.getElementById("add-animal");
-  let currentPage = parseInt(addAnimal.getAttribute("data-current-page"));
-  const maxPages = parseInt(addAnimal.getAttribute("data-max-pages"));
+  let addForm = document.getElementById("add-form");
+  let currentPage = parseInt(addForm.getAttribute("data-current-page"));
+  const maxPages = parseInt(addForm.getAttribute("data-max-pages"));
 
   if (currentPage < maxPages) {
     document.getElementById("step" + currentPage + "prog").classList.remove("active");
@@ -88,12 +88,12 @@ function formNext(evt) {
     document.getElementById("step" + (currentPage + 1)).classList.remove("d-hide");
 
     currentPage += 1;
-    addAnimal.setAttribute("data-current-page", currentPage);
+    addForm.setAttribute("data-current-page", currentPage);
     if (currentPage === maxPages) {
-      this.classList.add("d-hide");
-      document.getElementById("add-animal-submit").classList.remove("d-hide")
+      document.getElementById("add-form-next").classList.add("d-hide");
+      document.getElementById("add-form-submit").classList.remove("d-hide")
     } else {
-      document.getElementById("add-animal-back").classList.remove("d-hide");
+      document.getElementById("add-form-back").classList.remove("d-hide");
     }
   }
 
@@ -116,9 +116,9 @@ function formNext(evt) {
 }
 
 function formBack(evt) {
-  let addAnimal = document.getElementById("add-animal");
-  let currentPage = parseInt(addAnimal.getAttribute("data-current-page"));
-  const maxPages = parseInt(addAnimal.getAttribute("data-max-pages"));
+  let addForm = document.getElementById("add-form");
+  let currentPage = parseInt(addForm.getAttribute("data-current-page"));
+  const maxPages = parseInt(addForm.getAttribute("data-max-pages"));
 
   if (currentPage > 0) {
     document.getElementById("step" + currentPage + "prog").classList.remove("active");
@@ -127,52 +127,62 @@ function formBack(evt) {
     document.getElementById("step" + (currentPage - 1)).classList.remove("d-hide");
 
     currentPage -= 1;
-    addAnimal.setAttribute("data-current-page", currentPage);
+    addForm.setAttribute("data-current-page", currentPage);
 
     if (currentPage === 0) {
-      this.classList.add("d-hide");
+      document.getElementById("add-form-back").classList.add("d-hide");
     } else {
-      document.getElementById("add-animal-next").classList.remove("d-hide");
-      document.getElementById("add-animal-submit").classList.add("d-hide")
+      document.getElementById("add-form-next").classList.remove("d-hide");
+      document.getElementById("add-form-submit").classList.add("d-hide")
     }
   }
 
 }
 
+function formReturnToFirstPage() {
+  let addForm = document.getElementById("add-form");
+  let currentPage = parseInt(addForm.getAttribute("data-current-page"));
+  while (currentPage !== 0)
+  {
+    formBack();
+    currentPage = parseInt(addForm.getAttribute("data-current-page"));
+  }
+}
 
 
+if (document.getElementById("main-grid")) {
+  fetch('https://api.tay.fail/pets/animals') // Initiates the request.
+    .then(function (response) { // Once we receive a response, run the function below.
+      var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
+      return animals;
+    })
+    .then(displayAnimals);
+}
 
-fetch('https://api.tay.fail/pets/animals') // Initiates the request.
-  .then(function (response) { // Once we receive a response, run the function below.
-    var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
-    return animals;
-  })
-  .then(function (animals) {
-    animals.forEach((animal) => {
-      let node = document.createElement("article");
-      node.classList.add("card");
-      // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
-      // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
-      node.innerHTML = `
-        <a class="card-image" href="#">
-        <div alt="${animal.name}" class="img-aspect hover-zoom" style="background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;"></div>
-        </a>
-        <header class="card-header">
-          <h5 class="card-title">${animal.name}</h5>
-          <h6 class="card-subtitle">${animal.breed}</h6>
-        </header>
-        <p class="card-body">
-          ${animal.shortDesc}
-        </p>
-        <footer class="card-footer">
-          <a class="btn btn-primary" href="#">Learn more!</a>
-        </footer>`;
-      document.getElementById("main-grid").appendChild(node);
-    });
+function displayAnimals(animals) {
+  animals.forEach((animal) => {
+    let node = document.createElement("article");
+    node.classList.add("card");
+    // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
+    // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
+    node.innerHTML = `
+      <a class="card-image" href="#">
+      <div alt="${animal.name}" class="img-aspect hover-zoom" style="background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;"></div>
+      </a>
+      <header class="card-header">
+        <h5 class="card-title">${animal.name}</h5>
+        <h6 class="card-subtitle">${animal.breed}</h6>
+      </header>
+      <p class="card-body">
+        ${animal.shortDesc}
+      </p>
+      <footer class="card-footer">
+        <a class="btn btn-primary" href="#">Learn more!</a>
+        <span class="float-right m-2 text-gray text-italic">${animal.matchness ? animal.matchness : ""}</span>
+      </footer>`;
+    document.getElementById("main-grid").appendChild(node);
   });
-
-
-
+}
 
 
 
