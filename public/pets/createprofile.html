@@ -60,28 +60,31 @@
         <label class="form-label" for="profile_name">Name</label>
         <input class="form-input" type="text" id="profile_name" name="profile_name" placeholder="Name">
         <br />
-        
+
         <label class="form-label" for="typeId">What type of animal are you looking for?</label>
-        <select id="typeId" name="typeId" class="form-select" size="6" multiple>
-          <option value="1">Bird</option>
-          <option value="2">Cat</option>
-          <option value="4">Dog</option>
-          <option value="5">Ferret</option>
-          <option value="6">Fish</option>
-          <option value="7">Frog</option>
-          <option value="8">Hedgehog</option>
-          <option value="9">Horse</option>
-          <option value="10">Lizard</option>
-          <option value="11">Otter</option>
-          <option value="12">Pig</option>
-          <option value="13">Rabbit</option>
-          <option value="14">Rodent</option>
-          <option value="15">Snake</option>
-          <option value="16">Tortoise</option>
-          <option value="17">Turtle</option>
-          <option value="3">Caticorn</option>
-          <option value="0">Other</option>
-        </select>
+        <div class="container">
+          <div id="typeId" class="form-group columns">
+            <label class="form-checkbox col-4"><input id="selectAllTypeId" name="typeId" value="" type="checkbox" checked /><i class="form-icon"></i>Any</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="1" type="checkbox" /><i class="form-icon"></i>Bird</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="2" type="checkbox" /><i class="form-icon"></i>Cat</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="4" type="checkbox" /><i class="form-icon"></i>Dog</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="5" type="checkbox" /><i class="form-icon"></i>Ferret</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="6" type="checkbox" /><i class="form-icon"></i>Fish</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="7" type="checkbox" /><i class="form-icon"></i>Frog</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="8" type="checkbox" /><i class="form-icon"></i>Hedgehog</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="9" type="checkbox" /><i class="form-icon"></i>Horse</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="10" type="checkbox" /><i class="form-icon"></i>Lizard</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="11" type="checkbox" /><i class="form-icon"></i>Otter</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="12" type="checkbox" /><i class="form-icon"></i>Pig</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="13" type="checkbox" /><i class="form-icon"></i>Rabbit</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="14" type="checkbox" /><i class="form-icon"></i>Rodent</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="15" type="checkbox" /><i class="form-icon"></i>Snake</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="16" type="checkbox" /><i class="form-icon"></i>Tortoise</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="17" type="checkbox" /><i class="form-icon"></i>Turtle</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="3" type="checkbox" /><i class="form-icon"></i>Caticorn</label>
+            <label class="form-checkbox col-4"><input name="typeId" value="0" type="checkbox" /><i class="form-icon"></i>Other</label>
+          </div>
+        </div>
 
         <label class="form-switch auto-width mt-5">
           <input id="houseTrained" name="houseTrained" type="checkbox" value="1">
