@@ -68,50 +68,98 @@ function setInputFilter(input, inputFilter) {
 }
 
 
+if (document.getElementById("add-form")) {
+  let selectAllTypeId = document.getElementById("selectAllTypeId");
+  if (selectAllTypeId) {
+    selectAllTypeId.addEventListener("input", selectAllTypeIds);
+    document.getElementById("typeId").addEventListener("input", handleTypeIdCheckboxes);
+  }
 
-if (document.getElementById("add-form-next"))
-  document.getElementById("add-form-next").addEventListener("click", formNext);
-if (document.getElementById("add-form-back"))
-  document.getElementById("add-form-back").addEventListener("click", formBack);
+  if (document.getElementById("add-form-next"))
+    document.getElementById("add-form-next").addEventListener("click", formNext);
+  if (document.getElementById("add-form-back"))
+    document.getElementById("add-form-back").addEventListener("click", formBack);
+
+  document.getElementById("add-form").addEventListener("submit", formSubmitNewAnimal);
+}
+
+
+function selectAllTypeIds(evt) {
+  let checkboxes = document.querySelectorAll('input[type="checkbox"][name="typeId"]');
+
+  for (let checkbox of checkboxes) {
+    checkbox.checked = false;
+  }
+
+  this.checked = true;
+  evt.stopPropagation();
+}
+
+function handleTypeIdCheckboxes() {
+  let checkboxes = document.querySelectorAll('input[type="checkbox"][name="typeId"]');
+  let selectAllTypeId = document.getElementById("selectAllTypeId");
+  let checkedCount = 0;
+  for (let checkbox of checkboxes) {
+    if (checkbox.checked)
+      ++checkedCount;
+  }
+  if (checkedCount === 0) {
+    selectAllTypeId.checked = true;
+  } else if (checkedCount > 1) {
+    selectAllTypeId.checked = false;
+  } else if (checkedCount === checkboxes.length - 1) {
+    for (let checkbox of checkboxes) {
+      checkbox.checked = false;
+    }
+    selectAllTypeId.checked = true;
+  }
+}
+
+function formValidator(formSection) {
+  let inputs = formSection.querySelectorAll("textarea, select, [type=text], [type=file]");
+
+  let invalidInputCount = 0;
+  for (let input of inputs) {
+    if (!input.value) {
+      ++invalidInputCount;
+      input.classList.add("is-error");
+      input.addEventListener("focus", function (evt) { this.classList.remove("is-error"); });
+    }
+  }
+  if (invalidInputCount !== 0)
+    return false;
+  else
+    return true;
+}
+
 
 // Form pagination
 // <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="3">
 function formNext(evt) {
   let addForm = document.getElementById("add-form");
-  let currentPage = parseInt(addForm.getAttribute("data-current-page"));
+  let currentPageNum = parseInt(addForm.getAttribute("data-current-page"));
   const maxPages = parseInt(addForm.getAttribute("data-max-pages"));
 
-  if (currentPage < maxPages) {
-    document.getElementById("step" + currentPage + "prog").classList.remove("active");
-    document.getElementById("step" + (currentPage + 1) + "prog").classList.add("active");
-    document.getElementById("step" + currentPage).classList.add("d-hide");
-    document.getElementById("step" + (currentPage + 1)).classList.remove("d-hide");
+  let formSection = document.getElementById("step" + currentPageNum);
 
-    currentPage += 1;
-    addForm.setAttribute("data-current-page", currentPage);
-    if (currentPage === maxPages) {
+  if (!formValidator(formSection))
+    return;
+
+  if (currentPageNum < maxPages) {
+    document.getElementById("step" + currentPageNum + "prog").classList.remove("active");
+    document.getElementById("step" + (currentPageNum + 1) + "prog").classList.add("active");
+    document.getElementById("step" + currentPageNum).classList.add("d-hide");
+    document.getElementById("step" + (currentPageNum + 1)).classList.remove("d-hide");
+
+    currentPageNum += 1;
+    addForm.setAttribute("data-current-page", currentPageNum);
+    if (currentPageNum === maxPages) {
       document.getElementById("add-form-next").classList.add("d-hide");
       document.getElementById("add-form-submit").classList.remove("d-hide")
     } else {
       document.getElementById("add-form-back").classList.remove("d-hide");
     }
   }
-
-  // let formPages = document.getElementsByClassName("form-group");
-  // let stepInidcators = document.getElementsByClassName("step-item");
-
-  // let activateNextPage = false;
-
-  // for (let i = 0; i < formPages.length; ++i) {
-  //   if (activateNextPage === true) {      
-  //     formPages[i].classList.add("d-hide");
-
-  //     activateNextPage = false
-  //   }
-  //   if (!formPages[i].classList.contains("d-hide")) {
-  //     activateNextPage = true;
-  //   }
-  // }
 
 }
 
@@ -133,7 +181,7 @@ function formBack(evt) {
       document.getElementById("add-form-back").classList.add("d-hide");
     } else {
       document.getElementById("add-form-next").classList.remove("d-hide");
-      document.getElementById("add-form-submit").classList.add("d-hide")
+      document.getElementById("add-form-submit").classList.add("d-hide");
     }
   }
 
@@ -142,12 +190,31 @@ function formBack(evt) {
 function formReturnToFirstPage() {
   let addForm = document.getElementById("add-form");
   let currentPage = parseInt(addForm.getAttribute("data-current-page"));
-  while (currentPage !== 0)
-  {
+  while (currentPage !== 0) {
     formBack();
     currentPage = parseInt(addForm.getAttribute("data-current-page"));
   }
 }
+
+function formSubmitNewAnimal(evt) {
+  
+  let fullForm = document.getElementById("add-form");
+  
+  if (!formValidator(fullForm)) {
+    evt.preventDefault();
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+
+
+
+
+
+
 
 
 if (document.getElementById("main-grid")) {
