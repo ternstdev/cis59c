@@ -233,9 +233,9 @@ window.onload = function () {
     // look for and load any previous profiles
     prepareWebpage()
     $("find_matches").onclick = lookForMatches;
-    
+
     var currentUser = localStorage.getItem(currentlySelectedProfileObjectNameStorageKey);
-    if (currentUser && arrayOfProfileObjects.some(function(profile){ return profile.name === this; }), currentUser) {
+    if (currentUser && arrayOfProfileObjects.some(function (profile) { return profile.name === this; }), currentUser) {
         $("select_profile").value = currentUser;
         var animalGrid = document.createElement("main");
         animalGrid.id = "main-grid";
