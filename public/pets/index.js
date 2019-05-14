@@ -197,9 +197,9 @@ function formReturnToFirstPage() {
 }
 
 function formSubmitNewAnimal(evt) {
-  
+
   let fullForm = document.getElementById("add-form");
-  
+
   if (!formValidator(fullForm)) {
     evt.preventDefault();
     return false;
@@ -227,26 +227,26 @@ if (document.getElementById("main-grid")) {
 }
 
 function displayAnimals(animals) {
+  document.getElementById("main-grid").innerHTML = "";
   animals.forEach((animal) => {
     let node = document.createElement("article");
     node.classList.add("card");
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
     // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
-    node.innerHTML = `
-      <a class="card-image" href="#">
-      <div alt="${animal.name}" class="img-aspect hover-zoom" style="background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;"></div>
-      </a>
-      <header class="card-header">
-        <h5 class="card-title">${animal.name}</h5>
-        <h6 class="card-subtitle">${animal.breed}</h6>
-      </header>
-      <p class="card-body">
-        ${animal.shortDesc}
-      </p>
-      <footer class="card-footer">
-        <a class="btn btn-primary" href="#">Learn more!</a>
-        <span class="float-right m-2 text-gray text-italic">${animal.matchness ? animal.matchness : ""}</span>
-      </footer>`;
+    node.innerHTML = '<a class="card-image" href="#">' +
+      '<div alt="' + animal.name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animal.imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
+      '</a>' +
+      '<header class="card-header">' +
+      '<h5 class="card-title">' + animal.name + '</h5>' +
+      '<h6 class="card-subtitle">' + animal.breed + '</h6>' +
+      '</header>' +
+      '<p class="card-body">' +
+      animal.shortDesc +
+      '</p>' +
+      '<footer class="card-footer">' +
+      '<a class="btn btn-primary" href="#">Learn more!</a>' +
+      '<span class="float-right m-2 text-gray text-italic">' + (animal.matchness ? animal.matchness : "") + '</span>' +
+      '</footer>';
     document.getElementById("main-grid").appendChild(node);
   });
 }
