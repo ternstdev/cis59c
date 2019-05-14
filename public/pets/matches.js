@@ -22,9 +22,9 @@ var retrieveAdoptablePetsFromServer = function () {
             return animals;
         })
         .then(function (animals) {
-
+            
             animalsArray = animals;
-
+            
             for (var i = 0; i < animals.length; ++i) {
                 // animalsArray.push (animals[i]); // but, 
                 // may need to do actual copy rather than just keep a reference
@@ -74,7 +74,7 @@ var prepareWebpage = function () {
 
     retrieveSavedArrayOfProfileObjects();
 
-    retrieveAdoptablePetsFromServer();
+    //retrieveAdoptablePetsFromServer();
     // printAnimalObject(animalsArray[0]);  // pass in one object
 
     var html = "";
@@ -137,10 +137,23 @@ var lookForMatches = function () {
         alert("Error:  There was problem retrieving animal data from server");
         return;
     }
-
+    let url = 'https://api.tay.fail/pets/animals';
+    if (profileToMatch.typeId) {
+        url += "?typeId=" + profileToMatch.typeId;
+    }
     // otherwise, passes all checks so now look for matches.
+    fetch(url) // Initiates the request.
+    .then(function (response) { // Once we receive a response, run the function below.
+        var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
+        return animals;
+    })
+    .then(function (animals) {
+        calculateMatchness(profileToMatch, animals);
+    })
+    .catch(function () {
 
-    calculateMatchness(profileToMatch, animalsArray);
+        console.log("Error with Network 'fetch' call");
+    });
 }
 
 var calculateMatchness = function (profileObject, animalsArray) {
@@ -237,7 +250,7 @@ window.onload = function () {
     var currentUser = localStorage.getItem(currentlySelectedProfileObjectNameStorageKey);
     if (currentUser && arrayOfProfileObjects.some(function (profile) { return profile.name === this; }), currentUser) {
         $("select_profile").value = currentUser;
-        var animalGrid = document.createElement("main");
+        var animalGrid = document.createElement("div");
         animalGrid.id = "main-grid";
         document.getElementsByClassName("wrapper")[0].appendChild(animalGrid);
         window.setTimeout(lookForMatches, 1000);

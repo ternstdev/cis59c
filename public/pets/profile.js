@@ -105,6 +105,7 @@ var updateProfileInArrayOfProfileObjects = function (profileObject) {
             arrayOfProfileObjects[i]["children"] = profileObject["children"];
             arrayOfProfileObjects[i]["strangers"] = profileObject["strangers"];
             arrayOfProfileObjects[i]["otherAnimals"] = profileObject["otherAnimals"];
+            arrayOfProfileObjects[i]["typeId"] = profileObject["typeId"];
         }
     }
 }
@@ -115,7 +116,7 @@ var clearArrayOfProfileObjects = function () {
 }
 
 var makeProfileObject = function (
-    name, houseTrained, energy, affection, obedience, children, strangers, otherAnimals) {
+    name, houseTrained, energy, affection, obedience, children, strangers, otherAnimals, types) {
 
     var profileAsString = "{\"name\":\"" + name + "\""
         + ",\"id\":\"" + counterGetNextNumber() + "\""
@@ -125,7 +126,8 @@ var makeProfileObject = function (
         + ",\"obedience\":\"" + obedience + "\""
         + ",\"children\":\"" + children + "\""
         + ",\"strangers\":\"" + strangers + "\""
-        + ",\"otherAnimals\":\"" + otherAnimals + "\"}";
+        + ",\"otherAnimals\":\"" + otherAnimals + "\""
+        + ",\"typeId\":\"" + types + "\"}";
 
     console.log("As a String  " + profileAsString);
 
@@ -202,6 +204,17 @@ var removeCurrentlyDisplayedProfile = function () {
     // remove the current profile (that which is on screen and any reference if found in array of saved profiles.)
 
     // First, make profileObject of all screen values
+    
+    var typeIdCheckboxes = document.querySelectorAll('input[name="typeId"]:checked');
+    var typeIdString = "";
+    
+    for (var i = 0, l = typeIdCheckboxes.length; i < l;  ++i) {
+        if (typeIdString) {
+            typeIdString += ",";
+        }
+        typeIdString += typeIdCheckboxes[i].value;
+    }
+    
     var screenProfileObject = makeProfileObject($("profile_name").value,
 
         // might be more efficient to convert the boolean to a number here (before saving to storage)
@@ -211,7 +224,8 @@ var removeCurrentlyDisplayedProfile = function () {
         $("obedience").value,
         $("children").value,
         $("strangers").value,
-        $("otherAnimals").value);
+        $("otherAnimals").value,
+        typeIdString);
 
     if ($("profile_name").value == "") {
 
@@ -255,7 +269,17 @@ var saveCurrentlyOnScreenProfile = function () {
         //$("profile_name").innerHTML = "*";
         nameElement.classList.remove("is-error");
     }
-
+    
+    var typeIdCheckboxes = document.querySelectorAll('input[name="typeId"]:checked');
+    var typeIdString = "";
+    
+    for (var i = 0, l = typeIdCheckboxes.length; i < l;  ++i) {
+        if (typeIdString) {
+            typeIdString += ",";
+        }
+        typeIdString += typeIdCheckboxes[i].value;
+    }
+    
     var screenProfileObject = makeProfileObject(nameElement.value,
         $("houseTrained").checked,
         $("energy").value,
@@ -263,7 +287,8 @@ var saveCurrentlyOnScreenProfile = function () {
         $("obedience").value,
         $("children").value,
         $("strangers").value,
-        $("otherAnimals").value);
+        $("otherAnimals").value,
+        typeIdString);
 
     // IF, Profile NAME is already in array (database), then let's just do an Update (replace)
     // Rather than creating a new (additional) entry.
@@ -306,7 +331,7 @@ var setScreenDefaults = function () {
     var currentProfileName = $("profile_name").value
 
     var makeSelectionProfileObject = makeProfileObject(currentProfileName, true,
-        "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection");
+        "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection");
 
     // update webpage with default values
 
@@ -327,6 +352,17 @@ var updateWebpageWithProfileObject = function (profileObject) {
     $("children").value = profileObject["children"];
     $("strangers").value = profileObject["strangers"];
     $("otherAnimals").value = profileObject["otherAnimals"];
+    
+    if (profileObject.typeId) {
+        var typeIdCheckboxes = document.getElementsByName('typeId');
+        //var typeIdArray = profileObject["typeId"].split(",");
+        for (var i = 0, l = typeIdCheckboxes.length; i < l;  ++i) {
+            if (profileObject["typeId"].includes(typeIdCheckboxes[i].value))
+            {
+                typeIdCheckboxes[i].checked = true;
+            }
+        }
+    }
 }
 
 
@@ -340,7 +376,7 @@ var setProfile = function () {
         // create a new profileObject with default "Make Selection" values
         // var defaultProfileObject = makeProfileObject("Three", 3, 3, 3, 3, 3, 3);
         var defaultProfileObject = makeProfileObject("", true,
-            "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection");
+            "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection", "make_selection");
 
         // then, display matching profile on web page
         updateWebpageWithProfileObject(defaultProfileObject);
