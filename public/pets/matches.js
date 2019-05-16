@@ -27,7 +27,7 @@ var retrieveAdoptablePetsFromServer = function () {
 
             let matchCount = document.getElementById("match-count");
             if (matchCount) {
-                matchCount.setAttribute("data-badge", animalsArray.length);
+                matchCount.setAttribute("data-badge", animals.length);
             }
 
             for (var i = 0; i < animals.length; ++i) {
@@ -156,7 +156,7 @@ var lookForMatches = function () {
             calculateMatchness(profileToMatch, animals);
             let matchCount = document.getElementById("match-count");
             if (matchCount) {
-                matchCount.setAttribute("data-badge", animalsArray.length);
+                matchCount.setAttribute("data-badge", animals.length);
             }
         })
         .catch(function () {

@@ -226,7 +226,7 @@ if (document.getElementById("main-grid")) {
       var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
       let matchCount = document.getElementById("match-count");
       if (matchCount) {
-        matchCount.setAttribute("data-badge", animalsArray.length);
+        matchCount.setAttribute("data-badge", animals.length);
       }
       return animals;
     })
