@@ -202,7 +202,7 @@ var calculateMatchness = function (profileObject, animalsArray) {
         // So, sorting with smaller numbers first
         // As secondary index, sorting on "names" by alphabetic / ASCII values
         if (a.matchness == b.matchness) {
-            console.log("b.name - a.name => " + b.name[0] + " - " + a.name[0] + " = " + b.name[0] - a.name[0]);
+            //console.log("b.name - a.name => " + b.name[0] + " - " + a.name[0] + " = " + b.name[0] - a.name[0]);
             if (a.name < b.name) {
                 return -1;
             } else if (a.name > b.name) {
