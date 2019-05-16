@@ -33,18 +33,7 @@ var retrieveAdoptablePetsFromServer = function () {
             for (var i = 0; i < animals.length; ++i) {
                 // animalsArray.push (animals[i]); // but, 
                 // may need to do actual copy rather than just keep a reference
-                console.log("======================================");
-                console.log("name = " + animals[i].name);
-                console.log("age = " + animals[i].age);
-                console.log("emergy = " + animals[i].energy);
-                console.log("affection = " + animals[i].affection);
-                console.log("obedience = " + animals[i].obedience);
-                console.log("children = " + animals[i].children);
-                console.log("strangers = " + animals[i].strangers);
-                console.log("otherAnimals = " + animals[i].otherAnimals);
-                console.log("description = " + animals[i].shortDesc);
-                console.log("Special Needs = " + animals[i].specialNeeds);
-                console.log("House Trained = " + animals[i].houseTrained);
+
             }
         })
         .catch(function () {
@@ -55,27 +44,12 @@ var retrieveAdoptablePetsFromServer = function () {
 
 var printAnimalObject = function (animalObject) {
 
-    console.log("typeof animalObject = " + typeof animalObject);
-    console.log("======================================");
-    console.log("name = " + animalObject[name]);
-    console.log("age = " + animalObject[age]);
-    console.log("emergy = " + animalObject.energy);
-    console.log("affection = " + animalObject.affection);
-    console.log("obedience = " + animalObject.obedience);
-    console.log("children = " + animalObject.children);
-    console.log("strangers = " + animalObject.strangers);
-    console.log("otherAnimals = " + animalObject.otherAnimals);
-    console.log("description = " + animalObject.shortDesc);
-    console.log("Special Needs = " + animalObject.specialNeeds);
-    console.log("House Trained = " + animalObject.houseTrained);
+
 }
 
 //  ==========================================
 
 var prepareWebpage = function () {
-
-    console.log("Running PrepareWebpage()");
-    //
 
     retrieveSavedArrayOfProfileObjects();
 
@@ -88,8 +62,6 @@ var prepareWebpage = function () {
 
         initializeArrayOfProfileObjects();
         printAllProfileObjects();
-
-        console.log("numberOfProfileObjects == 0");
 
         html += "<option value=\"" + "select_profile" + "\">No Profiles Available<\/option>";
 
@@ -114,7 +86,6 @@ var prepareWebpage = function () {
             html += "<option value=\"" + arrayOfProfileObjects[index]["name"] + "\">" + arrayOfProfileObjects[index]["name"] + "<\/option>";
         }
 
-        console.log("New HTML = " + html);
         $("select_profile").innerHTML = "";         // first, clear all entries
         $("select_profile").innerHTML += html;
     }
@@ -172,8 +143,6 @@ var calculateMatchness = function (profileObject, animalsArray) {
     // Then we add up the squares of the differences.
     // Modeled after the "least squares" algorithm.
 
-    console.log("Length of animalsArray is = " + animalsArray.length);
-
     for (var i = 0; i < animalsArray.length; ++i) {
         let total = 0;
         total += Math.pow(animalsArray[i].energy - profileObject.energy, 2);
@@ -202,7 +171,6 @@ var calculateMatchness = function (profileObject, animalsArray) {
         // So, sorting with smaller numbers first
         // As secondary index, sorting on "names" by alphabetic / ASCII values
         if (a.matchness == b.matchness) {
-            //console.log("b.name - a.name => " + b.name[0] + " - " + a.name[0] + " = " + b.name[0] - a.name[0]);
             if (a.name < b.name) {
                 return -1;
             } else if (a.name > b.name) {
@@ -243,8 +211,6 @@ var calculateMatchness = function (profileObject, animalsArray) {
     // }
 
     // $("resultDiv").innerHTML = html;
-
-    console.log("Finished looking for matches");
 }
 
 

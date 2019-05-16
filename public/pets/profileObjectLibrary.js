@@ -31,7 +31,6 @@ var printAllProfileObjects = function () {
     } else {
         for (var i = 0; i < arrayOfProfileObjects.length; i++) {
             var profileAsString = JSON.stringify(arrayOfProfileObjects[i]);
-            console.log("Object[" + i + "]  " + profileAsString);
         }
     }
 }
@@ -48,9 +47,7 @@ var numberOfProfileObjects = function () {
 var initializeArrayOfProfileObjects = function () {
 
     arrayOfProfileObjects = [];
-
-    console.log("initializeArrayOfProfileObjects:  Saving empty array of Profile Objects");
-
+    
     localStorage.setItem(arrayOfProfileObjectsStorageKey, JSON.stringify(arrayOfProfileObjects));
 }
 
