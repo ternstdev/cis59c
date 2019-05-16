@@ -22,9 +22,14 @@ var retrieveAdoptablePetsFromServer = function () {
             return animals;
         })
         .then(function (animals) {
-            
+
             animalsArray = animals;
-            
+
+            let matchCount = document.getElementById("match-count");
+            if (matchCount) {
+                matchCount.setAttribute("data-badge", animalsArray.length);
+            }
+
             for (var i = 0; i < animals.length; ++i) {
                 // animalsArray.push (animals[i]); // but, 
                 // may need to do actual copy rather than just keep a reference
@@ -143,17 +148,21 @@ var lookForMatches = function () {
     }
     // otherwise, passes all checks so now look for matches.
     fetch(url) // Initiates the request.
-    .then(function (response) { // Once we receive a response, run the function below.
-        var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
-        return animals;
-    })
-    .then(function (animals) {
-        calculateMatchness(profileToMatch, animals);
-    })
-    .catch(function () {
+        .then(function (response) { // Once we receive a response, run the function below.
+            var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
+            return animals;
+        })
+        .then(function (animals) {
+            calculateMatchness(profileToMatch, animals);
+            let matchCount = document.getElementById("match-count");
+            if (matchCount) {
+                matchCount.setAttribute("data-badge", animalsArray.length);
+            }
+        })
+        .catch(function () {
 
-        console.log("Error with Network 'fetch' call");
-    });
+            console.log("Error with Network 'fetch' call");
+        });
 }
 
 var calculateMatchness = function (profileObject, animalsArray) {
