@@ -224,16 +224,17 @@ if (document.getElementById("main-grid")) {
   fetch('https://api.ernst.dev/pets/animals') // Initiates the request.
     .then(function (response) { // Once we receive a response, run the function below.
       var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
-      let matchCount = document.getElementById("match-count");
-      if (matchCount) {
-        matchCount.setAttribute("data-badge", animals.length);
-      }
       return animals;
     })
     .then(displayAnimals);
 }
 
 function displayAnimals(animals) {
+  let matchCount = document.getElementById("match-count");
+  if (matchCount) {
+    matchCount.setAttribute("data-badge", animals.length);
+  }
+
   document.getElementById("main-grid").innerHTML = "";
   animals.forEach((animal) => {
     let node = document.createElement("article");
