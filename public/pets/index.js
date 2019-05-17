@@ -101,8 +101,8 @@ function handleTypeIdCheckboxes() {
   let checkboxes = document.querySelectorAll('input[type="checkbox"][name="typeId"]');
   let selectAllTypeId = document.getElementById("selectAllTypeId");
   let checkedCount = 0;
-  for (let checkbox of checkboxes) {
-    if (checkbox.checked)
+  for (let i = 0; i < checkboxes.length; ++i) {
+    if (checkboxes[i].checked)
       ++checkedCount;
   }
   if (checkedCount === 0) {
