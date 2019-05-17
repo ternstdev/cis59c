@@ -89,18 +89,23 @@ form[data-current-page="0"] button.btn-back {
 background: #00ae41;
 }
 
-#landing-main div {
-  padding: 1rem;
-}
-
 .green {
 background: #00ae41 !important;
   color: rgb(240, 240, 240);
-  padding: 5rem;
+  padding: 1rem;
 }
 
+.landing-text {
+  font-weight: 400;
+}
 
+@media only screen and (min-width: 600px) {
+  .landing-text {
+    font-size: 1.6rem;
+    padding: 1rem;
+  }
 
+}
 
 
 
@@ -141,6 +146,7 @@ background: #00ae41 !important;
   grid-gap: 2rem;
   padding: 2rem;
   }
+
 }
 
 #nav-menu-main {

@@ -245,7 +245,7 @@ function displayAnimals(animals) {
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
     // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
     node.innerHTML = '<a class="card-image learn-more" name="' + animals[x].id + '" href="#">' +
-      '<div alt="' + animals[x].name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animals[x].imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
+      '<div alt="' + animals[x].name + '" class="img-aspect hover-zoom" style="background: url(https://ernst.dev/pets/img/' + animals[x].imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
       '</a>' +
       '<header class="card-header">' +
       '<h5 class="card-title">' + animals[x].name + '</h5>' +
@@ -325,7 +325,7 @@ function writeDomTable(animalCard) {
     '<div class="content">' +
     '<div class="card">' +
     '<div class="card-image img">' +
-    '<div alt="' + animalCard.getAttribute("data-name") + '" class="img-aspect hover-zoom" style="background: url(./img/' + animalCard.getAttribute("data-imgs").split(",")[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
+    '<div alt="' + animalCard.getAttribute("data-name") + '" class="img-aspect hover-zoom" style="background: url(https://ernst.dev/pets/img/' + animalCard.getAttribute("data-imgs").split(",")[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
     '</div>' +
     '</div>' +
     domTable +
