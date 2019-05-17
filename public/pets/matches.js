@@ -16,7 +16,7 @@ var animalsArray = [];   // here is a more global variable
 
 var retrieveAdoptablePetsFromServer = function () {
 
-    fetch('https://api.tay.fail/pets/animals') // Initiates the request.
+    fetch('https://api.ernst.dev/pets/animals') // Initiates the request.
         .then(function (response) { // Once we receive a response, run the function below.
             var animals = response.json() // Converts the response from JSON into an object or array (in our case, an array).
             return animals;
@@ -113,7 +113,7 @@ var lookForMatches = function () {
         alert("Error:  There was problem retrieving animal data from server");
         return;
     }
-    let url = 'https://api.tay.fail/pets/animals';
+    let url = 'https://api.ernst.dev/pets/animals';
     if (profileToMatch.typeId) {
         url += "?typeId=" + profileToMatch.typeId;
     }
@@ -178,7 +178,7 @@ var calculateMatchness = function (profileObject, animalsArray) {
         // If the animal is not house trained and the person wants a house trained animal, it is a bad match - increase matchness.
         // However, if the animal is house trained and the person doesn't care if the animal is house trained or not, it is still a good match - no increase to matchness.
         if (animalsArray[i].houseTrained < houseTrainedAsANumber)
-            total += 1;
+            total += 9;
         // no point in squaring a value which is either '0' or '1'
 
         // now add property to animal object

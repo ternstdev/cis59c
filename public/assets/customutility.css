@@ -80,9 +80,48 @@ form[data-current-page="0"] button.btn-back {
   height: 100%;
 }
 */
-
+/*
 .hero-main {
 }
+*/
+
+#landing-main {
+background: #00ae41;
+}
+
+#landing-main div {
+  padding: 1rem;
+}
+
+.green {
+background: #00ae41 !important;
+  color: rgb(240, 240, 240);
+  padding: 5rem;
+}
+
+
+
+
+
+
+/*
+#landing-main .left {
+  display: inline-block;
+  background: #00ae41;
+  width: 40%;
+  padding: 1rem;
+  margin: 0;
+  border: 0;
+}
+
+#landing-main .left + .right {
+  display: inline-block;
+  background: #00ae41;
+  width: 40%;
+  padding: 1rem;
+  margin: 0;
+  border: 0;
+}*/
 
 #main-content {
   background: white;
@@ -174,6 +213,11 @@ form[data-current-page="0"] button.btn-back {
   /* Keep the image from overlapping sibling elements. */
   z-index: -1;
 }
+
+
+
+
+
 
 
 
