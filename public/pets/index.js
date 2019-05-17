@@ -239,7 +239,7 @@ function displayAnimals(animals) {
     let node = document.createElement("article");
     node.classList.add("card");
     for (let i = 0; i < ATTRIBUTE_LIST.length; ++i) {
-      node.setAttribute('data-' + ATTRIBUTE_LIST[i], animals[i][ATTRIBUTE_LIST[i]]);
+      node.setAttribute('data-' + ATTRIBUTE_LIST[i], animals[x][ATTRIBUTE_LIST[i]]);
     }
 
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
