@@ -110,8 +110,8 @@ function handleTypeIdCheckboxes() {
   } else if (checkedCount > 1) {
     selectAllTypeId.checked = false;
   } else if (checkedCount === checkboxes.length - 1) {
-    for (let checkbox of checkboxes) {
-      checkbox.checked = false;
+    for (let i = 0; i < checkboxes.length; ++i) {
+      checkboxes[i].checked = false;
     }
     selectAllTypeId.checked = true;
   }
@@ -121,11 +121,11 @@ function formValidator(formSection) {
   let inputs = formSection.querySelectorAll("textarea, select, [type=text], [type=file]");
 
   let invalidInputCount = 0;
-  for (let input of inputs) {
-    if (!input.value) {
+  for (let i = 0; i < inputs.length; ++i) {
+    if (!inputs[i].value) {
       ++invalidInputCount;
-      input.classList.add("is-error");
-      input.addEventListener("focus", function (evt) { this.classList.remove("is-error"); });
+      inputs[i].classList.add("is-error");
+      inputs[i].addEventListener("focus", function (evt) { this.classList.remove("is-error"); });
     }
   }
   if (invalidInputCount !== 0)
@@ -238,8 +238,8 @@ function displayAnimals(animals) {
   animals.forEach((animal) => {
     let node = document.createElement("article");
     node.classList.add("card");
-    for (const attribute of ATTRIBUTE_LIST) {
-      node.setAttribute('data-' + attribute, animal[attribute]);
+    for (let i = 0; i < ATTRIBUTE_LIST.length; ++i) {
+      node.setAttribute('data-' + ATTRIBUTE_LIST[i], animal[ATTRIBUTE_LIST[i]]);
     }
 
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
