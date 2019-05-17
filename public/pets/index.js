@@ -244,19 +244,19 @@ function displayAnimals(animals) {
 
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
     // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
-    node.innerHTML = '<a class="card-image learn-more" name="' + animals[i].id + '" href="#">' +
-      '<div alt="' + animals[i].name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animal.imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
+    node.innerHTML = '<a class="card-image learn-more" name="' + animals[x].id + '" href="#">' +
+      '<div alt="' + animals[x].name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animals[x].imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
       '</a>' +
       '<header class="card-header">' +
-      '<h5 class="card-title">' + animals[i].name + '</h5>' +
-      '<h6 class="card-subtitle">' + animals[i].breed + '</h6>' +
+      '<h5 class="card-title">' + animals[x].name + '</h5>' +
+      '<h6 class="card-subtitle">' + animals[x].breed + '</h6>' +
       '</header>' +
       '<p class="card-body">' +
-      animals[i].shortDesc +
+      animals[x].shortDesc +
       '</p>' +
       '<footer class="card-footer">' +
-      '<a class="btn btn-primary learn-more" name="' + animals[i].id + '" href="#">Learn more!</a>' +
-      '<span class="float-right m-2 text-gray text-italic">' + (animals[i].matchness ? animals[i].matchness : "") + '</span>' +
+      '<a class="btn btn-primary learn-more" name="' + animals[x].id + '" href="#">Learn more!</a>' +
+      '<span class="float-right m-2 text-gray text-italic">' + (animals[x].matchness ? animals[x].matchness : "") + '</span>' +
       '</footer>';
     document.getElementById("main-grid").appendChild(node);
   }
