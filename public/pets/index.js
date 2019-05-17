@@ -235,31 +235,32 @@ function displayAnimals(animals) {
   }
 
   document.getElementById("main-grid").innerHTML = "";
-  animals.forEach((animal) => {
+  for (let x = 0; x < animals.length; ++x) {
     let node = document.createElement("article");
     node.classList.add("card");
     for (let i = 0; i < ATTRIBUTE_LIST.length; ++i) {
-      node.setAttribute('data-' + ATTRIBUTE_LIST[i], animal[ATTRIBUTE_LIST[i]]);
+      node.setAttribute('data-' + ATTRIBUTE_LIST[i], animals[i][ATTRIBUTE_LIST[i]]);
     }
 
     // old image: <img src="./img/${animal.imgs[0]}" alt="${animal.name}" class="img-responsive hover-zoom" />
     // new image: <img alt="${animal.name}" class="img-responsive hover-zoom" style="height: 0; padding-top: 56.25%; background: url(./img/${animal.imgs[0]}); background-size: cover; background-repeat: no-repeat;">
-    node.innerHTML = '<a class="card-image learn-more" name="' + animal.id + '" href="#">' +
-      '<div alt="' + animal.name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animal.imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
+    node.innerHTML = '<a class="card-image learn-more" name="' + animals[i].id + '" href="#">' +
+      '<div alt="' + animals[i].name + '" class="img-aspect hover-zoom" style="background: url(./img/' + animal.imgs[0] + '); background-size: cover; background-repeat: no-repeat;"></div>' +
       '</a>' +
       '<header class="card-header">' +
-      '<h5 class="card-title">' + animal.name + '</h5>' +
-      '<h6 class="card-subtitle">' + animal.breed + '</h6>' +
+      '<h5 class="card-title">' + animals[i].name + '</h5>' +
+      '<h6 class="card-subtitle">' + animals[i].breed + '</h6>' +
       '</header>' +
       '<p class="card-body">' +
-      animal.shortDesc +
+      animals[i].shortDesc +
       '</p>' +
       '<footer class="card-footer">' +
-      '<a class="btn btn-primary learn-more" name="' + animal.id + '" href="#">Learn more!</a>' +
-      '<span class="float-right m-2 text-gray text-italic">' + (animal.matchness ? animal.matchness : "") + '</span>' +
+      '<a class="btn btn-primary learn-more" name="' + animals[i].id + '" href="#">Learn more!</a>' +
+      '<span class="float-right m-2 text-gray text-italic">' + (animals[i].matchness ? animals[i].matchness : "") + '</span>' +
       '</footer>';
     document.getElementById("main-grid").appendChild(node);
-  });
+  }
+  
   document.querySelectorAll(".learn-more").forEach(function (learnMore) {
     learnMore.addEventListener("click", function (evt) {
       const animalId = this.name;
