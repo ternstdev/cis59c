@@ -147,18 +147,38 @@ var calculateMatchness = function (profileObject, animalsArray) {
         let total = 0;
         total += Math.pow(animalsArray[i].energy - profileObject.energy, 2);
         total += Math.pow(animalsArray[i].affection - profileObject.affection, 2);
-        total += Math.pow(animalsArray[i].obedience - profileObject.obedience, 2);
-        total += Math.pow(animalsArray[i].children - profileObject.children, 2);
-        total += Math.pow(animalsArray[i].strangers - profileObject.strangers, 2);
-        total += Math.pow(animalsArray[i].otherAnimals - profileObject.otherAnimals, 2);
+        
+        // If the animal is less obedient than the person requires, it is a bad match - increase matchness.
+        // However, if the animal is more obedient than the person requires, it is still a good match - no increase to matchness.
+        if (animalsArray[i].obedience < profileObject.obedience)
+            total += Math.pow(animalsArray[i].obedience - profileObject.obedience, 2);
+        
+        // If the animal is worse with children than the person requires, it is a bad match - increase matchness.
+        // However, if the animal is better with children than the person's lifestyle requires, it is still a good match - no increase to matchness.
+        if (animalsArray[i].children < profileObject.children)
+            total += Math.pow(animalsArray[i].children - profileObject.children, 2);
+        
+        // If the animal is worse with strangers than the person requires, it is a bad match - increase matchness.
+        // However, if the animal is better with strangers than the person's lifestyle requires, it is still a good match - no increase to matchness.
+        if (animalsArray[i].strangers < profileObject.strangers)
+            total += Math.pow(animalsArray[i].strangers - profileObject.strangers, 2);
+        
+        // If the animal is worse with other animals than the person requires, it is a bad match - increase matchness.
+        // However, if the animal is better with other animals than the person's lifestyle requires, it is still a good match - no increase to matchness.
+        if (animalsArray[i].otherAnimals < profileObject.otherAnimals)
+            total += Math.pow(animalsArray[i].otherAnimals - profileObject.otherAnimals, 2);
+        
         // since houseTrained is a boolean string (either "true" or "false")
         // need to convert it to a number (true => 1, false = 0)
         let houseTrainedAsANumber = 0;
         if (profileObject.houseTrained == "true") {
             houseTrainedAsANumber = 1;
         }
-        // let houseTrainedAsANumber = profileObject.houseTrained ? 1 : 0;
-        total += Math.abs(animalsArray[i].houseTrained - houseTrainedAsANumber);
+        
+        // If the animal is not house trained and the person wants a house trained animal, it is a bad match - increase matchness.
+        // However, if the animal is house trained and the person doesn't care if the animal is house trained or not, it is still a good match - no increase to matchness.
+        if (animalsArray[i].houseTrained < houseTrainedAsANumber)
+            total += 1;
         // no point in squaring a value which is either '0' or '1'
 
         // now add property to animal object
