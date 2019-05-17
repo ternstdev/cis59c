@@ -84,7 +84,6 @@ var profileObjectAlreadyExists = function (profileObject) {
 
     for (var i = 0; i < arrayOfProfileObjects.length; i++) {
         if (profileObject["name"] == arrayOfProfileObjects[i]["name"]) {
-            console.log("Profile Found for Name = " + profileObject["name"]);
             return true;
         }
     }
@@ -96,7 +95,6 @@ var updateProfileInArrayOfProfileObjects = function (profileObject) {
 
     for (var i = 0; i < arrayOfProfileObjects.length; i++) {
         if (profileObject["name"] == arrayOfProfileObjects[i]["name"]) {
-            console.log("Match found for Name = " + profileObject["name"]);
             arrayOfProfileObjects[i]["name"] = profileObject["name"];
             arrayOfProfileObjects[i]["houseTrained"] = profileObject["houseTrained"];
             arrayOfProfileObjects[i]["energy"] = profileObject["energy"];
@@ -129,10 +127,7 @@ var makeProfileObject = function (
         + ",\"otherAnimals\":\"" + otherAnimals + "\""
         + ",\"typeId\":\"" + types + "\"}";
 
-    console.log("As a String  " + profileAsString);
-
     var profileAsObject = JSON.parse(profileAsString);
-    console.log("As an Object  " + JSON.stringify(profileAsObject));
     return (profileAsObject);
 }
 
@@ -140,7 +135,6 @@ var makeProfileObject = function (
 let saveArrayOfProfileObjects = function () {
 
     if (arrayOfProfileObjects.length == 0) {
-        console.log("arrayOfProfileObjects is empty so re-initializing it");
         initializeArrayOfProfileObjects();
     }
 
@@ -152,8 +146,6 @@ let saveArrayOfProfileObjects = function () {
 
 var prepareWebpage = function () {
 
-    console.log("Running PrepareWebpage()");
-    //
     retrieveSavedArrayOfProfileObjects();
 
     var html = "";
@@ -162,9 +154,6 @@ var prepareWebpage = function () {
 
         initializeArrayOfProfileObjects();
         printAllProfileObjects();
-
-        // $("profile_action").innerHTML = "make_new_profile";
-        console.log("numberOfProfileObjects == 0");
 
         html += "<option value=\"" + "make_new_profile" + "\">Make New Profile<\/option>";
 
@@ -192,7 +181,6 @@ var prepareWebpage = function () {
             }
         }
 
-        console.log("New HTML = " + html);
         $("profile_action").innerHTML = "";         // first, clear all entries
         $("profile_action").innerHTML += html;
     }
@@ -252,10 +240,6 @@ var removeCurrentlyDisplayedProfile = function () {
 
 var saveCurrentlyOnScreenProfile = function () {
 
-    console.log("Running saveCurrentlyOnScreenProfile()");
-
-    console.log("savingOnScreenProfile:  Name = " + $("profile_name").value);
-
     var nameElement = $("profile_name");
     if (nameElement.value == "") {
 
@@ -312,7 +296,6 @@ var saveCurrentlyOnScreenProfile = function () {
 
 var clearSavedValues = function () {
 
-    console.log("Clearing Saved Profile Values");
     clearArrayOfProfileObjects();
 
     // clear "default" Profile name:
@@ -323,11 +306,6 @@ var clearSavedValues = function () {
 
 
 var setScreenDefaults = function () {
-
-    console.log("Setting Screen Default Values");
-
-    // but retain current profile name...
-
     var currentProfileName = $("profile_name").value
 
     var makeSelectionProfileObject = makeProfileObject(currentProfileName, true,
@@ -369,7 +347,6 @@ var updateWebpageWithProfileObject = function (profileObject) {
 var setProfile = function () {
 
     let userSelection = $("profile_action").value;
-    console.log("Selected Profile = " + userSelection);
 
     // Action could be a profile OR, it could be "Make New Profile"
     if (userSelection == "make_new_profile") {
