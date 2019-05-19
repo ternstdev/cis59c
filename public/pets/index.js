@@ -125,11 +125,18 @@ function formValidator(formSection) {
     if (!inputs[i].value) {
       ++invalidInputCount;
       inputs[i].classList.add("is-error");
-      inputs[i].addEventListener("focus", function (evt) { this.classList.remove("is-error"); });
+      inputs[i].addEventListener("focus", function (evt) {
+        this.classList.remove("is-error");
+        document.getElementById("add-form-next").classList.remove("btn-error");
+        document.getElementById("add-form-submit").classList.remove("btn-error");
+      });
     }
   }
-  if (invalidInputCount !== 0)
+  if (invalidInputCount !== 0) {
+    document.getElementById("add-form-next").classList.add("btn-error");
+    document.getElementById("add-form-submit").classList.add("btn-error");
     return false;
+  }
   else
     return true;
 }
