@@ -115,7 +115,7 @@ function handleTypeIdCheckboxes() {
     }
     selectAllTypeId.checked = true;
   }
-}
+} //
 
 function formValidator(formSection) {
   let inputs = formSection.querySelectorAll("textarea, select, [type=text], [type=file]");
