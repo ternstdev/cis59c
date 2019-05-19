@@ -441,10 +441,13 @@ textarea.form-input {
 
   .has-error &,
   &.is-error {
-    background: lighten($error-color, 53%);
+    background: lighten($error-color, 45%);
     border-color: $error-color;
     &:focus {
       @include control-shadow($error-color);
+    }
+    &::placeholder {
+      color: $error-color;
     }
   }
 }
@@ -491,7 +494,7 @@ textarea.form-input {
       border-color: $error-color;
       &:focus {
         @include control-shadow($error-color);
-        background: lighten($error-color, 53%);
+        background: lighten($error-color, 45%);
       }
 
       & + .form-input-hint {
