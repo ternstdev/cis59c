@@ -194,6 +194,8 @@ background: #00ae41 !important;
   /* overflow-y: auto; */
   /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
   perspective: 2px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .hero-parallax::after {

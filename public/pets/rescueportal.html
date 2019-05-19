@@ -27,144 +27,142 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="3" autocomplete="off" method="POST" action="https://api.ernst.dev/pets/animals" enctype="multipart/form-data">
+  <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="3" autocomplete="off" method="POST" action="https://api.ernst.dev/pets/animals" enctype="multipart/form-data">
 
-      <header class="card-header">
-        <h2 class="text-center">Add a new pet for adoption</h2>
-        <ul class="step">
-          <li id="step0prog" class="step-item active">
-            <span>Step 1</span>
-          </li>
-          <li id="step1prog" class="step-item">
-            <span>Step 2</span>
-          </li>
-          <li id="step2prog" class="step-item">
-            <span>Step 3</span>
-          </li>
-          <li id="step3prog" class="step-item">
-            <span>Step 4</span>
-          </li>
-        </ul>
-      </header>
+    <header class="card-header">
+      <h2 class="text-center">Add a new pet for adoption</h2>
+      <ul class="step">
+        <li id="step0prog" class="step-item active">
+          <span>Step 1</span>
+        </li>
+        <li id="step1prog" class="step-item">
+          <span>Step 2</span>
+        </li>
+        <li id="step2prog" class="step-item">
+          <span>Step 3</span>
+        </li>
+        <li id="step3prog" class="step-item">
+          <span>Step 4</span>
+        </li>
+      </ul>
+    </header>
 
-      <article id="step0" class="form-group my-5">
-        <label class="form-label" for="name">Name</label>
-        <input class="form-input" type="text" id="name" name="name" placeholder="Name">
-        <label class="form-label" for="age">Age</label>
-        <input class="form-input numeric" type="text" id="age" name="age" placeholder="3" data-numtype="+i">
-        <label class="form-label" for="typeId">Type</label>
-        <select id="typeId" name="typeId" class="form-select" size="6">
-          <option value="1">Bird</option>
-          <option value="2">Cat</option>
-          <option value="4">Dog</option>
-          <option value="5">Ferret</option>
-          <option value="6">Fish</option>
-          <option value="7">Frog</option>
-          <option value="8">Hedgehog</option>
-          <option value="9">Horse</option>
-          <option value="10">Lizard</option>
-          <option value="11">Otter</option>
-          <option value="12">Pig</option>
-          <option value="13">Rabbit</option>
-          <option value="14">Rodent</option>
-          <option value="18">Sloth</option>
-          <option value="15">Snake</option>
-          <option value="16">Tortoise</option>
-          <option value="17">Turtle</option>
-          <option value="3">Caticorn</option>
-          <option value="0">Other</option>
-        </select>
-        <label class="form-label" for="breed">Breed</label>
-        <input id="breed" name="breed" class="form-input" type="text" placeholder="German Shepard">
+    <article id="step0" class="form-group my-5">
+      <label class="form-label" for="name">Name</label>
+      <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+      <label class="form-label" for="age">Age</label>
+      <input class="form-input numeric" type="text" id="age" name="age" placeholder="3" data-numtype="+i">
+      <label class="form-label" for="typeId">Type</label>
+      <select id="typeId" name="typeId" class="form-select" size="6">
+        <option value="1">Bird</option>
+        <option value="2">Cat</option>
+        <option value="4">Dog</option>
+        <option value="5">Ferret</option>
+        <option value="6">Fish</option>
+        <option value="7">Frog</option>
+        <option value="8">Hedgehog</option>
+        <option value="9">Horse</option>
+        <option value="10">Lizard</option>
+        <option value="11">Otter</option>
+        <option value="12">Pig</option>
+        <option value="13">Rabbit</option>
+        <option value="14">Rodent</option>
+        <option value="18">Sloth</option>
+        <option value="15">Snake</option>
+        <option value="16">Tortoise</option>
+        <option value="17">Turtle</option>
+        <option value="3">Caticorn</option>
+        <option value="0">Other</option>
+      </select>
+      <label class="form-label" for="breed">Breed</label>
+      <input id="breed" name="breed" class="form-input" type="text" placeholder="German Shepard">
 
-        <label class="form-switch auto-width mt-5">
-          <input id="houseTrained" name="houseTrained" type="checkbox" value="1" checked>
-          <i class="form-icon"></i> This animal is house-trained.
-        </label>
-        <label class="form-switch auto-width mt-5">
-          <input id="specialNeeds" name="specialNeeds" type="checkbox" value="1">
-          <i class="form-icon"></i> This animal has special needs.
-        </label>
-      </article>
+      <label class="form-switch auto-width mt-5">
+        <input id="houseTrained" name="houseTrained" type="checkbox" value="1" checked>
+        <i class="form-icon"></i> This animal is house-trained.
+      </label>
+      <label class="form-switch auto-width mt-5">
+        <input id="specialNeeds" name="specialNeeds" type="checkbox" value="1">
+        <i class="form-icon"></i> This animal has special needs.
+      </label>
+    </article>
 
-      <article id="step1" class="form-group my-5 d-hide">
-        <label class="form-label noselect" for="energy">
-          <span class="float-left text-left">Low Energy</span>
-          <span class="float-right text-right">High Energy</span>
-          <span class="p-centered text-center slider-container">
-            <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+    <article id="step1" class="form-group my-5 d-hide">
+      <label class="form-label noselect" for="energy">
+        <span class="float-left text-left">Low Energy</span>
+        <span class="float-right text-right">High Energy</span>
+        <span class="p-centered text-center slider-container">
+          <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-label noselect" for="affection">
-          <span class="float-left text-left">Independent</span>
-          <span class="float-right text-right">Affectionate</span>
-          <span class="p-centered text-center slider-container">
-            <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+      <label class="form-label noselect" for="affection">
+        <span class="float-left text-left">Independent</span>
+        <span class="float-right text-right">Affectionate</span>
+        <span class="p-centered text-center slider-container">
+          <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-label noselect" for="obedience">
-          <span class="float-left text-left">Disobedient</span>
-          <span class="float-right text-right">Obedience</span>
-          <span class="p-centered text-center slider-container">
-            <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
-      </article>
+      <label class="form-label noselect" for="obedience">
+        <span class="float-left text-left">Disobedient</span>
+        <span class="float-right text-right">Obedience</span>
+        <span class="p-centered text-center slider-container">
+          <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
+    </article>
 
-      <article id="step2" class="form-group my-5 d-hide">
-        <label class="form-label noselect" for="children">
-          <span class="float-left text-left">Bad with Children</span>
-          <span class="float-right text-right">Good with Children</span>
-          <span class="p-centered text-center slider-container">
-            <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+    <article id="step2" class="form-group my-5 d-hide">
+      <label class="form-label noselect" for="children">
+        <span class="float-left text-left">Bad with Children</span>
+        <span class="float-right text-right">Good with Children</span>
+        <span class="p-centered text-center slider-container">
+          <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-label noselect" for="strangers">
-          <span class="float-left text-left">Defensive w/ Strangers</span>
-          <span class="float-right text-right">Good with Strangers</span>
-          <span class="p-centered text-center slider-container">
-            <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+      <label class="form-label noselect" for="strangers">
+        <span class="float-left text-left">Defensive w/ Strangers</span>
+        <span class="float-right text-right">Good with Strangers</span>
+        <span class="p-centered text-center slider-container">
+          <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-label noselect" for="otherAnimals">
-          <span class="float-left text-left">Aggressive w/ Other Animals</span>
-          <span class="float-right text-right">Good with Other Animals</span>
-          <span class="p-centered text-center slider-container">
-            <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
-      </article>
+      <label class="form-label noselect" for="otherAnimals">
+        <span class="float-left text-left">Aggressive w/ Other Animals</span>
+        <span class="float-right text-right">Good with Other Animals</span>
+        <span class="p-centered text-center slider-container">
+          <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
+    </article>
 
-      <article id="step3" class="form-group my-5 d-hide">
-        <label class="form-label" for="shortDesc">Brief Description</label>
-        <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
-        <label class="form-label" for="longDesc">Detailed Desecription</label>
-        <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
-        <label for="imgs">Upload Images
-          <input id="imgs" name="imgs" type="file" accept=".jpg, .jpeg, .png" class="form-input" multiple>
-        </label>
-      </article>
+    <article id="step3" class="form-group my-5 d-hide">
+      <label class="form-label" for="shortDesc">Brief Description</label>
+      <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
+      <label class="form-label" for="longDesc">Detailed Desecription</label>
+      <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
+      <label for="imgs">Upload Images
+        <input id="imgs" name="imgs" type="file" accept=".jpg, .jpeg, .png" class="form-input" multiple>
+      </label>
+    </article>
 
-      <footer class="card-footer">
-        <button id="add-form-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
-        <input id="add-form-submit" class="btn btn-primary btn-submit float-right d-hide" value="Submit" type="submit">
-        <button id="add-form-back" class="btn btn-back d-hide" type="button">Back</button>
-      </footer>
-    </form>
+    <footer class="card-footer">
+      <button id="add-form-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
+      <input id="add-form-submit" class="btn btn-primary btn-submit float-right d-hide" value="Submit" type="submit">
+      <button id="add-form-back" class="btn btn-back d-hide" type="button">Back</button>
+    </footer>
+  </form>
 
-  </div>
   <header id="nav-menu-wrapper">
     <a id="nav-menu-closer" href="#"></a>
     <nav id="nav-menu-main" class="nav">
-      <a class="nav-item active" href="index.html">Home</a>
+      <a class="nav-item" href="index.html">Home</a>
       <a class="nav-item" href="createprofile.html">Find Your Match</a>
       <a id="match-count" href="matches.html" class="nav-item badge" data-badge="">Your Matches </a>
-      <a class="nav-item" href="rescueportal.html">Rescue Portal</a>
+      <a class="nav-item active" href="rescueportal.html">Rescue Portal</a>
     </nav>
     <button id="nav-menu-button" class="navbar-toggler2" aria-label="nav menu">
       <span></span>

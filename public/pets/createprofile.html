@@ -29,151 +29,149 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="2" autocomplete="off" method="GET" action="matches.html" enctype="multipart/form-data">
+  <form id="add-form" class="paged-form card" data-current-page="0" data-max-pages="2" autocomplete="off" method="GET" action="matches.html" enctype="multipart/form-data">
 
-      <header class="card-header">
-        <h2 class="text-center">Find Your Match</h2>
-        <ul class="step">
-          <li id="step0prog" class="step-item active">
-            <span>Step 1</span>
-          </li>
-          <li id="step1prog" class="step-item">
-            <span>Step 2</span>
-          </li>
-          <li id="step2prog" class="step-item">
-            <span>Step 3</span>
-          </li>
-        </ul>
-      </header>
-      <article id="step0" class="form-group my-5">
-        <label for="profile" class="form-label">Create a new profile or edit an existing one:</label>
-        <div class="input-group">
-          <select name="profile_action" id="profile_action" class="form-select">
-            <option value="make_new_profile">Make New Profile</option>
-          </select>
-          <input type="button" id="delete_this_profile" value="Delete" class="btn btn-error btn-next input-group-btn">
-          <input type="button" id="clear_saved_values" value="Clear All" class="btn btn-link text-error btn-next input-group-btn">
+    <header class="card-header">
+      <h2 class="text-center">Find Your Match</h2>
+      <ul class="step">
+        <li id="step0prog" class="step-item active">
+          <span>Step 1</span>
+        </li>
+        <li id="step1prog" class="step-item">
+          <span>Step 2</span>
+        </li>
+        <li id="step2prog" class="step-item">
+          <span>Step 3</span>
+        </li>
+      </ul>
+    </header>
+    <article id="step0" class="form-group my-5">
+      <label for="profile" class="form-label">Create a new profile or edit an existing one:</label>
+      <div class="input-group">
+        <select name="profile_action" id="profile_action" class="form-select">
+          <option value="make_new_profile">Make New Profile</option>
+        </select>
+        <input type="button" id="delete_this_profile" value="Delete" class="btn btn-error btn-next input-group-btn">
+        <input type="button" id="clear_saved_values" value="Clear All" class="btn btn-link text-error btn-next input-group-btn">
+      </div>
+      <br />
+
+      <label class="form-label" for="profile_name">Name</label>
+      <input class="form-input" type="text" id="profile_name" name="profile_name" placeholder="Name">
+      <br />
+
+      <label class="form-label" for="typeId">What type of animal are you looking for?</label>
+      <div class="container">
+        <div id="typeId" class="form-group columns">
+          <label class="form-checkbox col-4"><input id="selectAllTypeId" name="typeId" value="" type="checkbox" checked /><i class="form-icon"></i>Any</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="1" type="checkbox" /><i class="form-icon"></i>Bird</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="2" type="checkbox" /><i class="form-icon"></i>Cat</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="4" type="checkbox" /><i class="form-icon"></i>Dog</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="5" type="checkbox" /><i class="form-icon"></i>Ferret</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="6" type="checkbox" /><i class="form-icon"></i>Fish</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="7" type="checkbox" /><i class="form-icon"></i>Frog</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="8" type="checkbox" /><i class="form-icon"></i>Hedgehog</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="9" type="checkbox" /><i class="form-icon"></i>Horse</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="10" type="checkbox" /><i class="form-icon"></i>Lizard</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="11" type="checkbox" /><i class="form-icon"></i>Otter</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="12" type="checkbox" /><i class="form-icon"></i>Pig</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="13" type="checkbox" /><i class="form-icon"></i>Rabbit</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="14" type="checkbox" /><i class="form-icon"></i>Rodent</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="18" type="checkbox" /><i class="form-icon"></i>Sloth</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="15" type="checkbox" /><i class="form-icon"></i>Snake</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="16" type="checkbox" /><i class="form-icon"></i>Tortoise</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="17" type="checkbox" /><i class="form-icon"></i>Turtle</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="3" type="checkbox" /><i class="form-icon"></i>Caticorn</label>
+          <label class="form-checkbox col-4"><input name="typeId" value="0" type="checkbox" /><i class="form-icon"></i>Other</label>
         </div>
-        <br />
+      </div>
 
-        <label class="form-label" for="profile_name">Name</label>
-        <input class="form-input" type="text" id="profile_name" name="profile_name" placeholder="Name">
-        <br />
+      <label class="form-switch auto-width mt-5">
+        <input id="houseTrained" name="houseTrained" type="checkbox" value="1">
+        <i class="form-icon"></i> I am only looking for house-trained animals.
+      </label>
+    </article>
 
-        <label class="form-label" for="typeId">What type of animal are you looking for?</label>
-        <div class="container">
-          <div id="typeId" class="form-group columns">
-            <label class="form-checkbox col-4"><input id="selectAllTypeId" name="typeId" value="" type="checkbox" checked /><i class="form-icon"></i>Any</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="1" type="checkbox" /><i class="form-icon"></i>Bird</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="2" type="checkbox" /><i class="form-icon"></i>Cat</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="4" type="checkbox" /><i class="form-icon"></i>Dog</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="5" type="checkbox" /><i class="form-icon"></i>Ferret</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="6" type="checkbox" /><i class="form-icon"></i>Fish</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="7" type="checkbox" /><i class="form-icon"></i>Frog</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="8" type="checkbox" /><i class="form-icon"></i>Hedgehog</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="9" type="checkbox" /><i class="form-icon"></i>Horse</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="10" type="checkbox" /><i class="form-icon"></i>Lizard</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="11" type="checkbox" /><i class="form-icon"></i>Otter</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="12" type="checkbox" /><i class="form-icon"></i>Pig</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="13" type="checkbox" /><i class="form-icon"></i>Rabbit</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="14" type="checkbox" /><i class="form-icon"></i>Rodent</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="18" type="checkbox" /><i class="form-icon"></i>Sloth</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="15" type="checkbox" /><i class="form-icon"></i>Snake</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="16" type="checkbox" /><i class="form-icon"></i>Tortoise</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="17" type="checkbox" /><i class="form-icon"></i>Turtle</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="3" type="checkbox" /><i class="form-icon"></i>Caticorn</label>
-            <label class="form-checkbox col-4"><input name="typeId" value="0" type="checkbox" /><i class="form-icon"></i>Other</label>
-          </div>
-        </div>
+    <article id="step1" class="form-group my-5 d-hide">
+      <label class="form-label noselect" for="energy">
+        How active is your lifestyle?<br /><br />
+        <span class="float-left text-left text-italic">Not Very Active</span>
+        <span class="float-right text-right text-italic">Very Active</span>
+        <span class="p-centered text-center slider-container">
+          <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-switch auto-width mt-5">
-          <input id="houseTrained" name="houseTrained" type="checkbox" value="1">
-          <i class="form-icon"></i> I am only looking for house-trained animals.
-        </label>
-      </article>
+      <label class="form-label noselect" for="affection">
+        Some animals are mostly independent, and others are very affectionate. What's your ideal balance?<br /><br />
+        <span class="float-left text-left text-italic">Independent</span>
+        <span class="float-right text-right text-italic">Affectionate</span>
+        <span class="p-centered text-center slider-container">
+          <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-      <article id="step1" class="form-group my-5 d-hide">
-        <label class="form-label noselect" for="energy">
-          How active is your lifestyle?<br /><br />
-          <span class="float-left text-left text-italic">Not Very Active</span>
-          <span class="float-right text-right text-italic">Very Active</span>
-          <span class="p-centered text-center slider-container">
-            <input id="energy" name="energy" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+      <label class="form-label noselect" for="obedience">
+        Some animals need lots of training. How willing to train are you?<br /><br />
+        <span class="float-left text-left text-italic">I'm happy to do any training required</span>
+        <span class="float-right text-right text-italic">Must already be trained</span>
+        <span class="p-centered text-center slider-container">
+          <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
+    </article>
 
-        <label class="form-label noselect" for="affection">
-          Some animals are mostly independent, and others are very affectionate. What's your ideal balance?<br /><br />
-          <span class="float-left text-left text-italic">Independent</span>
-          <span class="float-right text-right text-italic">Affectionate</span>
-          <span class="p-centered text-center slider-container">
-            <input id="affection" name="affection" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+    <article id="step2" class="form-group my-5 d-hide">
+      <label class="form-label noselect" for="children">
+        How often will your animal be around children?<br /><br />
+        <span class="float-left text-left text-italic">Rarely, if ever</span>
+        <span class="float-right text-right text-italic">Frequently</span>
+        <span class="p-centered text-center slider-container">
+          <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-        <label class="form-label noselect" for="obedience">
-          Some animals need lots of training. How willing to train are you?<br /><br />
-          <span class="float-left text-left text-italic">I'm happy to do any training required</span>
-          <span class="float-right text-right text-italic">Must already be trained</span>
-          <span class="p-centered text-center slider-container">
-            <input id="obedience" name="obedience" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
-      </article>
+      <label class="form-label noselect" for="strangers">
+        How often will your animal be around strangers?<br /><br />
+        <span class="float-left text-left text-italic">Rarely, if ever</span>
+        <span class="float-right text-right text-italic">Frequently</span>
+        <span class="p-centered text-center slider-container">
+          <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
 
-      <article id="step2" class="form-group my-5 d-hide">
-        <label class="form-label noselect" for="children">
-          How often will your animal be around children?<br /><br />
-          <span class="float-left text-left text-italic">Rarely, if ever</span>
-          <span class="float-right text-right text-italic">Frequently</span>
-          <span class="p-centered text-center slider-container">
-            <input id="children" name="children" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+      <label class="form-label noselect" for="otherAnimals">
+        How often will your animal be around other animals?<br /><br />
+        <span class="float-left text-left text-italic">Rarely, if ever</span>
+        <span class="float-right text-right text-italic">Frequently</span>
+        <span class="p-centered text-center slider-container">
+          <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
+        </span>
+      </label>
+    </article>
 
-        <label class="form-label noselect" for="strangers">
-          How often will your animal be around strangers?<br /><br />
-          <span class="float-left text-left text-italic">Rarely, if ever</span>
-          <span class="float-right text-right text-italic">Frequently</span>
-          <span class="p-centered text-center slider-container">
-            <input id="strangers" name="strangers" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
+    <article id="step3" class="form-group my-5 d-hide">
+      <label class="form-label" for="shortDesc">Brief Description</label>
+      <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
+      <label class="form-label" for="longDesc">Detailed Desecription</label>
+      <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
+      <label for="imgs">Upload Images
+        <input id="imgs" name="imgs" type="file" accept=".jpg, .jpeg, .png" class="form-input" multiple>
+      </label>
+    </article>
 
-        <label class="form-label noselect" for="otherAnimals">
-          How often will your animal be around other animals?<br /><br />
-          <span class="float-left text-left text-italic">Rarely, if ever</span>
-          <span class="float-right text-right text-italic">Frequently</span>
-          <span class="p-centered text-center slider-container">
-            <input id="otherAnimals" name="otherAnimals" class="slider tooltip tooltip-right" type="range" min="1" max="5" value="3" oninput="this.setAttribute('value', this.value);">
-          </span>
-        </label>
-      </article>
+    <footer class="card-footer">
+      <button id="add-form-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
+      <input id="add-form-submit" type="button" value="Save Profile" class="btn btn-primary btn-submit float-right d-hide">
+      <button id="add-form-back" class="btn btn-back d-hide" type="button">Back</button>
+    </footer>
+  </form>
 
-      <article id="step3" class="form-group my-5 d-hide">
-        <label class="form-label" for="shortDesc">Brief Description</label>
-        <input id="shortDesc" name="shortDesc" class="form-input" type="text" placeholder="Enter a brief description...">
-        <label class="form-label" for="longDesc">Detailed Desecription</label>
-        <textarea id="longDesc" name="longDesc" class="form-input" placeholder="Enter a detailed description..." rows="4"></textarea>
-        <label for="imgs">Upload Images
-          <input id="imgs" name="imgs" type="file" accept=".jpg, .jpeg, .png" class="form-input" multiple>
-        </label>
-      </article>
-
-      <footer class="card-footer">
-        <button id="add-form-next" class="btn btn-primary btn-next float-right" type="button">Next</button>
-        <input id="add-form-submit" type="button" value="Save Profile" class="btn btn-primary btn-submit float-right d-hide">
-        <button id="add-form-back" class="btn btn-back d-hide" type="button">Back</button>
-      </footer>
-    </form>
-
-  </div>
   <header id="nav-menu-wrapper">
     <a id="nav-menu-closer" href="#"></a>
     <nav id="nav-menu-main" class="nav">
-      <a class="nav-item active" href="index.html">Home</a>
-      <a class="nav-item" href="createprofile.html">Find Your Match</a>
+      <a class="nav-item" href="index.html">Home</a>
+      <a class="nav-item active" href="createprofile.html">Find Your Match</a>
       <a id="match-count" href="matches.html" class="nav-item badge" data-badge="">Your Matches </a>
       <a class="nav-item" href="rescueportal.html">Rescue Portal</a>
     </nav>

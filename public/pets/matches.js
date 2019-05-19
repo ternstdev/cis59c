@@ -247,7 +247,7 @@ window.onload = function () {
         $("select_profile").value = currentUser;
         var animalGrid = document.createElement("div");
         animalGrid.id = "main-grid";
-        document.getElementsByClassName("wrapper")[0].appendChild(animalGrid);
+        document.getElementById("matches-wrapper").appendChild(animalGrid);
         window.setTimeout(lookForMatches, 1000);
     }
 
