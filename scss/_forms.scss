@@ -447,7 +447,7 @@ textarea.form-input {
       @include control-shadow($error-color);
     }
     &::placeholder {
-      color: $error-color;
+      color: lighten($error-color, 25%);
     }
   }
 }
