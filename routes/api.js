@@ -337,12 +337,12 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
         fs.unlink(imgFile.path, function (err) {
           if (err) {
             console.log('ERROR: ' + err);
-            res.status(400).send(error);
-            throw error;
+            res.status(400).send(err);
+            throw err;
           }
         });
       });
-    }
+        }
 
     return res.status(406).json(validationResult);
   }
@@ -385,14 +385,21 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
           } else if (imgFile.originalname.includes('.png')) {
             newExt = '.png';
           } else {
+            req.files.forEach((imgFile) => {
+              fs.unlink(imgFile.path, function (err) {
+                if (err) {
             console.log('ERROR: ' + err);
             res.status(400).send(error);
             throw error;
           }
+              });
+            });
+            return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
+          }
 
           fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
             if (err) {
-              console.log('ERROR: ' + err);
+              console.log('ERROR: ' + error);
               res.status(400).send(error);
               throw error;
             }
@@ -433,8 +440,8 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
         fs.unlink(imgFile.path, function (err) {
           if (err) {
             console.log('ERROR: ' + err);
-            res.status(400).send(error);
-            throw error;
+            res.status(400).send(err);
+            throw err;
           }
         });
       });
