@@ -215,7 +215,7 @@ router.get('/pets/animals/', function (req, res, next) {
 
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
-          age, shortDesc, houseTrained, specialNeeds,
+          age, shortDesc, longDesc, houseTrained, specialNeeds,
           energy, affection, obedience, children,
           strangers, otherAnimals, IFNULL(GROUP_CONCAT(I.img SEPARATOR ','), "") AS imgs
     FROM animals A
@@ -282,7 +282,7 @@ router.get('/pets/animals/:id', function (req, res, next) {
 
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
-          age, shortDesc, houseTrained, specialNeeds,
+          age, shortDesc, longDesc, houseTrained, specialNeeds,
           energy, affection, obedience, children,
           strangers, otherAnimals, IFNULL(GROUP_CONCAT(I.img SEPARATOR ','), "") AS imgs
     FROM animals A
