@@ -29,7 +29,7 @@ const canParseInt = (text, min, max) => {
 }
 
 const validateInput = (req) => {
-  let validationResult = [];
+  let validationResult = { fields : {} };
 
   let fieldName = "id"; // int(11)
   if (req.param(fieldName)) {
