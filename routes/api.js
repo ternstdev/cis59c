@@ -431,7 +431,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
       }
 
       if (!req.files || req.files.length < 1) {
-        return res.status(404).json({ msg: `No image was found in request.` });
+        return res.status(404).json({ msg: `No image was found in the request.` });
       }
 
       req.files.forEach((imgFile) => {
