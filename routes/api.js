@@ -88,7 +88,7 @@ const validateInput = (req) => {
 
   fieldName = "longDesc"; // text
   if (!req.param(fieldName) || req.param(fieldName).length > 3000) {
-    validationResult.fields[fieldName] = req.param(fieldName).toString();
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "houseTrained"; // tinyint(1)
