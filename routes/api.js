@@ -228,11 +228,16 @@ router.get('/pets/animals/', function (req, res, next) {
         throw error;
       }
 
-
       results.forEach(row => {
-        tempAnimal = {};
+        // Format / clean the currrent row.
         row.imgs = row.imgs.split(",");
-        Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
+        if (!row.longDesc) {
+          row.longDesc = "";
+        }
+
+        // Add the current row to the fullResult array.
+        tempAnimal = {};
+        Object.keys(row).forEach(key => tempAnimal[key] = row[key]); // TODO: Use an array with the key names instead.
         fullResult.push(tempAnimal);
       });
 
@@ -297,9 +302,15 @@ router.get('/pets/animals/:id', function (req, res, next) {
 
 
       results.forEach(row => {
-        tempAnimal = {};
+        // Format / clean the currrent row.
         row.imgs = row.imgs.split(",");
-        Object.keys(row).forEach(key => tempAnimal[key] = row[key]);
+        if (!row.longDesc) {
+          row.longDesc = "";
+        }
+
+        // Add the current row to the fullResult array.
+        tempAnimal = {};
+        Object.keys(row).forEach(key => tempAnimal[key] = row[key]); // TODO: Use an array with the key names instead.
         fullResult.push(tempAnimal);
       });
 
