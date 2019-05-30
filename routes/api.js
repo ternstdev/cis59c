@@ -404,7 +404,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
         });
       });
     }
-    return res.status(404).json({ msg: `aNo animal found with id ${req.params.id}` });
+    return res.status(404).json({ msg: `No animal found with id ${req.params.id}` });
   }
 
   dbconn.query(`
@@ -415,7 +415,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
         throw error;
       }
 
-      if (results.length) {
+      if (!results.length) {
         if (req.files && req.files.length > 0) {
           req.files.forEach((imgFile) => {
             fs.unlink(imgFile.path, function (err) {
@@ -427,7 +427,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
             });
           });
         }
-        return res.status(404).json({ msg: `bNo animal found with id ${req.params.id}` });
+        return res.status(404).json({ msg: `No animal found with id ${req.params.id}` });
       }
 
       if (req.files && req.files.length > 0) {
