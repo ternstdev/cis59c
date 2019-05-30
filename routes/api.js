@@ -312,7 +312,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
   var validationResult = validateInput(req);
 
-  if (validationResult.length !== 0) {
+  if (validationResult.isValid === false) {
     if (req.files && req.files.length > 0) {
       req.files.forEach((imgFile) => {
         fs.unlink(imgFile.path, function (err) {
