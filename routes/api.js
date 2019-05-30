@@ -29,26 +29,26 @@ const canParseInt = (text, min, max) => {
 }
 
 const validateInput = (req) => {
-  let validationResult = { msg: "", isValid: true, fields: {} };
-  let isValid = true;
+  let validationResult = { msg: "", isSuccess: true, fields: {} };
+  let isSuccess = true;
 
   let fieldName = "id"; // int(11)
   if (req.param(fieldName)) {
     if (!canParseInt(req.param(fieldName), 0, 999999999)) {
-      isValid = false;
+      isSuccess = false;
       validationResult.fields[fieldName] = req.param(fieldName);
     }
   }
 
   fieldName = "name"; // varchar(31)
   if (!req.param(fieldName) || req.param(fieldName).length > 30) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "typeId"; // int(11)
   if (!canParseInt(req.param(fieldName), 0, 30)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
@@ -77,83 +77,83 @@ const validateInput = (req) => {
 
   fieldName = "breed"; // varchar(30)
   if (!req.param(fieldName) || req.param(fieldName).length > 30) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "age"; // tinyint(3)
   if (!canParseInt(req.param(fieldName), 0, 250)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "shortDesc"; // varchar(1022)
   if (!req.param(fieldName) || req.param(fieldName).length > 1000) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "longDesc"; // text
   if (!req.param(fieldName) || req.param(fieldName).length > 3000) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "houseTrained"; // tinyint(1)
   if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "specialNeeds"; // tinyint(1)
   if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "energy"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "affection"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "obedience"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
 
   }
 
   fieldName = "children"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "strangers"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "otherAnimals"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    isValid = false;
+    isSuccess = false;
     validationResult.fields[fieldName] = req.param(fieldName);
   }
 
-  if (isValid === true) {
+  if (isSuccess === true) {
     validationResult.msg = "Success";
-    validationResult.isValid = true;
+    validationResult.isSuccess = true;
   } else {
     validationResult.msg = "Invalid Request";
-    validationResult.isValid = false;
+    validationResult.isSuccess = false;
   }
   return validationResult;
 };
@@ -320,7 +320,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
   var validationResult = validateInput(req);
 
-  if (validationResult.isValid === false) {
+  if (validationResult.isSuccess === false) {
     if (req.files && req.files.length > 0) {
       req.files.forEach((imgFile) => {
         fs.unlink(imgFile.path, function (err) {
@@ -402,7 +402,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
         });
       }
 
-      res.status(201).json({ msg: "Success", isValid: true, id: results.insertId });
+      res.status(201).json({ msg: "Success", isSuccess: true, id: results.insertId });
     });
 });
 
@@ -428,7 +428,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
         });
       });
     }
-    return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isValid: false });
+    return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
   }
 
   dbconn.query(`
@@ -451,11 +451,11 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
             });
           });
         }
-        return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isValid: false });
+        return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
       }
 
       if (!req.files || req.files.length < 1) {
-        return res.status(404).json({ msg: `${req.files} No image was found in the request.`, isValid: false });
+        return res.status(404).json({ msg: `${req.files} No image was found in the request.`, isSuccess: false });
       }
 
       req.files.forEach((imgFile) => {
@@ -474,7 +474,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
               }
             });
           });
-          return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isValid: false });
+          return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
         }
 
         fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
@@ -498,7 +498,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
 
           });
       });
-      res.status(201).json({ msg: "Success", isValid: true, id: results.insertId });
+      res.status(201).json({ msg: "Success", isSuccess: true, id: results.insertId });
     });
 });
 
