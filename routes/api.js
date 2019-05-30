@@ -430,41 +430,50 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
         return res.status(404).json({ msg: `No animal found with id ${req.params.id}` });
       }
 
-      if (req.files && req.files.length > 0) {
-        req.files.forEach((imgFile) => {
-          let newExt = '';
-          if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
-            newExt = '.jpg';
-          } else if (imgFile.originalname.includes('.png')) {
-            newExt = '.png';
-          } else {
+      if (!req.files || req.files.length < 1) {
+        return res.status(404).json({ msg: `No image was found in request.` });
+      }
+
+      req.files.forEach((imgFile) => {
+        let newExt = '';
+        if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
+          newExt = '.jpg';
+        } else if (imgFile.originalname.includes('.png')) {
+          newExt = '.png';
+        } else {
+          req.files.forEach((imgFile) => {
+            fs.unlink(imgFile.path, function (err) {
+              if (err) {
+                console.log('ERROR: ' + err);
+                res.status(400).send(error);
+                throw error;
+              }
+            });
+          });
+          return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)` });
+        }
+
+        fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
+          if (err) {
             console.log('ERROR: ' + err);
             res.status(400).send(error);
             throw error;
           }
+        });
 
-          fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
-            if (err) {
-              console.log('ERROR: ' + err);
+        let newImg = [req.params.id, (imgFile.filename + newExt)]
+        dbconn.query(`
+      INSERT INTO animal_images (animalId, img)
+      VALUES (?, ?)`,
+          newImg,
+          function (error, results, fields) {
+            if (error) {
               res.status(400).send(error);
               throw error;
             }
+
           });
-
-          let newImg = [req.params.id, (imgFile.filename + newExt)]
-          dbconn.query(`
-      INSERT INTO animal_images (animalId, img)
-      VALUES (?, ?)`,
-            newImg,
-            function (error, results, fields) {
-              if (error) {
-                res.status(400).send(error);
-                throw error;
-              }
-
-            });
-        });
-      }
+      });
       res.status(201).redirect('/pets');
     });
 });
