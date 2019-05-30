@@ -34,18 +34,18 @@ const validateInput = (req) => {
   let fieldName = "id"; // int(11)
   if (req.param(fieldName)) {
     if (!canParseInt(req.param(fieldName), 0, 999999999)) {
-      validationResult.push({ field: fieldName, value: req.param(fieldName) });
+      validationResult.fields[fieldName] = req.param(fieldName);
     }
   }
 
   fieldName = "name"; // varchar(31)
   if (!req.param(fieldName) || req.param(fieldName).length > 30) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "typeId"; // int(11)
   if (!canParseInt(req.param(fieldName), 0, 30)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   // +----+-------------+
@@ -73,63 +73,63 @@ const validateInput = (req) => {
 
   fieldName = "breed"; // varchar(30)
   if (!req.param(fieldName) || req.param(fieldName).length > 30) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "age"; // tinyint(3)
   if (!canParseInt(req.param(fieldName), 0, 250)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "shortDesc"; // varchar(1022)
   if (!req.param(fieldName) || req.param(fieldName).length > 1000) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "longDesc"; // text
   if (!req.param(fieldName) || req.param(fieldName).length > 3000) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "houseTrained"; // tinyint(1)
   if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "specialNeeds"; // tinyint(1)
   if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "energy"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "affection"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "obedience"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
 
   }
 
   fieldName = "children"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "strangers"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   fieldName = "otherAnimals"; // tinyint(3) unsigned
   if (!canParseInt(req.param(fieldName), 0, 5)) {
-    validationResult.push({ field: fieldName, value: req.param(fieldName) });
+    validationResult.fields[fieldName] = req.param(fieldName);
   }
 
   return validationResult;
