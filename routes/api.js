@@ -537,7 +537,7 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
               res.status(400).send(error);
               throw error;
             }
-            res.status(201).json({ msg: "Success", isSuccess: true, id: results.insertId });
+            res.status(201).json({ msg: "Success", isSuccess: true});
           });
       //});
       //res.status(201).json({ msg: "Success", isSuccess: true});
