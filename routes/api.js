@@ -435,13 +435,13 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
 
 
-router.post('/pets/images/:id', upload.single('img'), function (req, res, next) {
+router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
   const searchId = parseInt(req.params.id);
   if (isNaN(searchId) || !(searchId >= 0)) {
-    /* if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
       req.files.forEach((imgFile) => {
         fs.unlink(imgFile.path, function (err) {
           if (err) {
@@ -451,7 +451,7 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
           }
         });
       });
-    } else */ if (req.file && req.file.path) {
+    } else if (req.file && req.file.path) {
       fs.unlink(req.file.path, function (err) {
         if (err) {
           console.log('ERROR: ' + err);
@@ -477,7 +477,7 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
       }
 
       if (!results.length) {
-        /* if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+        if (req.files && Array.isArray(req.files) && req.files.length > 0) {
           req.files.forEach((imgFile) => {
             fs.unlink(imgFile.path, function (err) {
               if (err) {
@@ -487,7 +487,7 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
               }
             });
           });
-        } else */ if (req.file && req.file.path) {
+        } else if (req.file && req.file.path) {
           fs.unlink(req.file.path, function (err) {
             if (err) {
               console.log('ERROR: ' + err);
@@ -499,8 +499,8 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
         return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
       }
 
-      //req.files.forEach((imgFile) => {
-        let imgFile = req.file;
+      req.files.forEach((imgFile) => {
+        //let imgFile = req.file;
         let newExt = '';
         if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
           newExt = '.jpg';
@@ -515,9 +515,11 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
                 throw error;
               }
             });
-          //});
-          return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
-        }
+            return;
+          }
+        //});
+          //return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
+        //}
 
         fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
           if (err) {
@@ -526,6 +528,7 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
             throw error;
           }
         });
+      
 
         let newImg = [req.params.id, (imgFile.filename + newExt)]
         dbconn.query(`
@@ -539,7 +542,8 @@ router.post('/pets/images/:id', upload.single('img'), function (req, res, next) 
             }
             res.status(201).json({ msg: "Success", isSuccess: true});
           });
-      //});
+        
+      });
       //res.status(201).json({ msg: "Success", isSuccess: true});
     });
 });
