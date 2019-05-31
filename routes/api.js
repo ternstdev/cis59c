@@ -332,7 +332,7 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
   var validationResult = validateInput(req);
 
   if (validationResult.isSuccess === false) {
-    if (req.files && req.files.length > 0) {
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
       req.files.forEach((imgFile) => {
         fs.unlink(imgFile.path, function (err) {
           if (err) {
@@ -342,7 +342,15 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
           }
         });
       });
+    } else if (req.file && req.file.path) {
+      fs.unlink(req.file.path, function (err) {
+        if (err) {
+          console.log('ERROR: ' + err);
+          res.status(400).send(err);
+          throw err;
         }
+      });
+    }
 
     return res.status(406).json(validationResult);
   }
@@ -388,10 +396,10 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
             req.files.forEach((imgFile) => {
               fs.unlink(imgFile.path, function (err) {
                 if (err) {
-            console.log('ERROR: ' + err);
-            res.status(400).send(error);
-            throw error;
-          }
+                  console.log('ERROR: ' + err);
+                  res.status(400).send(error);
+                  throw error;
+                }
               });
             });
             return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
@@ -427,15 +435,13 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
 
 
-router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, next) {
+router.post('/pets/images/:id', upload.single('img'), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-  var validationResult = validateInput(req);
-
   const searchId = parseInt(req.params.id);
-  if (!(searchId >= 0) || isNaN(searchId)) {
-    if (req.files && req.files.length > 0) {
+  if (isNaN(searchId) || !(searchId >= 0)) {
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
       req.files.forEach((imgFile) => {
         fs.unlink(imgFile.path, function (err) {
           if (err) {
@@ -445,8 +451,21 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
           }
         });
       });
+    } else if (req.file && req.file.path) {
+      fs.unlink(req.file.path, function (err) {
+        if (err) {
+          console.log('ERROR: ' + err);
+          res.status(400).send(err);
+          throw err;
+        }
+      });
     }
+
     return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
+  }
+
+  if ((!req.files || req.files.length < 1) && !(req.file && req.file.path)) {
+    return res.status(404).json({ msg: `${req.files} No image was found in the request.`, isSuccess: false });
   }
 
   dbconn.query(`
@@ -458,22 +477,26 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, ne
       }
 
       if (!results.length) {
-        if (req.files && req.files.length > 0) {
+        if (req.files && Array.isArray(req.files) && req.files.length > 0) {
           req.files.forEach((imgFile) => {
             fs.unlink(imgFile.path, function (err) {
               if (err) {
                 console.log('ERROR: ' + err);
-                res.status(400).send(error);
-                throw error;
+                res.status(400).send(err);
+                throw err;
               }
             });
           });
+        } else if (req.file && req.file.path) {
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.log('ERROR: ' + err);
+              res.status(400).send(err);
+              throw err;
+            }
+          });
         }
         return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
-      }
-
-      if (!req.files || req.files.length < 1) {
-        return res.status(404).json({ msg: `${req.files} No image was found in the request.`, isSuccess: false });
       }
 
       req.files.forEach((imgFile) => {
