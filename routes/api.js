@@ -1,10 +1,41 @@
+var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
 
+const crypto = require("crypto");
 const multer = require('multer');
-var upload = multer({ dest: '../public/pets/img/', limits: { fieldSize: 5 * 1024 * 1024 } });
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, '../public/pets/img/');
+  },
+  filename: function(req, file, cb) {
+    const originalname = file.originalname;
+    const extensionTemp = originalname.split(".");
+    const extension = extensionTemp[extensionTemp.length - 1];
+    const randId = crypto.randomBytes(16).toString("hex");
+    
+    const filename = randId + '.' + extension;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 25 * 1024 * 1024 },
+  fileFilter: function(req, file, callback) {
+    var ext = path.extname(file.originalname).toLowerCase();
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+      callback(createError(415, new Error("Invalid image format (jpg, jpeg, or png only)")), false);
+    } else {
+      callback(null, true)
+    }
+  }
+});
+
+//var upload = multer({ dest: '../public/pets/img/', limits: { fieldSize: 5 * 1024 * 1024 } });
 // let upload = multer({
 //   dest: '../public/pets/img/', limits: { fileSize: 3072 }, fileFilter: function (req, file, cb) {
 //     let extType = path.extension(file.originalname);
@@ -15,6 +46,9 @@ var upload = multer({ dest: '../public/pets/img/', limits: { fieldSize: 5 * 1024
 //     }
 //   }
 // });
+
+
+
 
 var allAnimalsData = require('./allAnimalsData');
 
@@ -28,30 +62,34 @@ const canParseInt = (text, min, max) => {
   return ((!isNaN(num)) && (num >= min) && (num <= max));
 }
 
+/**
+ * 
+ * @param { import('express').Request } req
+ */
 const validateInput = (req) => {
   let validationResult = { msg: "", isSuccess: true, fields: {} };
   let isSuccess = true;
-
+  
   let fieldName = "id"; // int(11)
-  if (req.param(fieldName)) {
-    if (!canParseInt(req.param(fieldName), 0, 999999999)) {
+  if (req.body[fieldName]) {
+    if (!canParseInt(req.body[fieldName], 0, 999999999)) {
       isSuccess = false;
-      validationResult.fields[fieldName] = req.param(fieldName);
+      validationResult.fields[fieldName] = req.body[fieldName];
     }
   }
-
+  
   fieldName = "name"; // varchar(31)
-  if (!req.param(fieldName) || req.param(fieldName).length > 30) {
+  if (!req.body[fieldName] || req.body[fieldName].length > 30) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "typeId"; // int(11)
-  if (!canParseInt(req.param(fieldName), 0, 30)) {
+  if (!canParseInt(req.body[fieldName], 0, 30)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   // +----+-------------+
   // | id | animal_type |
   // +----+-------------+
@@ -74,80 +112,80 @@ const validateInput = (req) => {
   // | 16 | Tortoise    |
   // | 17 | Turtle      |
   // +----+-------------+
-
+  
   fieldName = "breed"; // varchar(30)
-  if (!req.param(fieldName) || req.param(fieldName).length > 30) {
+  if (!req.body[fieldName] || req.body[fieldName].length > 30) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "age"; // tinyint(3)
-  if (!canParseInt(req.param(fieldName), 0, 250)) {
+  if (!canParseInt(req.body[fieldName], 0, 250)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "shortDesc"; // varchar(1022)
-  if (!req.param(fieldName) || req.param(fieldName).length > 1000) {
+  if (!req.body[fieldName] || req.body[fieldName].length > 1000) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "longDesc"; // text
-  if (!req.param(fieldName) || req.param(fieldName).length > 3000) {
+  if (!req.body[fieldName] || req.body[fieldName].length > 3000) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "houseTrained"; // tinyint(1)
-  if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
+  if (req.body[fieldName] && !canParseInt(req.body[fieldName], 0, 1)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "specialNeeds"; // tinyint(1)
-  if (req.param(fieldName) && !canParseInt(req.param(fieldName), 0, 1)) {
+  if (req.body[fieldName] && !canParseInt(req.body[fieldName], 0, 1)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "energy"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "affection"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "obedience"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
-
+    validationResult.fields[fieldName] = req.body[fieldName];
+    
   }
-
+  
   fieldName = "children"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "strangers"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   fieldName = "otherAnimals"; // tinyint(3) unsigned
-  if (!canParseInt(req.param(fieldName), 0, 5)) {
+  if (!canParseInt(req.body[fieldName], 0, 5)) {
     isSuccess = false;
-    validationResult.fields[fieldName] = req.param(fieldName);
+    validationResult.fields[fieldName] = req.body[fieldName];
   }
-
+  
   if (isSuccess === true) {
     validationResult.msg = "Success";
     validationResult.isSuccess = true;
@@ -158,12 +196,57 @@ const validateInput = (req) => {
   return validationResult;
 };
 
+/**
+ * 
+ * @param {{[fieldname: string]: Express.Multer.File[];} | Express.Multer.File[]} files
+ */
+// const validateAndProcessImages = (files) => {
+//   if (files && Array.isArray(files) && files.length > 0) {
+//     for (let i = 0; i < files.length; ++i) {
+//       let imgFile = files[i];
+//       let newExt = '';
+//       if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
+//         newExt = '.jpg';
+//       } else if (imgFile.originalname.includes('.png')) {
+//         newExt = '.png';
+//       } else {
+//         return false;
+//       }
 
-router.get('/test/', function (req, res, next) {
+//       fs.rename(imgFile.path, (imgFile.path + newExt), function(err) {
+//         if (err) {
+//           console.log('ERROR: ' + err);
+//           throw err;
+//         }
+//       });
+//     }
+//   }
+//   return true;
+// }
+
+/**
+ * 
+ * @param {{[fieldname: string]: Express.Multer.File[];} | Express.Multer.File[]} files
+ */
+const deleteImages = (files) => {
+  if (files && Array.isArray(files) && files.length > 0) {
+    for (let i = 0; i < files.length; ++i) {
+      fs.unlink(files[i].path, function(err) {
+        if (err) {
+          console.log('ERROR: ' + err);
+          throw err;
+        }
+      });
+    }
+  }
+}
+
+
+router.get('/test/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-
+  
+  
   dbconn.query(`
 SELECT A.id, name, typeId, breed,
         age, shortDesc, houseTrained, specialNeeds,
@@ -173,23 +256,23 @@ SELECT A.id, name, typeId, breed,
   LEFT JOIN animal_images I
   ON A.id = I.animalId
   GROUP BY A.id`,
-    function (error, results, fields) {
+    function(error, results, fields) {
       if (error) {
         res.status(400).send(error);
-        throw error;
+        return next(error);
       }
-
+      
       let test = [];
-      let blargh;// = new {};
-
+      let blargh; // = new {};
+      
       results.forEach(row => {
         blargh = {};
         row.imgs = row.imgs.split(",");
         Object.keys(row).forEach(key => blargh[key] = row[key]);
         test.push(blargh);
       });
-
-
+      
+      
       res.send(JSON.stringify(test));
       //res.send(JSON.stringify(results));
     });
@@ -200,19 +283,19 @@ SELECT A.id, name, typeId, breed,
 
 
 
-router.get('/pets/animals/', function (req, res, next) {
+router.get('/pets/animals/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+  
   let filteredResult = [];
   let fullResult = [];
   let tempAnimal;
-
+  
   // Max filters is 10. If more are requested, return error.
   if (Object.keys(req.query).length > 10) {
     return res.status(400).json({ msg: `Too many filters provided.` });
   }
-
+  
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
           age, shortDesc, longDesc, houseTrained, specialNeeds,
@@ -222,52 +305,52 @@ router.get('/pets/animals/', function (req, res, next) {
     LEFT JOIN animal_images I
     ON A.id = I.animalId
     GROUP BY A.id`,
-    function (error, results, fields) {
+    function(error, results, fields) {
       if (error) {
         res.status(400).send(error);
-        throw error;
+        return next(error);
       }
-
+      
       results.forEach(row => {
         // Format / clean the currrent row.
         row.imgs = row.imgs.split(",");
         if (!row.longDesc) {
           row.longDesc = "";
         }
-
+        
         // Add the current row to the fullResult array.
         tempAnimal = {};
         Object.keys(row).forEach(key => tempAnimal[key] = row[key]); // TODO: Use an array with the key names instead.
         fullResult.push(tempAnimal);
       });
-
+      
       // If no animals are found, return w/ message.
       if (!fullResult || fullResult.length <= 0) {
-        res.status(404).json({ msg: `No animals matching the provided criteria was found.` });
+        return res.status(404).json({ msg: `No animals matching the provided criteria was found.` });
       }
-
+      
       // If no filters specified, return full data set.
       if (Object.keys(req.query).length <= 0) {
         //return res.json(allAnimalsData);
         return res.json(fullResult);
       }
-
+      
       filteredResult = fullResult.filter((animal) => {
         return Object.keys(req.query).every(key => {
           // If this key doesn't exist, return false.
           if (!(key in animal)) {
             return false;
           }
-
+          
           let keyValues = req.query[key].split(",", 5);
           let doesKeyValueMatch = keyValues.some(keyValue => {
             return (animal[key].toString().toLowerCase() === keyValue.toString().toLowerCase());
           });
-
+          
           return doesKeyValueMatch;
         });
       });
-
+      
       if (!filteredResult || filteredResult.length <= 0) {
         // If no animals are found, return w/ message.
         res.status(404).json({ msg: `No animals matching the provided criteria was found.` });
@@ -278,13 +361,13 @@ router.get('/pets/animals/', function (req, res, next) {
 });
 
 
-router.get('/pets/animals/:id', function (req, res, next) {
+router.get('/pets/animals/:id', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+  
   let fullResult = [];
   let tempAnimal;
-
+  
   dbconn.query(`
   SELECT A.id, name, typeId, breed,
           age, shortDesc, longDesc, houseTrained, specialNeeds,
@@ -294,28 +377,28 @@ router.get('/pets/animals/:id', function (req, res, next) {
     LEFT JOIN animal_images I
     ON A.id = I.animalId
     GROUP BY A.id`,
-    function (error, results, fields) {
+    function(error, results, fields) {
       if (error) {
         res.status(400).send(error);
-        throw error;
+        return next(error);
       }
-
-
+      
+      
       results.forEach(row => {
         // Format / clean the currrent row.
         row.imgs = row.imgs.split(",");
         if (!row.longDesc) {
           row.longDesc = "";
         }
-
+        
         // Add the current row to the fullResult array.
         tempAnimal = {};
         Object.keys(row).forEach(key => tempAnimal[key] = row[key]); // TODO: Use an array with the key names instead.
         fullResult.push(tempAnimal);
       });
-
+      
       const found = fullResult.some(animal => animal.id === parseInt(req.params.id));
-
+      
       if (found) {
         res.json(fullResult.filter(animal => animal.id === parseInt(req.params.id)));
       } else {
@@ -325,53 +408,39 @@ router.get('/pets/animals/:id', function (req, res, next) {
 });
 
 
-router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next) {
+router.post('/pets/animals/', upload.array('imgs', 12), function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+  
   var validationResult = validateInput(req);
-
+  
   if (validationResult.isSuccess === false) {
-    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-      req.files.forEach((imgFile) => {
-        fs.unlink(imgFile.path, function (err) {
-          if (err) {
-            console.log('ERROR: ' + err);
-            res.status(400).send(err);
-            throw err;
-          }
-        });
-      });
-    } else if (req.file && req.file.path) {
-      fs.unlink(req.file.path, function (err) {
-        if (err) {
-          console.log('ERROR: ' + err);
-          res.status(400).send(err);
-          throw err;
-        }
-      });
-    }
-
+    deleteImages(req.files);
     return res.status(406).json(validationResult);
   }
-
+  
+  // if (validateAndProcessImages(req.files) === false) {
+  //   deleteImages(req.files);
+  //   return res.status(415).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
+  // }
+  
   const newAnimalData = [
-    req.param("name"),
-    req.param("typeId"),
-    req.param("breed"),
-    req.param("age"),
-    req.param("shortDesc"),
-    req.param("longDesc"),
-    req.param("houseTrained") || 0,
-    req.param("specialNeeds") || 0,
-    req.param("energy"),
-    req.param("affection"),
-    req.param("obedience"),
-    req.param("children"),
-    req.param("strangers"),
-    req.param("otherAnimals")
+    req.body["name"],
+    req.body["typeId"],
+    req.body["breed"],
+    req.body["age"],
+    req.body["shortDesc"],
+    req.body["longDesc"],
+    req.body["houseTrained"] || 0,
+    req.body["specialNeeds"] || 0,
+    req.body["energy"],
+    req.body["affection"],
+    req.body["obedience"],
+    req.body["children"],
+    req.body["strangers"],
+    req.body["otherAnimals"]
   ];
-
+  
   dbconn.query(`
   INSERT INTO animals (name, typeId, breed,
           age, shortDesc, longDesc, houseTrained,
@@ -379,55 +448,30 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
           children, strangers, otherAnimals)
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     newAnimalData,
-    function (error, results, fields) {
+    function(error, results, fields) {
       if (error) {
         res.status(400).send(error);
-        throw error;
+        return next(error);
       }
-
-      if (req.files && req.files.length > 0) {
-        req.files.forEach((imgFile) => {
-          let newExt = '';
-          if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
-            newExt = '.jpg';
-          } else if (imgFile.originalname.includes('.png')) {
-            newExt = '.png';
-          } else {
-            req.files.forEach((imgFile) => {
-              fs.unlink(imgFile.path, function (err) {
-                if (err) {
-                  console.log('ERROR: ' + err);
-                  res.status(400).send(error);
-                  throw error;
-                }
-              });
-            });
-            return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
-          }
-
-          fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
-            if (err) {
-              console.log('ERROR: ' + error);
-              res.status(400).send(error);
-              throw error;
-            }
-          });
-
-          let newImg = [results.insertId, (imgFile.filename + newExt)]
+      
+      if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+        for (let i = 0; i < req.files.length; ++i) {
+          let imgFile = req.files[i];
+          let newImg = [results.insertId, imgFile.filename]
           dbconn.query(`
           INSERT INTO animal_images (animalId, img)
           VALUES (?, ?)`,
             newImg,
-            function (error, results, fields) {
+            function(error, results, fields) {
               if (error) {
                 res.status(400).send(error);
-                throw error;
+                return next(error);
               }
-
+              
             });
-        });
+        }
       }
-
+      
       res.status(201).json({ msg: "Success", isSuccess: true, id: results.insertId });
     });
 });
@@ -435,122 +479,53 @@ router.post('/pets/animals/', upload.array('imgs', 12), function (req, res, next
 
 
 
-router.post('/pets/images/:id', upload.array('imgs', 12), function (req, res, next) {
+router.post('/pets/images/:id', upload.array('imgs', 12), function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+  
   const searchId = parseInt(req.params.id);
   if (isNaN(searchId) || !(searchId >= 0)) {
-    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-      req.files.forEach((imgFile) => {
-        fs.unlink(imgFile.path, function (err) {
-          if (err) {
-            console.log('ERROR: ' + err);
-            res.status(400).send(err);
-            throw err;
-          }
-        });
-      });
-    } else if (req.file && req.file.path) {
-      fs.unlink(req.file.path, function (err) {
-        if (err) {
-          console.log('ERROR: ' + err);
-          res.status(400).send(err);
-          throw err;
-        }
-      });
-    }
-
+    deleteImages(req.files);
     return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
   }
-
-  if ((!req.files || req.files.length < 1) && !(req.file && req.file.path)) {
-    return res.status(404).json({ msg: `${req.files} No image was found in the request.`, isSuccess: false });
+  
+  if (!req.files || req.files.length < 1) {
+    return res.status(404).json({ msg: `No image was found in the request.`, isSuccess: false });
   }
-
+  
   dbconn.query(`
   SELECT id FROM animals`,
-    function (error, results, fields) {
+    function(error, results, fields) {
       if (error) {
         res.status(400).send(error);
-        throw error;
+        return next(error);
       }
-
+      
       if (!results.length) {
-        if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-          req.files.forEach((imgFile) => {
-            fs.unlink(imgFile.path, function (err) {
-              if (err) {
-                console.log('ERROR: ' + err);
-                res.status(400).send(err);
-                throw err;
-              }
-            });
-          });
-        } else if (req.file && req.file.path) {
-          fs.unlink(req.file.path, function (err) {
-            if (err) {
-              console.log('ERROR: ' + err);
-              res.status(400).send(err);
-              throw err;
-            }
-          });
-        }
+        deleteImages(req.files);
         return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
       }
-
-      req.files.forEach((imgFile) => {
-        //let imgFile = req.file;
-        let newExt = '';
-        if (imgFile.originalname.includes('.jpg') || imgFile.originalname.includes('.jpeg')) {
-          newExt = '.jpg';
-        } else if (imgFile.originalname.includes('.png')) {
-          newExt = '.png';
-        } else {
-          //req.files.forEach((imgFile) => {
-            fs.unlink(imgFile.path, function (err) {
-              if (err) {
-                console.log('ERROR: ' + err);
-                res.status(400).send(error);
-                throw error;
-              }
-            });
-            return;
-          }
-        //});
-          //return res.status(404).json({ msg: `Invalid image format (jpg, jpeg, or png only)`, isSuccess: false });
-        //}
-
-        fs.rename(imgFile.path, (imgFile.path + newExt), function (err) {
-          if (err) {
-            console.log('ERROR: ' + err);
-            res.status(400).send(error);
-            throw error;
-          }
-        });
       
-
-        let newImg = [req.params.id, (imgFile.filename + newExt)]
-        dbconn.query(`
+      if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+        for (let i = 0; i < req.files.length; ++i) {
+          let imgFile = req.files[i];
+          let newImg = [req.params.id, imgFile.filename]
+          dbconn.query(`
       INSERT INTO animal_images (animalId, img)
       VALUES (?, ?)`,
-          newImg,
-          function (error, results, fields) {
-            if (error) {
-              res.status(400).send(error);
-              throw error;
-            }
-            res.status(201).json({ msg: "Success", isSuccess: true});
-          });
-        
-      });
+            newImg,
+            function(error, results, fields) {
+              if (error) {
+                res.status(400).send(error);
+                return next(error);
+              }
+            });
+        }
+        res.status(201).json({ msg: "Success", isSuccess: true });
+      }
       //res.status(201).json({ msg: "Success", isSuccess: true});
     });
 });
-
-
-
-
 
 
 
