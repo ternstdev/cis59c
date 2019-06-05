@@ -40,7 +40,7 @@
   
 }
 
-.form-group span:not(.p-centered) {
+.form-group .form-label span:not(.p-centered) {
   max-width: 50%;
 }
 
