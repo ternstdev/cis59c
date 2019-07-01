@@ -530,7 +530,7 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function(req, res, nex
 router.delete('/pets/animals/:id', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.status(200).send("HIIIIIII");
+  
   const searchId = parseInt(req.params.id);
   if (isNaN(searchId) || !(searchId >= 0)) {
     return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
@@ -549,6 +549,7 @@ router.delete('/pets/animals/:id', function(req, res, next) {
       
       if (results.length) {
         results.forEach((row) => {
+          try {
           row.imgs = row.imgs.split(",");
           row.imgs.forEach((img) => {
             if (img.length) {
@@ -560,6 +561,11 @@ router.delete('/pets/animals/:id', function(req, res, next) {
               });
             }
           });
+          }
+          catch
+          {
+            return res.send("Uhhhhhh.....");
+          }
         });
         //return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
       }
