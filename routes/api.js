@@ -550,7 +550,7 @@ router.delete('/pets/animals/:id', function(req, res, next) {
       if (results.length) {
         results.forEach((row) => {
           if (row.img.length) {
-            fs.unlink('../public/pets/img/' + row.img., function(err) {
+            fs.unlink('../public/pets/img/' + row.img, function(err) {
                 if (err) {
                   console.log('ERROR: ' + err);
                   throw err;
