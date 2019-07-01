@@ -549,11 +549,8 @@ router.delete('/pets/animals/:id', function(req, res, next) {
       
       if (results.length) {
         results.forEach((row) => {
-          try {
-          row.imgs = row.imgs.split(",");
-          row.imgs.forEach((img) => {
-            if (img.length) {
-              fs.unlink('../public/pets/img/' + img, function(err) {
+          if (row.img.length) {
+            fs.unlink('../public/pets/img/' + row.img., function(err) {
                 if (err) {
                   console.log('ERROR: ' + err);
                   throw err;
@@ -561,12 +558,6 @@ router.delete('/pets/animals/:id', function(req, res, next) {
               });
             }
           });
-          }
-          catch
-          {
-            return res.send("Uhhhhhh.....");
-          }
-        });
         //return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
       }
       
