@@ -3,7 +3,6 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
-
 const crypto = require("crypto");
 const multer = require('multer');
 
@@ -528,6 +527,77 @@ router.post('/pets/images/:id', upload.array('imgs', 12), function(req, res, nex
 });
 
 
+router.delete('/pets/animals/:id', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
+  const searchId = parseInt(req.params.id);
+  if (isNaN(searchId) || !(searchId >= 0)) {
+    return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
+  }
+  
+  dbconn.query(`
+  SELECT id, img FROM animal_images WHERE animalId = ?`,
+    [searchId],
+    function(error, results, fields) {
+      if (error) {
+        res.status(400).send(error);
+        return next(error);
+      }
+      
+      
+      
+      if (results.length) {
+        results.forEach((row) => {
+          row.imgs = row.imgs.split(",");
+          row.imgs.forEach((img) => {
+            if (img.length) {
+              fs.unlink('../public/pets/img/' + img, function(err) {
+                if (err) {
+                  console.log('ERROR: ' + err);
+                  throw err;
+                }
+              });
+            }
+          });
+        });
+        //return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
+      }
+      
+      dbconn.query(`
+      DELETE FROM animal_images WHERE animalId = ? `,
+        [searchId],
+        function(error, results, fields) {
+          if (error) {
+            res.status(400).send(error);
+            return next(error);
+          }
+          
+          dbconn.query(`
+          DELETE FROM animals WHERE id = ? `,
+            [searchId],
+            function(error, results, fields) {
+              if (error) {
+                res.status(400).send(error);
+                return next(error);
+              }
+              
+              if (results.affectedRows) {
+                return res.status(200).json({ msg: `Successfully deleted id ${req.params.id}`, isSuccess: true });
+              } else {
+                return res.status(404).json({ msg: `No animal found with id ${req.params.id}`, isSuccess: false });
+              }
+            });
+          
+        });
+      
+      
+      
+      //res.status(201).json({ msg: "Success", isSuccess: true});
+    });
+  
+  
+});
 
 
 module.exports = router;
